@@ -4,9 +4,9 @@ Build target: **LG C3 / ARM32**, application `com.ryanspice.skifree`, candidate
 version **1.0.0**. This package includes Original, Recreation, Yeti Chase and
 three-letter score entry. Build/package evidence does not replace its C3 run.
 
-Latest local package: `native/dist/tv-c3-1.0.0-20261104/com.ryanspice.skifree_1.0.0_arm.ipk`,
-**1,983,374 bytes**, SHA-256
-`b29b9117425001c0700bd23a8a0f00e0386d41db2451ea3de20b607aaedae648`.
+Corrected local package: `.ai/outbox/storage-fix-1.0.0/com.ryanspice.skifree_1.0.0_arm.ipk`,
+**1,989,972 bytes**, SHA-256
+`e7b3d6495e48e8cfd1307e6f47542947cb0ec4ebbaf3f09d1254a58eb5e165de`.
 The adjacent `SHA256SUMS.txt` and `.ipk.sha256` contain the same checksum.
 
 ## Build inputs
@@ -18,8 +18,9 @@ The adjacent `SHA256SUMS.txt` and `.ipk.sha256` contain the same checksum.
 
 See [native setup](../native/README.md) and
 [runtime staging](../native/docs/WEBOS-RUNTIME.md). Choose fresh build/stage/output
-paths on a volume with sufficient free space. Build products can live outside the
-checkout; the Windows Debug investigation found the local B: volume full.
+paths under `.ai/evidence/<task>/`, and release deliverables under `.ai/outbox/`.
+B: has been freed. Earlier external recovery/build products were ingested and
+hash-checked under `.ai/archive/` while preserving their originals.
 
 ## Build and package sequence
 
@@ -32,7 +33,9 @@ checkout; the Windows Debug investigation found the local B: volume full.
    against the exact SDK sysroot and run `native/scripts/audit_public_stage.py`.
 4. Package the audited stage with `ares-package`. Normalize Unix file modes with
    `release/finalize_ipk.py`, then run `release/verify_ipk.py` against the exact
-   stage audit. Keep the SHA-256, byte size and audit reports together.
+   stage audit. The finalizer also gives the packaged `state/` parent sticky
+   mode 01777, enabling a per-user writable child without changing executable or
+   asset permissions. Keep the SHA-256, byte size and audit reports together.
 5. Follow [installation](INSTALL.md). Launch through the application manager.
 
 The package must retain executable permissions and contain exactly the audited

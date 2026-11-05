@@ -11,9 +11,9 @@ Run from the repository root. Core tests need CMake 3.20 or newer and a C++20
 compiler; they do not require SDL, a GPU or a TV:
 
 ```sh
-cmake -S native -B native/build/core -DSKIFREE_BUILD_UI=OFF -DSKIFREE_STRICT=ON -DCMAKE_BUILD_TYPE=Release
-cmake --build native/build/core --config Release --parallel 1
-ctest --test-dir native/build/core -C Release --output-on-failure
+cmake -S native -B .ai/evidence/core-build -DSKIFREE_BUILD_UI=OFF -DSKIFREE_STRICT=ON -DCMAKE_BUILD_TYPE=Release
+cmake --build .ai/evidence/core-build --config Release --parallel 1
+ctest --test-dir .ai/evidence/core-build -C Release --output-on-failure
 python release/source_archive_tests.py
 python native/tests/public_stage_tests.py
 git diff --check
@@ -28,8 +28,9 @@ staging and IPK auditing are in [release preparation](release/README.md).
 The example uses a serial Release build. Debug and parallel builds are supported:
 the earlier PDB/library write failures were investigated and B: was found to have
 zero free bytes. A fresh parallel MSVC Debug build on C: passed all four suites
-with unchanged compiler settings. Choose a build directory on a volume with
-enough free space; see the [diagnostic record](native/docs/DEBUG-BUILD.md).
+with unchanged compiler settings. B: has since been freed. New work products stay
+under the project's `.ai/`; external tool output requires ingestion and hash
+evidence. See the [diagnostic record](native/docs/DEBUG-BUILD.md).
 
 ## Making a change
 

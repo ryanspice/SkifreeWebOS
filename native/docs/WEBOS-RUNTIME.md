@@ -10,10 +10,11 @@ The C3 target reports OLED48C3PUA, firmware 43.21.84, SDK 11.2.0, glibc 2.39 and
 
 Launch via the webOS application manager. Direct execution over the Developer Mode SSH service was rejected as the wrong application identity and is not a valid graphics test.
 
-Source review found no declared elevated permission or identified root-service
-dependency. That does not establish the installed process UID, jail capabilities
-or success on rooted/unrooted TVs. Developer Mode and rooted Homebrew are separate
-installation routes; a rooted installation does not imply the app runs as root.
+The corrected November 5 package launched through Developer Mode as non-root
+UID 6252 on the observed C3, and created its score file without an elevated
+service. The TV's global root status and other install routes are not inferred.
+Developer Mode and rooted Homebrew are separate routes; a rooted installation
+does not imply the app runs as root.
 See the [compatibility research and plan](../../docs/COMPATIBILITY.md).
 
 The current runtime audit resolves dependency paths and checks ELF32 ARM while

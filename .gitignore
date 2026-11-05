@@ -1,4 +1,5 @@
 private/
+.ai/
 **/build/
 **/dist/
 **/evidence/

@@ -6,7 +6,7 @@ import importlib.util
 import json
 from pathlib import Path
 
-REQUIRED = {"skifree-native", "appinfo.json", "icon.png", "LICENSE", "NOTICE.md", "CLASSIC-PROVENANCE.md", "assets/README.md", "assets/manifest.json"}
+REQUIRED = {"skifree-native", "appinfo.json", "icon.png", "LICENSE", "NOTICE.md", "CLASSIC-PROVENANCE.md", "assets/README.md", "assets/manifest.json", "state/README.md"}
 OPTIONAL = {"lib/libSDL2-2.0.so.0", "lib/libpng16.so.16", "licenses/SDL2-LICENSE.txt",
             "licenses/libpng-LICENSE.txt", "RUNTIME-FILES.json", "RUNTIME-AUDIT.json"}
 

@@ -4,23 +4,32 @@ SkiFree for webOS 1.0.0 is currently a local release candidate. There is no publ
 
 ## Compatibility
 
-The earlier 1.0.0 candidate was installed and rendered on an **LG OLED48C3PUA (C3), firmware 43.21.84**. The TV reports SDK 11.2.0. The latest HUD/initials revision has passed local build, input/storage tests and ARM package audits, but has not yet been installed on that TV. This is one previously tested configuration, not a minimum webOS release or a promise of support on all LG TVs.
+The corrected 1.0.0 package was installed and rendered on an **LG OLED48C3PUA
+(C3), firmware 43.21.84**, on November 5, 2026. The TV reports SDK 11.2.0. Its
+non-root application process created the new score file successfully. This is
+one tested configuration, not a minimum webOS release or a promise of all-TV support.
 
-The ARM32 build requires GLIBC 2.38 and GLIBCXX 3.4.32. Older TV software may not provide those libraries. Rooted versus unrooted compatibility has not been independently established; no root requirement is asserted. See [runtime details](../native/docs/WEBOS-RUNTIME.md) and [verification](../native/docs/VERIFICATION.md).
+The ARM32 build requires GLIBC 2.38 and GLIBCXX 3.4.32. Older TV software may not
+provide those libraries. The observed install used Developer Mode and a non-root
+process; no elevated service was needed for saving. The TV's global root status
+and other installation routes are not established. See
+[runtime details](../native/docs/WEBOS-RUNTIME.md) and [verification](../native/docs/VERIFICATION.md).
 
 ## Install through Developer Mode
 
-This is the intended setup route for the current native candidate. Its exact IPK
-has not yet been verified through this route. LG's official Developer Mode
+This is the tested setup route for the current native candidate on the C3.
+LG's official Developer Mode
 instructions describe app setup/testing; the native TV toolchain and SDL port
 used here are community-supported. See the [compatibility brief](COMPATIBILITY.md)
 for the distinction between installation method and app privileges.
 
 1. Follow [LG's Developer Mode setup](https://webostv.developer.lge.com/develop/getting-started/developer-mode-app) to connect your TV and computer. The [webOS Homebrew setup guide](https://www.webosbrew.org/devmode/) is another walkthrough. LG requires an account for this installation method; SkiFree itself requires no account.
-2. Obtain the candidate IPK and compare its SHA-256 with the maintainer's checksum. The latest audited C3 build is `com.ryanspice.skifree_1.0.0_arm.ipk` (under `native/dist/tv-c3-1.0.0-20261104/` in the maintainer's local build), 1,983,374 bytes:
+2. Obtain the candidate IPK and compare its SHA-256 with the maintainer's checksum.
+   The corrected storage build is `com.ryanspice.skifree_1.0.0_arm.ipk` (under
+   `.ai/outbox/storage-fix-1.0.0/` in the maintainer's local build), 1,989,972 bytes:
 
    ```text
-   b29b9117425001c0700bd23a8a0f00e0386d41db2451ea3de20b607aaedae648
+   e7b3d6495e48e8cfd1307e6f47542947cb0ec4ebbaf3f09d1254a58eb5e165de
    ```
 
    In PowerShell, use `Get-FileHash -Algorithm SHA256 <path-to-ipk>`.
@@ -54,9 +63,20 @@ Original maintains a local high-score table. If storage is unreadable, malformed
 
 Tables appear after a course finish. Each Original course has its own table; lower times win in Slalom and Tree Slalom, higher style scores in Freestyle. A qualifying result prompts for three letters, starting at **AAA**. Type letters and press Enter, or use Left/Right, Up/Down and OK. The plus/minus buttons also work with a pointer. Back keeps the current letters. Reopening returns to the mountain, not a score browser. Finish the same course again to see its saved entries. Recreation and Yeti Chase scores are not added to these tables.
 
-The initials revision writes `scores-initials-v1.txt`. If that file is absent, valid `scores-v104.txt` entries are imported with **---** initials; the old file and `record.txt` remain untouched. An invalid or interrupted legacy save blocks migration instead of silently replacing it. An older app build reads only the old file, so results earned in the initials revision will not appear after downgrading.
+The corrected TV package writes `scores-initials-v1.txt` beneath
+`state/user-<runtime-uid>/` in its application folder. If absent, it imports a valid
+installation-root named table first, or a valid numeric `scores-v104.txt` table
+with **---** initials. The old files and `record.txt` remain untouched. Invalid
+or interrupted data blocks migration. Older app builds read only the old location,
+so newer results do not appear after downgrading.
 
-Non-empty save/reload is covered by desktop tests. A human check that an earned score survives closing and reopening on the C3 is pending. Survival across uninstall is not promised.
+The November 4 package pointed saves at the protected installation root and could
+show the warning after a score. Use the corrected package above; root or TV-wide
+permission changes are unnecessary. Startup now verifies an actual write before
+reporting scores as available. On the C3, creation and relaunch replacement are
+checked; a new earned-score playthrough remains pending. Non-empty round-trip
+and migration pass host tests. Uninstall, app-UID changes and non-empty upgrade
+survival are not promised.
 
 **Game files unavailable** is a different error: one or more bundled sprites could not load. A local desktop build needs the complete `native/assets` folder supplied through `--assets`. For an installed TV package, verify its checksum and obtain a complete package; preserve score data before reinstalling. **Check Again** retries loading the files. There is no artwork-import step.
 

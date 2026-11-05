@@ -24,9 +24,11 @@ The separate Recreation and Yeti Chase runs add simplified steering and boosts.
 This candidate adds a lighter Recreation HUD, hides the footer while skiing and
 lets qualifying Original scores carry three initials, starting at **AAA**.
 
-The earlier candidate ran on an LG C3. The updated HUD/initials build has host
-tests and an audited ARM package; its C3 playthrough and earned-score relaunch
-check are pending. [Build and acceptance details](native/docs/VERIFICATION.md).
+The corrected HUD/initials package is installed on the LG C3. Native rendering
+and real score-file creation are verified without root. It fixes the earlier
+save warning by keeping scores in a writable state directory. A fresh earned-score
+playthrough of this corrected package is pending.
+[Build and acceptance details](native/docs/VERIFICATION.md).
 
 ## Install on your TV
 
@@ -34,7 +36,8 @@ check are pending. [Build and acceptance details](native/docs/VERIFICATION.md).
    [TV build brief](docs/TV-BUILD.md). Downloadable release assets are being prepared.
 2. Set up your TV with [LG Developer Mode](https://webostv.developer.lge.com/develop/getting-started/developer-mode-app)
    and the webOS CLI. This is the intended installation route; the exact current
-   package still needs a device check. [Rooted and unrooted notes](docs/COMPATIBILITY.md).
+   package has been installed and launched on the C3 using the non-root app
+   identity. [Rooted and unrooted notes](docs/COMPATIBILITY.md).
 3. Verify and install the supplied package, replacing `my-tv` with your CLI device:
 
    ```powershell
@@ -113,7 +116,10 @@ Finishing an Original course opens its high-score table. Slalom and Tree Slalom 
 
 Type three letters and press **Enter**, or use **Left / Right** to select a letter, **Up / Down** to change it, and **OK** to advance to **Save Initials**. Pointer users can click the plus/minus buttons and **Save Initials**. **Back** keeps the current letters and shows the table. The result is saved automatically with its current initials; nonqualifying results skip entry.
 
-Existing scores import with **---** where no initials were recorded. The new named-score file preserves the old score file. This is a TV score-entry adaptation; Original's ranking, penalties and course rules are unchanged.
+Existing scores import with **---** where no initials were recorded. The corrected
+TV package stores named scores in writable application state and preserves the
+old installation-root files. It verifies saving at startup. This is a TV
+score-entry adaptation; Original's ranking, penalties and course rules are unchanged.
 
 Reopening starts at the original mountain. To see previously saved entries, finish the same course again; there is no separate score-browser menu in 1.0.0. Recreation and Yeti Chase do not use these tables. If a menu says **High scores are not being saved**, see [score troubleshooting](docs/INSTALL.md#scores-and-troubleshooting).
 

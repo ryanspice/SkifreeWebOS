@@ -8,9 +8,20 @@ The latest local revision replaces Recreation's dark HUD bar with compact white 
 
 Qualifying Original scores now prompt for three arcade-style initials, starting at AAA. Keyboard, remote arrows/OK and pointer plus/minus controls are supported. Existing scores import with --- initials into `scores-initials-v1.txt`; the original `scores-v104.txt` and prototype `record.txt` remain untouched. Original's ranking and course rules are unchanged.
 
+The November 5 correction fixes a real TV save failure: SDL's preference path
+pointed at the protected installation root. Scores now live in a writable
+per-runtime-user state directory, and startup verifies an actual save before
+reporting it as available. The corrected package runs and creates/replaces its
+score file on the C3 without root. Existing installation-root named and numeric
+tables are preserved during import; a fresh earned-score playthrough is pending.
+
 Score storage rejects incomplete, malformed or incorrectly ranked tables before adopting them. Saves retain the temporary-file/replace approach; failure and interrupted-save states preserve recovery material, disable further writes for that session and show a clear menu warning. Older binaries do not read the new initials file.
 
 Owner playtesting provided positive aggregate input feedback. The source, build, package and TV evidence is recorded in [verification](../native/docs/VERIFICATION.md). Full Windows runtime equivalence and compatibility with every LG TV have not been established. This remains a local candidate; no public release or social post has been sent.
 
 
-The earlier candidate passed four sanitizer suites (118 assertions), 55 native UI cases, seven package-boundary cases and ARM/package audits, and was installed and rendered on the C3. The initials/HUD revision has separate fresh host tests and captures; it has not been installed as part of this revision. The old empty score file survived the earlier update/relaunch; non-empty TV migration remains unverified. See the verification record for the current evidence.
+The corrected package passed four Windows suites, four Linux sanitizer suites,
+68 native UI cases, six source-boundary tests, seven stage-boundary cases and
+six package-permission tests. All 104 staged / 105 packaged files matched.
+The old empty score file remains unchanged; non-empty TV migration remains
+unverified. See the verification record for exact artifact identities and scope.

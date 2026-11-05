@@ -8,7 +8,7 @@ param(
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 $ProjectRoot = Split-Path $PSScriptRoot -Parent
-if (-not $BuildDir) { $BuildDir = Join-Path $ProjectRoot 'build\windows' }
+if (-not $BuildDir) { $BuildDir = Join-Path (Split-Path $ProjectRoot -Parent) '.ai\evidence\desktop-windows' }
 $Toolchain = Join-Path $VcpkgRoot 'scripts\buildsystems\vcpkg.cmake'
 if (-not (Test-Path -LiteralPath $Toolchain -PathType Leaf)) { throw "vcpkg toolchain missing: $Toolchain" }
 foreach ($Tool in @('cmake','ninja','cl')) {

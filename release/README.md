@@ -12,14 +12,27 @@ Package that directory with `ares-package`. On Windows, write this first package
 python release/finalize_ipk.py --input $intermediateIpk --output $finalIpk
 python release/verify_ipk.py --ipk $finalIpk --stage-audit $stageAudit --report $finalAudit
 python release/source_archive_tests.py
-python release/prepare_source_archive.py --out native/dist/SkifreeWebOS-1.0.0-source-public-rc8.zip
+python release/ipk_permissions_tests.py
+python release/prepare_source_archive.py --out .ai/outbox/release-1.0.0/SkifreeWebOS-1.0.0-source.zip
 ```
 
 The finalizer normalizes Unix modes, including execute permissions on the ELF. The verifier compares every packaged app file against the audited stage. The source builder permits source files, explicitly listed documentation, the original procedural icon, the 89 hash-verified sprites and three hash-verified documentation images. It excludes original EXE/ZIP files, raw resource dumps, known private/planning paths, unsent launch drafts, unapproved documentation text and generated release metadata. This path/asset gate is not a content-level secret scanner; review source contents before publication. Documentation images are not added to the IPK. Source ZIPs include the Git-visible tree, including allowed uncommitted files, and omit ignored build dependencies; pinned dependency preparation remains documented.
 
 The builder refuses existing output files. Preserve previous archives and use a fresh revision name after changes. The ZIP, adjacent SHA-256 file and per-file manifest form one source-release set. A source-only documentation refresh does not change the audited IPK or its checksum.
 
-The latest C3 build of the HUD/initials source has its own audited local IPK in `native/dist/tv-c3-1.0.0-20261104/`. It retains version 1.0.0 while the release is unpublished; use its exact checksum from the installation guide, not an earlier artifact. This build's TV input and score migration checks are still pending. See the [TV build brief](../docs/TV-BUILD.md), [compatibility synthesis](../docs/COMPATIBILITY.md) and [tag preparation](TAGGING.md).
+The corrected C3 storage build is in `.ai/outbox/storage-fix-1.0.0/`. It retains
+version 1.0.0 while the release is unpublished; use the installation guide's exact
+checksum. Its Developer Mode launch and actual non-root file creation/replacement
+are verified. A corrected-build earned-score playthrough and broader TV migration
+checks remain pending. The finalizer must preserve the sticky 01777 `state/`
+parent; direct packaging without this step does not satisfy the storage contract.
+See the [TV build brief](../docs/TV-BUILD.md), [compatibility synthesis](../docs/COMPATIBILITY.md)
+and [tag preparation](TAGGING.md).
+
+New work products use `.ai/inbox/`, `.ai/outbox/`, `.ai/evidence/` and `.ai/archive/`.
+Reviews/plans are reconciled through `.ai/SYNTHESIS-QUEUE.json`. Earlier external
+recovery/build products have been ingested with per-file hashes and originals
+retained; immutable receipts may still contain their historical paths.
 
 ## Homebrew metadata
 
@@ -38,8 +51,9 @@ alone is not used to fill minimum-release metadata.
 - [x] Strict native builds, game/input checks and exact package audit.
 - [x] Earlier candidate: install and native GPU title-screen launch on OLED48C3PUA, firmware 43.21.84.
 - [x] Earlier candidates: owner input observations and empty-score update/relaunch evidence recorded.
-- [ ] Current HUD/initials IPK: install and render on the C3, identified by its exact checksum.
-- [ ] Current HUD/initials IPK: physical controls, focus/resume, earned-score relaunch and legacy migration.
+- [x] Corrected storage IPK: Developer Mode install and native render on the C3, exact checksum recorded.
+- [x] Corrected storage IPK: actual score-file creation/replacement as non-root UID 6252; legacy bytes preserved.
+- [ ] Corrected storage IPK: earned score/initials after relaunch, broader controls/focus and non-empty migration.
 - [ ] Complete publication support claims only for specifically evidenced device/input/lifecycle/save cases.
 - [ ] Meaningful human code review, design explanation and honest AI disclosure.
 - [ ] Record original artwork and reconstruction redistribution terms; confirm repository pool.

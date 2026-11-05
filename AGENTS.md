@@ -13,8 +13,18 @@ instructions in `native/AGENTS.md` or `release/AGENTS.md` before editing.
   non-overlapping files and require scoped evidence and unresolved issues back.
 - Use the smallest relevant checks in CONTRIBUTING.md plus scoped gates. Review
   the staged diff and run `git diff --check` before committing.
-- Put generated builds, packages, screenshots and raw receipts in ignored
-  `native/build/`, `native/dist/`, `native/evidence/` or `private/` directories.
+- Keep project work products under ignored `.ai/`: `inbox/` for intake/plans,
+  `outbox/` for deliverables, `evidence/` for builds/checks/captures, and `archive/`
+  for retained originals/recovery. Preserve task/source grouping. Do not use
+  another project's folders or harness scratch for project storage.
+- Set process-local TEMP/TMP and explicit output/download paths where supported.
+  Ingest/hash-check unavoidable external output and record the exception. Leave
+  credentials, sessions and native harness configuration tool-managed.
+- Register plans/reviews/guides as `pending-synthesis` in
+  `.ai/SYNTHESIS-QUEUE.json`. Reconcile accepted decisions into maintained
+  docs/source/tests, record source/destination hashes, receipt and unresolved
+  issues, then mark synthesized. Preserve originals; synthesis is not deletion
+  authority. Existing `private/` and native build/dist history is retained.
 - Preserve saves; never replace user scores with test fixtures. Use isolated
   preference paths in tests. Update user docs when controls or storage change.
 - Keep historical evidence labelled. A new artifact does not inherit the old

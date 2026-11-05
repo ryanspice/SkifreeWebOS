@@ -13,7 +13,10 @@ errors; the exact free-space state of that earlier build was not recorded.
 Generated output from the failed Debug build was copied to C: and hash-checked.
 Its top-level Debug output was moved to C: to reclaim a small amount of space.
 No user source, scores, published artifacts or unrelated data were removed.
-New build outputs use C: while B: remains nearly full.
+New build outputs used C: while B: was nearly full. B: was freed on November 5;
+project-owned external outputs were then ingested/hash-checked into `.ai/archive/`
+with originals retained. A fresh parallel Debug build on B: also passed all four
+suites. New outputs use `.ai/evidence/` under the owning project.
 
 ## Verification
 
@@ -22,12 +25,12 @@ with four parallel jobs in 5.2 seconds. All four CTest suites passed. This used
 the repository's existing `/Zi` configuration; no `/Z7`, `/FS`, toolchain or
 global environment change was needed.
 
-For a local reproduction, choose a fresh directory on a volume with free space:
+For a local reproduction, use a fresh project-local directory with free space:
 
 ```powershell
-cmake -S native -B C:/build/skifree-debug -DSKIFREE_BUILD_UI=OFF -DSKIFREE_STRICT=ON
-cmake --build C:/build/skifree-debug --config Debug --parallel 4
-ctest --test-dir C:/build/skifree-debug -C Debug --output-on-failure
+cmake -S native -B .ai/evidence/debug-build -DSKIFREE_BUILD_UI=OFF -DSKIFREE_STRICT=ON
+cmake --build .ai/evidence/debug-build --config Debug --parallel 4
+ctest --test-dir .ai/evidence/debug-build -C Debug --output-on-failure
 ```
 
 Use an existing writable build root appropriate for your machine. If C2471

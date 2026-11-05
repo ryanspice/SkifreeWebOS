@@ -8,11 +8,11 @@ def main():
     binary=a.binary.resolve();out=a.out.resolve();out.mkdir(parents=True,exist_ok=True)
     assets=Path(__file__).resolve().parents[1]/'assets'
     checks=[]
-    def run(name,actions='',frames=20,width=1280,height=720,assetdir=assets,expected='playing',scores=None):
+    def run(name,actions='',frames=20,width=1280,height=720,assetdir=assets,expected='playing',scores=None,save_override=None):
         directory=out/name;directory.mkdir(exist_ok=True)
         script=directory/'input.txt';script.write_text(actions)
         if scores is not None:(directory/'scores-v104.txt').write_text(scores)
-        cmd=['xvfb-run','-a',str(binary),'--assets',str(assetdir),'--save',str(directory/'record.txt'),'--fixed-frame','--frames',str(frames),'--script',str(script),'--width',str(width),'--height',str(height),'--capture',str(directory/'frame.png'),'--report',str(directory/'report.json')]
+        cmd=['xvfb-run','-a',str(binary),'--assets',str(assetdir),'--save',str(save_override or directory/'record.txt'),'--fixed-frame','--frames',str(frames),'--script',str(script),'--width',str(width),'--height',str(height),'--capture',str(directory/'frame.png'),'--report',str(directory/'report.json')]
         r=subprocess.run(cmd,capture_output=True,text=True,timeout=40,env={**os.environ,'LIBGL_ALWAYS_SOFTWARE':'1'})
         (directory/'log.txt').write_text(r.stdout+r.stderr)
         if r.returncode:raise AssertionError(name+': '+r.stdout+r.stderr)
@@ -105,6 +105,7 @@ def main():
     baseline=run('slalom_timer_running',route,frames=650);assert baseline['course']==1 and baseline['race_elapsed_ms']>0
     st=run('slalom_timer_paused',route+'650 back\n',frames=720,expected='paused');assert st['race_elapsed_ms']==baseline['race_elapsed_ms']
     st=run('slalom_timer_resumed',route+'650 back\n700 back\n',frames=760);assert st['race_elapsed_ms']>baseline['race_elapsed_ms']
+    st=run('startup_unwritable','1 back\n',expected='paused',save_override='/proc/skifree-unwritable/record.txt');assert not st['record_writable']
     with tempfile.TemporaryDirectory(prefix='skifree-ui-') as temp:
         temporary=Path(temp);run('missing_assets',assetdir=temporary,expected='setup')
         shutil.copytree(assets,temporary,dirs_exist_ok=True);(temporary/'ski32_001.png').unlink()

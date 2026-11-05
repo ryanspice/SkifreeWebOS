@@ -1,8 +1,50 @@
 # Verification — SkiFree for webOS 1.0.0
 
-Updated November 4, 2026. This record describes the local candidate and distinguishes automated checks, physical-device observations and human feedback. It is not a claim of exhaustive equivalence to the Windows executable.
+Updated November 5, 2026. This record describes the local candidate and distinguishes automated checks, physical-device observations and human feedback. It is not a claim of exhaustive equivalence to the Windows executable.
 
-## Release preparation follow-up
+## Current package: non-root score storage fix
+
+The owner corrected the earlier score-survival response and reported **High scores
+are not being saved**. That warning is recorded as a real defect in the November 4
+package, not a root requirement. Its SDL webOS preference path was the root-owned
+installation directory. The non-root app could read the legacy file, but could
+not create the temporary file required for a safe save.
+
+The corrected package provides a root-owned sticky `state/` parent (01777), then
+creates a per-runtime-UID child for scores and diagnostic receipts. Only this
+data parent is writable; executable, asset and library modes remain restricted.
+Old named/numeric tables are imported in that order and preserved. Startup now
+performs a real save of the validated table before reporting saving as available.
+
+Package SHA-256: `e7b3d6495e48e8cfd1307e6f47542947cb0ec4ebbaf3f09d1254a58eb5e165de`
+(1,989,972 bytes). ARM executable SHA-256:
+`60397dfc0b45e9546670745c5532c5b5033d23e45351dfd112febe80e63bee50`.
+It was installed and launched through Developer Mode on the observed C3, running
+as UID 6252 with no root service. Its new score file is owned by UID 6252, and
+creation plus replacement after close/relaunch were verified. The file's
+timestamp advanced, its format remained valid and no temporary file remained.
+The old 13-byte numeric table's hash stayed unchanged. The initial table is empty;
+this is not a human-earned result or a non-empty migration test.
+
+Fresh checks passed: four Windows Debug suites on the freed B: volume, four Linux
+host suites, four Linux ASan/UBSan suites, **68 native UI cases**, six source-boundary
+tests, seven stage-boundary cases and six package-permission tests. The SDK audit
+has 12 records; all 104 staged / 105 packaged files match, including 89 sprites
+and one state-directory README. Original simulation and artwork are unchanged.
+
+The requested Terra review of this fix found one release-verifier gap: hashes
+alone accepted writable or non-root-owned code/assets. The verifier now enforces
+root ownership and exact file/directory modes, with only the sticky state parent
+excepted. Six permission tests pass, including six metadata-only tampering cases;
+the peer's unsafe fixture is rejected and the installed IPK still passes unchanged.
+
+The corrected build is open for an earned-score/initials/relaunch playthrough.
+Broader input/firmware coverage, non-empty TV upgrade/migration and uninstall
+survival remain unverified. Release and tag publication are held while acceptance
+of this correction is pending. Raw evidence and preserved originals are in the
+project's ignored `.ai/`; the synthesis queue records sources and destinations.
+
+## Historical November 4 release preparation
 
 Three requested GPT-6.1 Terra lanes completed: scoped peer review, rooted/unrooted
 research and consumer webOS version research. The peer found two release issues:
@@ -27,7 +69,7 @@ It is available locally under `native/dist/tv-c3-1.0.0-20261104/` and has not be
 installed on the C3. Earlier host UI/sanitizer evidence covers the same unchanged
 gameplay sources; it was not rerun as a new physical or firmware compatibility test.
 
-## Latest local revision: quieter HUD and arcade initials
+## Historical November 4 HUD and initials build
 
 The current source removes Recreation's dark HUD bar, places its statistics and boost status in a compact white panel, and hides the footer during active runs. Original's stationary opening and menus retain the colour choices. Physical colour shortcuts remain active.
 

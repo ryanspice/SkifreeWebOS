@@ -22,9 +22,13 @@ Use [1.0.0 release notes](RELEASE-NOTES-1.0.0.md) for the eventual release body,
 - [x] Requested Terra peer review completed; its two release-doc/source-boundary
   findings are addressed in the preparation changes and regression checks.
 - [x] Rooted/unrooted and version research synthesized into a compatibility plan.
-- [ ] Install and accept the exact latest IPK on the C3.
-- [ ] Confirm physical initials controls and a human-earned score after relaunch;
-  retain the distinction from host fixtures and earlier empty-table evidence.
+- [x] Storage-fix Terra review completed; its verifier permission finding is
+  fixed with metadata-only rejection tests and a fresh strict IPK verification.
+- [x] Install and render the corrected storage IPK on the C3; non-root file
+  creation/replacement and preserved old score bytes verified.
+- [ ] Confirm physical initials controls and a human-earned score after relaunch
+  on the corrected package. The earlier affirmative response was corrected to a
+  save-warning report; it is not counted as a pass.
 - [ ] Final owner/human review of code, original-game quality, credits and claims.
 - [ ] Decide private tag versus public release. Complete rights and hosting fields
   before public redistribution/Homebrew submission.

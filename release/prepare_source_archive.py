@@ -12,13 +12,13 @@ ROOT = Path(__file__).resolve().parents[1]
 ROOT_FILES = {"README.md", "CONTRIBUTING.md", "AGENTS.md", "LICENSE", "NOTICE.md", ".gitignore", ".gitattributes"}
 LOCAL_FILES = {"native/docs/PUBLISHING-PLAN-2026-11-04.md",
                "release/HOMEBREW-PR-DRAFT.md"}
-LOCAL_PREFIXES = ("private/", "native/docs/wayfinder/", "docs/marketing/")
+LOCAL_PREFIXES = (".ai/", "private/", "native/docs/wayfinder/", "docs/marketing/")
 PUBLIC_MEDIA = {"docs/media/skifree-original-c3.png", "docs/media/skifree-recreation-desktop.png",
                 "docs/media/champions-development-preview.png"}
 # Release generators must write to ignored build/private directories, never the source tree.
 RELEASE_FILES = {"README.md", "AGENTS.md", "TAGGING.md", "Prepare-Homebrew.ps1", "homebrew-package.yml.in",
                  "finalize_ipk.py", "verify_ipk.py", "prepare_source_archive.py",
-                 "source_archive_tests.py", "RELEASE-NOTES-1.0.0.md",
+                 "source_archive_tests.py", "ipk_permissions_tests.py", "RELEASE-NOTES-1.0.0.md",
                  "RELEASE-NOTES-0.3.0.md", "RELEASE-NOTES-0.4.0.md", "RELEASE-NOTES-0.5.0.md",
                  "RELEASE-NOTES-0.6.0.md", "RELEASE-NOTES-0.7.0.md", "RELEASE-NOTES-0.8.0.md"}
 NATIVE_FILES = {"CMakeLists.txt", "appinfo.json", "LICENSE", "NOTICE.md", "README.md", "AGENTS.md",
@@ -46,7 +46,7 @@ def allowed(name):
         return True
     if len(path.parts) == 2 and path.parts[0] == "native" and path.parts[1] in NATIVE_FILES:
         return True
-    if name in {"native/assets/README.md", "native/assets/manifest.json"}:
+    if name in {"native/assets/README.md", "native/assets/manifest.json", "native/state/README.md"}:
         return True
     if len(path.parts) == 3 and path.parts[:2] == ("native", "assets") and path.suffix == ".png":
         manifest = json.loads((ROOT / "native/assets/manifest.json").read_text(encoding="utf-8-sig"))
@@ -65,12 +65,12 @@ def allowed(name):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--out", type=Path, required=True, help="New ZIP under ignored native/dist")
+    parser.add_argument("--out", type=Path, required=True, help="New ZIP under ignored .ai/outbox")
     args = parser.parse_args()
     target = args.out.resolve()
-    output_root = (ROOT / "native" / "dist").resolve()
+    output_root = (ROOT / ".ai" / "outbox").resolve()
     if not output_root.is_relative_to(ROOT) or not target.is_relative_to(output_root) or target.suffix.lower() != ".zip":
-        parser.error("--out must be a .zip inside this project's native/dist")
+        parser.error("--out must be a .zip inside this project's .ai/outbox")
     receipts = [target, target.with_suffix(".zip.sha256"), target.with_suffix(".files.json")]
     if any(p.exists() for p in receipts):
         parser.error("Choose a fresh output name; an archive or receipt already exists")

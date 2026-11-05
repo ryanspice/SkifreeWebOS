@@ -24,8 +24,9 @@ enum class StoreStatus { Ok, Missing, Disabled, Invalid, IoError, OrphanTemp, Wr
 // primary file is absent; neither legacy scores nor record.txt are overwritten.
 class Store {
  public:
-  explicit Store(std::filesystem::path path, std::filesystem::path legacy = {})
-      : path_(std::move(path)), legacy_(std::move(legacy)) {}
+  explicit Store(std::filesystem::path path, std::filesystem::path legacy = {},
+                 std::filesystem::path olderLegacy = {})
+      : path_(std::move(path)), legacy_(std::move(legacy)), olderLegacy_(std::move(olderLegacy)) {}
   StoreStatus load(Tables& tables) {
     writable_ = false;
     if (path_.empty()) return StoreStatus::Disabled;
@@ -36,12 +37,14 @@ class Store {
     const bool exists = std::filesystem::exists(path_, ec);
     if (ec) return StoreStatus::IoError;
     if (!exists) {
-      if (!legacy_.empty()) {
-        Store legacy(legacy_);
-        const auto status = legacy.load(tables);
-        if (status != StoreStatus::Ok && status != StoreStatus::Missing) return status;
-        writable_ = true;
-        return status;
+      for (const auto& source : {legacy_, olderLegacy_}) {
+        if (source.empty()) continue;
+        Store legacy(source);
+        Tables imported;
+        const auto status = legacy.load(imported);
+        if (status == StoreStatus::Missing) continue;
+        if (status != StoreStatus::Ok) return status;
+        tables = std::move(imported); writable_ = true; return StoreStatus::Ok;
       }
       tables = {}; writable_ = true; return StoreStatus::Missing;
     }
@@ -110,6 +113,7 @@ class Store {
   std::filesystem::path temp() const { auto result = path_; result += ".tmp"; return result; }
   std::filesystem::path path_;
   std::filesystem::path legacy_;
+  std::filesystem::path olderLegacy_;
   bool writable_ = false;
 };
 }

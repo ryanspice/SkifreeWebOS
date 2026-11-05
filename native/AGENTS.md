@@ -36,3 +36,7 @@ For asset/staging changes run `python native/tests/public_stage_tests.py` from
 the root, then audit the exact stage and package following release instructions.
 Never infer ARM compatibility from a host build. TV installation requires the
 intended device and task authorization; leave unrelated TV state alone.
+
+New builds/captures belong in root `.ai/evidence/<task>/`; deliverable IPKs belong
+in `.ai/outbox/<release>/`. Use explicit paths and process-local TEMP/TMP.
+Preserve existing build products as historical evidence.

@@ -9,8 +9,8 @@ fi
 : "${SKIFREE_WEBOS_TOOLCHAIN:?Set SKIFREE_WEBOS_TOOLCHAIN to the verified SDK CMake toolchain file}"
 [[ -f "$SKIFREE_WEBOS_TOOLCHAIN" ]] || { echo 'Toolchain file missing' >&2; exit 2; }
 command -v readelf >/dev/null || { echo 'readelf is required for the ARM gate' >&2; exit 2; }
-BUILD="${SKIFREE_WEBOS_BUILD_DIR:-$ROOT/build/webos}"
-STAGE="${SKIFREE_WEBOS_STAGE_DIR:-$ROOT/dist/webos-stage}"
+BUILD="${SKIFREE_WEBOS_BUILD_DIR:-$ROOT/../.ai/evidence/webos-build}"
+STAGE="${SKIFREE_WEBOS_STAGE_DIR:-$ROOT/../.ai/evidence/webos-stage}"
 if [[ "${SKIFREE_WEBOS_BUILD_ONLY:-0}" != 1 ]]; then
   [[ ! -e "$STAGE" ]] || { echo "Stage already exists; choose a new SKIFREE_WEBOS_STAGE_DIR: $STAGE" >&2; exit 2; }
 fi

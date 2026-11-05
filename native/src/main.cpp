@@ -17,6 +17,9 @@
 #include <sstream>
 #include <stdexcept>
 #include <thread>
+#ifdef SKIFREE_WEBOS
+#include <unistd.h>
+#endif
 
 namespace {
 using spice::Color;
@@ -159,10 +162,14 @@ struct App {
     const auto st=ski::classic::state();
     return screen!=Screen::Initials&&(screen!=Screen::Run||(edition==Edition::Original&&originalIntro&&st.x==0&&st.y==0));
   }
-  explicit App(const std::filesystem::path& path):save(path.empty()?path:path.parent_path()/"scores-initials-v1.txt"),
-      scoreStore(save,path.empty()?path:path.parent_path()/"scores-v104.txt") {
+  explicit App(const std::filesystem::path& path,const std::filesystem::path& legacyDirectory={}):save(path.empty()?path:path.parent_path()/"scores-initials-v1.txt"),
+      scoreStore(save,legacyDirectory.empty()?(path.empty()?path:path.parent_path()/"scores-v104.txt"):legacyDirectory/"scores-initials-v1.txt",
+                 legacyDirectory.empty()?std::filesystem::path{}:legacyDirectory/"scores-v104.txt") {
     scoreStatus=scoreStore.load(scores);
     recordWritable=scoreStatus==ski::scores::StoreStatus::Ok||scoreStatus==ski::scores::StoreStatus::Missing;
+    // Prove creation/replacement before advertising that scores can be saved.
+    // This writes only a successfully loaded table; invalid/recovery files stay untouched.
+    persist();
   }
   void persist() {
     if(initialsPending&&scorePlacement.qualified())scores[resultCourse()][scorePlacement.rank-1].initials=initials;
@@ -439,13 +446,23 @@ int run(int argc,char** argv) {
   spice::Sdl sdl;sdl.SetMainReady();
   if(sdl.Init(SDL_INIT_VIDEO|SDL_INIT_GAMECONTROLLER)!=0)throw std::runtime_error(sdl.GetError());
   struct Quit{spice::Sdl& s;~Quit(){s.Quit();}} quit{sdl};
+  std::filesystem::path legacyDirectory;
+#ifdef SKIFREE_WEBOS
+  if(opt.save.empty()) {
+    legacyDirectory=std::filesystem::absolute(argv[0]).parent_path();
+    // SDL-webOS GetPrefPath returns the protected install directory. The package
+    // provides a sticky writable state parent; each runtime UID owns its child.
+    opt.save=legacyDirectory/"state"/("user-"+std::to_string(getuid()))/"record.txt";
+  }
+#else
   char* pref=sdl.GetPrefPath("ryanspice","skifree-native");
   if(pref) {
     if(opt.save.empty())opt.save=std::filesystem::path(pref)/"record.txt";
     sdl.Free(pref);
   }
+#endif
   std::cout<<"Game asset directory: "<<opt.assets.string()<<std::endl;
-  App app(opt.save);
+  App app(opt.save,legacyDirectory);
   app.deterministic=opt.fixed;
   if(!opt.fixed)app.seed=static_cast<std::uint32_t>(std::chrono::steady_clock::now().time_since_epoch().count());
   sdl.GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,SDL_GL_CONTEXT_PROFILE_ES);sdl.GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION,2);sdl.GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION,0);
@@ -479,7 +496,7 @@ int run(int argc,char** argv) {
     app.action(colorActions[static_cast<std::size_t>(index)]);
 #ifdef SKIFREE_WEBOS
     try {
-      std::ofstream receipt(std::filesystem::absolute(argv[0]).parent_path()/"runtime-color.json");
+      std::ofstream receipt(app.save.parent_path()/"runtime-color.json");
       receipt<<"{\"version\":\"1.0.0\",\"color\":"<<index<<",\"edition\":"<<static_cast<int>(app.edition)<<",\"source\":"<<jsonString(source)<<"}\n";
     }catch(const std::exception&){}
 #else
@@ -581,7 +598,7 @@ int run(int argc,char** argv) {
       if(frame==60) {
         // App-local startup evidence only; never intercepts other apps or input.
         try {
-          const auto folder=std::filesystem::absolute(argv[0]).parent_path();
+          const auto folder=app.save.parent_path();
           renderer.screenshot(folder/"runtime-startup.png");
           std::ofstream receipt(folder/"runtime-status.json");
           receipt<<"{\"version\":\"1.0.0\",\"renderer\":"<<jsonString(renderer.renderer)

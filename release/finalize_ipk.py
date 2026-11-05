@@ -16,7 +16,9 @@ from verify_ipk import ar_members
 def normalize_data(raw):
     output = io.BytesIO()
     main = "usr/palm/applications/com.ryanspice.skifree/skifree-native"
+    state = "usr/palm/applications/com.ryanspice.skifree/state"
     found = False
+    state_found = False
     with tarfile.open(fileobj=io.BytesIO(raw), mode="r:gz") as source:
         with tarfile.open(fileobj=output, mode="w", format=tarfile.USTAR_FORMAT) as target:
             for item in source:
@@ -30,6 +32,11 @@ def normalize_data(raw):
                 item.uid = item.gid = item.mtime = 0
                 item.uname = item.gname = "root"
                 item.mode = 0o755 if item.isdir() or name == main else 0o644
+                if name == state:
+                    if not item.isdir():
+                        raise ValueError("Runtime state path must be a directory")
+                    item.mode = 0o1777
+                    state_found = True
                 if name == main:
                     if not item.isfile():
                         raise ValueError("Native executable is not a regular file")
@@ -37,6 +44,8 @@ def normalize_data(raw):
                 target.addfile(item, source.extractfile(item) if item.isfile() else None)
     if not found:
         raise ValueError("Native executable missing")
+    if not state_found:
+        raise ValueError("Runtime state directory missing")
     return gzip.compress(output.getvalue(), mtime=0)
 
 

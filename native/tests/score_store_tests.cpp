@@ -52,6 +52,18 @@ int main() {
     check(writefail.load(loaded) == StoreStatus::Missing, "missing parent permits initial load");
     put(blocker, "file");
     check(writefail.save(t) == StoreStatus::WriteError && read(blocker) == "file", "write failure preserves blocking file");
+    const auto appdir=dir/"protected-install", state=dir/"state"/"user-123"/"scores-initials-v1.txt";
+    fs::create_directory(appdir);
+    const auto formerNamed=appdir/"scores-initials-v1.txt", formerNumeric=appdir/"scores-v104.txt";
+    put(formerNumeric,legacyText);Store relocated(state,formerNamed,formerNumeric);Tables moved;
+    check(relocated.load(moved)==StoreStatus::Ok&&moved[0][0]==Entry{1000,"---"},"relocated store imports numeric file if named file is absent");
+    check(relocated.save(moved)==StoreStatus::Ok&&read(formerNumeric)==legacyText&&!fs::exists(formerNamed),"new state directory is created without rewriting install-root files");
+    fs::remove(state);put(formerNamed,"skifree-initials-v1\n0 500 RYN\n");Store namedFirst(state,formerNamed,formerNumeric);
+    check(namedFirst.load(moved)==StoreStatus::Ok&&moved[0][0]==Entry{500,"RYN"},"relocation prefers existing named scores over numeric legacy");
+    put(formerNamed,"broken\n");Store malformedSource(state,formerNamed,formerNumeric);const auto unchangedMoved=moved;
+    check(malformedSource.load(moved)==StoreStatus::Invalid&&moved==unchangedMoved&&malformedSource.save(moved)==StoreStatus::Disabled,"invalid former named file blocks relocation without fallback or data loss");
+    fs::remove(formerNamed);put(formerNamed.string()+".tmp","recovery");Store interruptedSource(state,formerNamed,formerNumeric);
+    check(interruptedSource.load(moved)==StoreStatus::OrphanTemp&&read(formerNamed.string()+".tmp")=="recovery","interrupted former named save blocks relocation and preserves recovery");
     fs::remove_all(dir); return 0;
   } catch (const std::exception& e) { std::cerr << "FAIL: " << e.what() << '\n'; fs::remove_all(dir); return 1; }
 }

@@ -17,14 +17,16 @@ class PublicSourceBoundaries(unittest.TestCase):
                      "docs/README.md", "docs/REPOSITORY-REVIEW.md", "native/src/main.cpp", "native/include/skifree/scores.hpp",
                      "docs/TV-BUILD.md", "docs/COMPATIBILITY.md", "native/docs/DEBUG-BUILD.md", "release/TAGGING.md",
                      "docs/INSTALL.md", "docs/support.md", "release/RELEASE-NOTES-0.3.0.md",
-                     "release/source_archive_tests.py"):
+                     "release/source_archive_tests.py", "release/ipk_permissions_tests.py", "native/state/README.md"):
             with self.subTest(name=name):
                 self.assertTrue(archive.allowed(name))
 
     def test_local_material_is_never_public(self):
         for name in ("native/docs/PUBLISHING-PLAN-2026-11-04.md",
                      "native/docs/wayfinder/1.0.0/MAP.md", "docs/marketing/SOCIAL-DRAFTS.md",
-                     "release/HOMEBREW-PR-DRAFT.md", "private/receipt.json"):
+                     "release/HOMEBREW-PR-DRAFT.md", "private/receipt.json",
+                     ".ai/SYNTHESIS-QUEUE.json", ".ai/evidence/device.json",
+                     ".ai/archive/original.md", ".ai/outbox/release/manifest.json"):
             with self.subTest(name=name):
                 self.assertFalse(archive.allowed(name))
 

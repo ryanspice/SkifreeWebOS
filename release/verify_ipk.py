@@ -43,13 +43,24 @@ def main():
     prefix = "usr/palm/applications/com.ryanspice.skifree/"
     package_info = "usr/palm/packages/com.ryanspice.skifree/packageinfo.json"
     seen, records = set(), []
+    state_directory_seen = False
     with tarfile.open(fileobj=io.BytesIO(members["data.tar.gz"]), mode="r:gz") as archive:
         for member in archive:
             if member.isdir():
+                name = member.name.removeprefix("./").rstrip("/")
+                if name == prefix.rstrip("/") + "/state":
+                    if state_directory_seen or member.mode != 0o1777 or member.uid != 0 or member.gid != 0:
+                        raise ValueError("Runtime state directory lacks audited sticky permissions")
+                    state_directory_seen = True
+                elif member.mode != 0o755 or member.uid != 0 or member.gid != 0:
+                    raise ValueError("Unsafe packaged directory permissions/ownership: " + name)
                 continue
             if not member.isfile() or member.size > 16 * 1024 * 1024:
                 raise ValueError("Unexpected file type/size in package: " + member.name)
             name = member.name.removeprefix("./")
+            expected_mode = 0o755 if name == prefix + "skifree-native" else 0o644
+            if member.mode != expected_mode or member.uid != 0 or member.gid != 0:
+                raise ValueError("Unsafe packaged file permissions/ownership: " + name)
             if name in seen:
                 raise ValueError("Duplicate packaged path")
             seen.add(name)
@@ -64,6 +75,8 @@ def main():
             elif not name.startswith(prefix) or expected.get(name[len(prefix):]) != digest:
                 raise ValueError("Unexpected or changed packaged content: " + name)
             records.append({"path": name, "bytes": len(blob), "sha256": digest})
+    if not state_directory_seen:
+        raise ValueError("Runtime state directory missing")
     if seen != {prefix + name for name in expected} | {package_info}:
         raise ValueError("Packaged files do not match the complete stage")
     report = {"ipk": args.ipk.name, "bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest(),
