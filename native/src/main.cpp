@@ -116,7 +116,7 @@ Options options(int argc,char** argv) {
   }
   return o;
 }
-enum class Screen { Setup, Run, Pause, Help, Scores, Versions, Quit };
+enum class Screen { Setup, Run, Pause, Help, Initials, Scores, Versions, Quit };
 enum class Edition { Original, Recreation, Chase };
 struct App {
   Screen screen=Screen::Setup,helpReturn=Screen::Pause,quitReturn=Screen::Setup;
@@ -127,7 +127,9 @@ struct App {
   std::filesystem::path save;
   ski::scores::Store scoreStore;
   ski::scores::StoreStatus scoreStatus=ski::scores::StoreStatus::Disabled;
-  std::array<std::vector<int>,3> scores;
+  ski::scores::Tables scores;
+  std::string initials="AAA";
+  bool initialsPending=false;
   std::string resultSeen;
   ski::scores::Placement scorePlacement;
   std::uint64_t resultSerial=0;
@@ -136,7 +138,6 @@ struct App {
   Edition edition=Edition::Original;
   std::array<ski::recreation::Game,2> recreation;
   std::array<bool,2> recreationStarted{};
-  double switchHint=0;
   bool originalIntro=true;
   ski::recreation::Game& extra(){return recreation[edition==Edition::Chase?1:0];}
   const ski::recreation::Game& extra()const{return recreation[edition==Edition::Chase?1:0];}
@@ -152,20 +153,32 @@ struct App {
       const auto i=value==Edition::Chase?1u:0u;
       if(!recreationStarted[i]){extra().start(++seed,value==Edition::Chase);recreationStarted[i]=true;}
     }
-    freeze(false);screen=Screen::Run;selection=0;switchHint=5;lastPointer.reset();pointerActive=false;
+    freeze(false);screen=Screen::Run;selection=0;lastPointer.reset();pointerActive=false;
   }
   bool colorsVisible()const {
     const auto st=ski::classic::state();
-    return screen!=Screen::Run||switchHint>0||(edition==Edition::Original&&st.x==0&&st.y==0);
+    return screen!=Screen::Initials&&(screen!=Screen::Run||(edition==Edition::Original&&originalIntro&&st.x==0&&st.y==0));
   }
-  explicit App(const std::filesystem::path& path):save(path.empty()?path:path.parent_path()/"scores-v104.txt"),scoreStore(save) {
+  explicit App(const std::filesystem::path& path):save(path.empty()?path:path.parent_path()/"scores-initials-v1.txt"),
+      scoreStore(save,path.empty()?path:path.parent_path()/"scores-v104.txt") {
     scoreStatus=scoreStore.load(scores);
     recordWritable=scoreStatus==ski::scores::StoreStatus::Ok||scoreStatus==ski::scores::StoreStatus::Missing;
   }
   void persist() {
+    if(initialsPending&&scorePlacement.qualified())scores[resultCourse()][scorePlacement.rank-1].initials=initials;
     if(!recordWritable)return;
     scoreStatus=scoreStore.save(scores);
     recordWritable=scoreStatus==ski::scores::StoreStatus::Ok;
+  }
+  std::size_t resultCourse()const {return resultSeen=="SS"?0u:resultSeen=="GS"?1u:2u;}
+  void acceptInitials() {
+    persist();initialsPending=false;screen=Screen::Scores;selection=0;
+  }
+  void cycleInitial(int direction) {
+    if(selection<3)initials[static_cast<std::size_t>(selection)]=static_cast<char>('A'+(initials[static_cast<std::size_t>(selection)]-'A'+direction+26)%26);
+  }
+  Rect initialRect(int slot,int part)const {
+    return {350.0f+static_cast<float>(slot)*90,part==0?222.0f:part==1?258.0f:322.0f,80,part==1?56.0f:30.0f};
   }
   void start() {
     if(edition==Edition::Original){
@@ -181,18 +194,31 @@ struct App {
       case Screen::Pause:return {"RESUME","NEW RUN","CONTROLS",edition==Edition::Original?(ski::classic::state().fast?"FAST MODE: ON":"FAST MODE: OFF"):"RESUME AND BOOST","CHOOSE A RUN","EXIT"};
       case Screen::Help:return {"BACK"};
       case Screen::Scores:return {"CONTINUE"};
+      case Screen::Initials:return {"SAVE INITIALS"};
       case Screen::Versions:return {"RED: ORIGINAL 1.04","GREEN: RECREATION","YELLOW: YETI CHASE","BACK"};
       case Screen::Quit:return {"CANCEL","EXIT"};
       default:return {};
     }
   }
-  Rect buttonRect(int i)const {return {310,screen==Screen::Help||screen==Screen::Scores?420.0f:(screen==Screen::Setup?365.0f:235.0f)+static_cast<float>(i)*38,340,32};}
+  Rect buttonRect(int i)const {return {310,screen==Screen::Help||screen==Screen::Scores||screen==Screen::Initials?420.0f:(screen==Screen::Setup?365.0f:235.0f)+static_cast<float>(i)*38,340,32};}
   void pause() {if(screen==Screen::Run){freeze(true);screen=Screen::Pause;selection=0;}}
   void action(std::string key,bool repeat=false) {
     pointerActive=false;
     if(key=="enter") {
       if(screen==Screen::Run&&edition==Edition::Original){if(ski::classic::state().alive)ski::classic::key(ski::classic::Key::Enter);else start();return;}
       key="ok";
+    }
+    if(screen==Screen::Initials) {
+      if(key=="left")selection=(selection+3)%4;
+      else if(key=="right")selection=(selection+1)%4;
+      else if(key=="up")cycleInitial(1);
+      else if(key=="down")cycleInitial(-1);
+      else if(key=="erase"&&!repeat)selection=std::max(0,selection-1);
+      else if(key=="ok"&&!repeat){if(selection<3)++selection;else acceptInitials();}
+      else if((key=="back"||key=="pause")&&!repeat)acceptInitials();
+      else if(!repeat&&(key=="original"||key=="recreation"||key=="chase"||key=="help"||key=="restart"))acceptInitials();
+      else return;
+      if(key!="original"&&key!="recreation"&&key!="chase"&&key!="help"&&key!="restart")return;
     }
     if(!repeat&&assetsReady) {
       if(key=="original"){choose(Edition::Original);return;}
@@ -256,6 +282,13 @@ struct App {
     const bool moved=!lastPointer||std::abs(p.x-lastPointer->x)>1||std::abs(p.y-lastPointer->y)>1;
     if(!click&&!moved)return;
     lastPointer=p;pointerActive=true;
+    if(screen==Screen::Initials) {
+      for(int slot=0;slot<3;++slot)for(int part=0;part<3;++part)if(initialRect(slot,part).contains(p)) {
+        selection=slot;if(click&&part!=1)cycleInitial(part==0?1:-1);return;
+      }
+      if(buttonRect(0).contains(p)){selection=3;if(click)acceptInitials();}
+      return;
+    }
     if(click&&assetsReady&&colorsVisible())for(int i=0;i<4;++i) {
       if(Rect{30.0f+i*230.0f,500,210,28}.contains(p)) {
         const std::array<std::string,4> actions{"original","recreation","chase","help"};action(actions[static_cast<std::size_t>(i)]);return;
@@ -275,6 +308,13 @@ struct App {
     const auto bs=buttons();for(std::size_t i=0;i<bs.size();++i)if(buttonRect(static_cast<int>(i)).contains(p)){selection=static_cast<int>(i);if(click)action("ok");break;}
   }
   void character(char value) {
+    if(screen==Screen::Initials) {
+      if(value>='a'&&value<='z')value=static_cast<char>(value-'a'+'A');
+      if(value>='A'&&value<='Z') {
+        selection=std::min(selection,2);initials[static_cast<std::size_t>(selection)]=value;++selection;
+      }
+      return;
+    }
     if(edition==Edition::Original&&(screen==Screen::Run||screen==Screen::Pause)) {
       pointerActive=false;ski::classic::character(value);
       const auto result=ski::classic::state().result;
@@ -284,10 +324,10 @@ struct App {
   void finish(const ski::classic::Result& result) {
     resultSeen=result.course;resultSerial=result.serial;const auto c=result.course=="SS"?0u:result.course=="GS"?1u:2u;
     scorePlacement=ski::scores::submit(scores[c],result.value,result.timed);
-    persist();ski::classic::pause(true);screen=Screen::Scores;selection=0;
+    initials="AAA";initialsPending=scorePlacement.qualified();
+    persist();ski::classic::pause(true);screen=initialsPending?Screen::Initials:Screen::Scores;selection=0;
   }
   void update(double dt) {
-    switchHint=std::max(0.0,switchHint-dt);
     if(screen!=Screen::Run)return;
     if(edition!=Edition::Original){extra().advance(dt);return;}
     ski::classic::advance(dt);const auto st=ski::classic::state();
@@ -297,7 +337,7 @@ struct App {
   }
 };
 std::string screenName(Screen screen) {
-  switch(screen){case Screen::Setup:return "setup";case Screen::Run:return "playing";case Screen::Pause:return "paused";case Screen::Help:return "help";case Screen::Scores:return "scores";case Screen::Versions:return "versions";case Screen::Quit:return "exit-confirm";}
+  switch(screen){case Screen::Setup:return "setup";case Screen::Run:return "playing";case Screen::Pause:return "paused";case Screen::Help:return "help";case Screen::Initials:return "initials";case Screen::Scores:return "scores";case Screen::Versions:return "versions";case Screen::Quit:return "exit-confirm";}
   return "unknown";
 }
 std::string timeString(int ms) {
@@ -324,20 +364,20 @@ void draw(spice::Renderer& r,App& app,const spice::Viewport& view) {
     if(app.screen==Screen::Run&&!st.alive)centeredText(r,"CLICK / OK OR F2 TO START AGAIN",480,477,1.5f);
   }else if(app.assetsReady) {
     ski::recreation::landscape(r,app.extra());
-    r.rect({28,20,904,56},Ink,8);text(r,app.editionName(),44,30,2,White);
-    text(r,app.edition==Edition::Chase?"RECREATION / PURSUIT":"FREE SKIING",44,53,1.3f,White);
-    text(r,std::to_string(static_cast<int>(app.extra().distance()))+" M",550,34,2,White);
-    text(r,"STYLE "+std::to_string(app.extra().score()),730,34,2,White);
+    r.rect({28,20,258,56},White);text(r,app.editionName(),40,30,2);
+    text(r,app.edition==Edition::Chase?"RECREATION / PURSUIT":"FREE SKIING",40,53,1.3f);
+    r.rect({738,0,222,77},White);r.rect({738,0,222,77},Ink,0,1);
+    text(r,"DIST: "+std::to_string(static_cast<int>(app.extra().distance()))+"M",747,6,1.5f);
+    text(r,"STYLE: "+std::to_string(app.extra().score()),747,30,1.5f);
     const auto cooldown=static_cast<int>(std::ceil(app.extra().player().cooldown));
-    text(r,cooldown>0?"BOOST IN "+std::to_string(cooldown)+" S":"BOOST READY",760,87,1.5f);
+    text(r,cooldown>0?"BOOST: "+std::to_string(cooldown)+"S":"BOOST: READY",747,54,1.5f);
     if(app.extra().mode()==ski::recreation::Mode::GameOver)centeredText(r,"RUN COMPLETE - PRESS OK TO TRY AGAIN",480,470,2);
-    else if(app.screen==Screen::Run){r.rect({125,471,710,23},White.opacity(0.94f),4);centeredText(r,"UP BRAKE   DOWN SKI   OK BOOST / TRICK   BACK MENU",480,477,1.7f);}
   }
   if(app.screen!=Screen::Run) {
     r.rect({0,0,960,540},Ink.opacity(0.22f));
     r.rect({234,102,500,372},{0,0,0,0.12f},10);r.rect({230,96,500,374},{0.97f,0.98f,0.99f,1},10);
     r.rect({230,96,500,50},Ink,10);
-    const auto title=app.screen==Screen::Setup?"GAME FILES UNAVAILABLE":app.screen==Screen::Help?"CONTROLS":app.screen==Screen::Scores?"HIGH SCORES":app.screen==Screen::Versions?"CHOOSE A RUN":app.screen==Screen::Quit?"EXIT GAME?":"PAUSED";
+    const auto title=app.screen==Screen::Setup?"GAME FILES UNAVAILABLE":app.screen==Screen::Help?"CONTROLS":app.screen==Screen::Initials?"ENTER YOUR INITIALS":app.screen==Screen::Scores?"HIGH SCORES":app.screen==Screen::Versions?"CHOOSE A RUN":app.screen==Screen::Quit?"EXIT GAME?":"PAUSED";
     text(r,"SKIFREE FOR WEBOS",250,106,1.2f,White);text(r,title,250,125,2,White);
     if(app.screen==Screen::Setup) {
       text(r,"SOME GAME FILES COULD NOT LOAD.",250,185,2);text(r,"REINSTALL SKIFREE FOR WEBOS.",250,220,2);
@@ -346,6 +386,18 @@ void draw(spice::Renderer& r,App& app,const spice::Viewport& view) {
       const std::array<std::string,9> lines{app.editionName(),"MOUSE / MAGIC POINTER: STEER",original?"CLICK / REMOTE OK: JUMP OR TRICK":"OK / F: BOOST OR AIR TRICK",original?"INSERT / NUMPAD 0: SMALL JUMP":"UP: BRAKE    DOWN: SKI DOWNHILL",original?"F: TOGGLE FAST MODE":"BOOST TO STAY AHEAD OF THE YETI","F2: NEW RUN    F3 / BACK: PAUSE","RED ORIGINAL / GREEN RECREATION","YELLOW YETI CHASE / BLUE HELP",original?"TIME: SLALOM / TREE SLALOM ONLY":"SWITCH RUNS WITHOUT RESTARTING"};
       float y=159;for(const auto& line:lines){text(r,line,250,y,1.7f);y+=26;}
       text(r,"ORIGINAL GAME AND ART: CHRIS PIRIH",250,397,1.35f);
+    }else if(app.screen==Screen::Initials) {
+      centeredText(r,"NEW TOP TEN SCORE",480,163,2);
+      centeredText(r,"RANK "+std::to_string(app.scorePlacement.rank)+"  /  "+(app.scorePlacement.timed?timeString(app.scorePlacement.value):std::to_string(app.scorePlacement.value)+" STYLE"),480,192,1.7f);
+      for(int slot=0;slot<3;++slot) {
+        for(int part=0;part<3;++part) {
+          const auto box=app.initialRect(slot,part);const bool selected=slot==app.selection;
+          r.rect(box,part==1&&selected?Blue:White,5);r.rect(box,selected?Blue:Ink,5,1);
+          centeredText(r,part==0?"+":part==2?"-":std::string(1,app.initials[static_cast<std::size_t>(slot)]),box.x+40,box.y+(part==1?14:7),part==1?4.0f:2.0f,part==1&&selected?White:Ink);
+        }
+      }
+      centeredText(r,"TYPE A-Z OR USE LEFT / RIGHT, UP / DOWN",480,369,1.4f);
+      centeredText(r,"OK: NEXT / SAVE    BACK: KEEP INITIALS",480,395,1.4f);
     }else if(app.screen==Screen::Pause) {
       text(r,app.editionName(),280,160,2);text(r,"F3 / BACK TO CONTINUE",300,197,1.7f);
     }else if(app.screen==Screen::Versions) {
@@ -353,13 +405,13 @@ void draw(spice::Renderer& r,App& app,const spice::Viewport& view) {
     }else if(app.screen==Screen::Scores) {
       const auto c=app.resultSeen=="SS"?0u:app.resultSeen=="GS"?1u:2u;
       text(r,c==0?"SLALOM":c==1?"TREE SLALOM":"FREESTYLE",270,153,2);
-      float y=178;std::size_t row=0;for(int v:app.scores[c]){
+      float y=178;std::size_t row=0;for(const auto& entry:app.scores[c]){
         const bool current=app.scorePlacement.isCurrentRow(row);
-        text(r,std::to_string(++row)+". "+(c==2?std::to_string(v):timeString(v))+(current?"  <- THAT IS YOU":""),260,y,1.6f);y+=21;
+        text(r,std::to_string(++row)+". "+entry.initials+"  "+(c==2?std::to_string(entry.value):timeString(entry.value))+(current?"  <- YOU":""),260,y,1.6f);y+=21;
       }
       if(!app.scorePlacement.qualified())text(r,(c==2?std::to_string(app.scorePlacement.value):timeString(app.scorePlacement.value))+"  - TRY AGAIN",260,397,1.6f);
     }else text(r,"LEAVE THE MOUNTAIN?",290,177,2);
-    const auto bs=app.buttons();for(std::size_t i=0;i<bs.size();++i){const auto box=app.buttonRect(static_cast<int>(i));const bool focus=static_cast<int>(i)==app.selection;r.rect(box,focus?Blue:White,5);if(focus)r.rect(box,Blue,5,2);text(r,(focus?"> ":"  ")+bs[i],box.x+12,box.y+10,1.8f,focus?White:Ink);}
+    const auto bs=app.buttons();for(std::size_t i=0;i<bs.size();++i){const auto box=app.buttonRect(static_cast<int>(i));const bool focus=app.screen==Screen::Initials?app.selection==3:static_cast<int>(i)==app.selection;r.rect(box,focus?Blue:White,5);if(focus)r.rect(box,Blue,5,2);text(r,(focus?"> ":"  ")+bs[i],box.x+12,box.y+10,1.8f,focus?White:Ink);}
   }
   if(!app.recordWritable&&app.screen!=Screen::Run)
     centeredText(r,"HIGH SCORES ARE NOT BEING SAVED",480,477,1.5f,{0.8f,0.05f,0.12f,1});
@@ -488,6 +540,9 @@ int run(int argc,char** argv) {
         }else if(scan==0&&event.key.keysym.sym==2097169) {
           // Some webOS builds expose Red only as this native keycode.
           colorEventSeen[0]=true;if(!event.key.repeat)colorAction(0,"native-red-keycode");
+        }else if(app.screen==Screen::Initials&&scan>=SDL_SCANCODE_A&&scan<=SDL_SCANCODE_Z) {
+          if(!event.key.repeat)app.character(static_cast<char>('A'+scan-SDL_SCANCODE_A));
+        }else if(app.screen==Screen::Initials&&scan==SDL_SCANCODE_BACKSPACE){app.action("erase",event.key.repeat!=0);
         }else if(app.edition==Edition::Original&&(app.screen==Screen::Run||app.screen==Screen::Pause)&&(scan==9||scan==21||scan==23||scan==27||scan==28)) {
           char c=static_cast<char>('a'+scan-SDL_SCANCODE_A);
           const bool upper=((event.key.keysym.mod&KMOD_SHIFT)!=0)!=((event.key.keysym.mod&KMOD_CAPS)!=0);

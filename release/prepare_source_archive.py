@@ -9,19 +9,19 @@ import subprocess
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-ROOT_FILES = {"README.md", "LICENSE", "NOTICE.md", ".gitignore", ".gitattributes"}
-LOCAL_FILES = {"AGENTS.md", "native/docs/PUBLISHING-PLAN-2026-11-04.md",
+ROOT_FILES = {"README.md", "CONTRIBUTING.md", "AGENTS.md", "LICENSE", "NOTICE.md", ".gitignore", ".gitattributes"}
+LOCAL_FILES = {"native/docs/PUBLISHING-PLAN-2026-11-04.md",
                "release/HOMEBREW-PR-DRAFT.md"}
 LOCAL_PREFIXES = ("private/", "native/docs/wayfinder/", "docs/marketing/")
 PUBLIC_MEDIA = {"docs/media/skifree-original-c3.png", "docs/media/skifree-recreation-desktop.png",
                 "docs/media/champions-development-preview.png"}
 # Release generators must write to ignored build/private directories, never the source tree.
-RELEASE_FILES = {"README.md", "Prepare-Homebrew.ps1", "homebrew-package.yml.in",
+RELEASE_FILES = {"README.md", "AGENTS.md", "Prepare-Homebrew.ps1", "homebrew-package.yml.in",
                  "finalize_ipk.py", "verify_ipk.py", "prepare_source_archive.py",
                  "source_archive_tests.py", "RELEASE-NOTES-1.0.0.md",
                  "RELEASE-NOTES-0.3.0.md", "RELEASE-NOTES-0.4.0.md", "RELEASE-NOTES-0.5.0.md",
                  "RELEASE-NOTES-0.6.0.md", "RELEASE-NOTES-0.7.0.md", "RELEASE-NOTES-0.8.0.md"}
-NATIVE_FILES = {"CMakeLists.txt", "appinfo.json", "LICENSE", "NOTICE.md", "README.md",
+NATIVE_FILES = {"CMakeLists.txt", "appinfo.json", "LICENSE", "NOTICE.md", "README.md", "AGENTS.md",
                 "icon.png", "remote-scancodes.example.txt"}
 TEXT_SUFFIXES = {".md", ".txt", ".py", ".ps1", ".sh", ".json", ".yml", ".yaml",
                  ".in", ".cpp", ".hpp", ".h", ".c", ".svg"}

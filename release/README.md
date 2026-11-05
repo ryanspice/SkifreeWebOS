@@ -12,12 +12,14 @@ Package that directory with `ares-package`. On Windows, write this first package
 python release/finalize_ipk.py --input $intermediateIpk --output $finalIpk
 python release/verify_ipk.py --ipk $finalIpk --stage-audit $stageAudit --report $finalAudit
 python release/source_archive_tests.py
-python release/prepare_source_archive.py --out native/dist/SkifreeWebOS-1.0.0-source-public-rc3.zip
+python release/prepare_source_archive.py --out native/dist/SkifreeWebOS-1.0.0-source-public-rc7.zip
 ```
 
 The finalizer normalizes Unix modes, including execute permissions on the ELF. The verifier compares every packaged app file against the audited stage. The source builder permits source/documentation files, the original procedural icon, the 89 hash-verified sprites and three hash-verified documentation images. It rejects the original EXE/ZIP, raw resource dumps, credentials, private reports, internal planning, unsent launch drafts and generated release metadata. Documentation images are not added to the IPK. Source ZIPs include the Git-visible tree, including allowed uncommitted files, and omit ignored build dependencies; pinned dependency preparation remains documented.
 
 The builder refuses existing output files. Preserve previous archives and use a fresh revision name after changes. The ZIP, adjacent SHA-256 file and per-file manifest form one source-release set. A source-only documentation refresh does not change the audited IPK or its checksum.
+
+The latest HUD/initials revision changes the native executable and has its own audited local IPK in `native/dist/ui-initials-1.0.0/`. It retains version 1.0.0 while the release is unpublished; use its exact checksum from the installation guide, not the earlier C3-installed artifact. This revision's TV input and score migration checks are still pending.
 
 ## Homebrew metadata
 
@@ -25,7 +27,11 @@ The builder refuses existing output files. Preserve previous archives and use a 
 
 The script defaults to `-Pool non-free` because the original artwork is separate from the code's MIT license. Confirm the appropriate pool and redistribution terms against the current repository rules before submission; free pricing does not describe a source/artwork license. No license grant is fabricated by this tooling. Public URL and compatibility fields remain explicit inputs rather than plausible placeholders.
 
-The existing verified destinations are https://ryanspice.com/ and https://github.com/ryanspice. A specific public repository/release does not exist as part of this task. The TV jail lacks `/etc/starfish-release`; the observed SDK version alone is not used to fill minimum-release metadata.
+The website is https://ryanspice.com/ and the source handoff repository is
+https://github.com/ryanspice/SkifreeWebOS. The repository is private; it is not a
+public Homebrew source or download URL. No GitHub Release or public IPK has been
+published. The TV jail lacks `/etc/starfish-release`; the observed SDK version
+alone is not used to fill minimum-release metadata.
 
 ## Submission checklist
 

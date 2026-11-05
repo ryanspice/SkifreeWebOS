@@ -16,14 +16,16 @@
 #endif
 
 namespace ski::scores {
-using Tables = std::array<std::vector<int>, 3>;
+using Tables = std::array<std::vector<Entry>, 3>;
 enum class StoreStatus { Ok, Missing, Disabled, Invalid, IoError, OrphanTemp, WriteError, ReplaceError };
 
 // A store is writable only after a successful load or a confirmed missing file.
-// The caller supplies the existing scores-v104.txt path, not record.txt.
+// Named scores use a new file. An optional legacy file is read only if the
+// primary file is absent; neither legacy scores nor record.txt are overwritten.
 class Store {
  public:
-  explicit Store(std::filesystem::path path) : path_(std::move(path)) {}
+  explicit Store(std::filesystem::path path, std::filesystem::path legacy = {})
+      : path_(std::move(path)), legacy_(std::move(legacy)) {}
   StoreStatus load(Tables& tables) {
     writable_ = false;
     if (path_.empty()) return StoreStatus::Disabled;
@@ -33,21 +35,33 @@ class Store {
     if (orphan) return StoreStatus::OrphanTemp;
     const bool exists = std::filesystem::exists(path_, ec);
     if (ec) return StoreStatus::IoError;
-    if (!exists) { tables = {}; writable_ = true; return StoreStatus::Missing; }
+    if (!exists) {
+      if (!legacy_.empty()) {
+        Store legacy(legacy_);
+        const auto status = legacy.load(tables);
+        if (status != StoreStatus::Ok && status != StoreStatus::Missing) return status;
+        writable_ = true;
+        return status;
+      }
+      tables = {}; writable_ = true; return StoreStatus::Missing;
+    }
     std::ifstream in(path_);
     if (!in) return StoreStatus::IoError;
     Tables parsed;
     std::string tag;
-    if (!(in >> tag) || tag != "skifree-v104") return StoreStatus::Invalid;
+    if (!(in >> tag) || (tag != "skifree-v104" && tag != "skifree-initials-v1")) return StoreStatus::Invalid;
     for (;;) {
       in >> std::ws;
       if (in.bad()) return StoreStatus::IoError;
       if (in.eof()) break;
       int course = 0, value = 0;
       if (!(in >> course >> value)) return in.bad() ? StoreStatus::IoError : StoreStatus::Invalid;
+      std::string initials = "---";
+      if (tag == "skifree-initials-v1" && !(in >> initials)) return in.bad() ? StoreStatus::IoError : StoreStatus::Invalid;
+      if (!validInitials(initials)) return StoreStatus::Invalid;
       if (course < 0 || course > 2 || parsed[static_cast<std::size_t>(course)].size() >= Limit)
         return StoreStatus::Invalid;
-      parsed[static_cast<std::size_t>(course)].push_back(value);
+      parsed[static_cast<std::size_t>(course)].emplace_back(value, initials);
     }
     if (!valid(parsed)) return StoreStatus::Invalid;
     tables = std::move(parsed);
@@ -65,9 +79,9 @@ class Store {
     {
       std::ofstream out(temp(), std::ios::trunc);
       if (out) {
-        out << "skifree-v104\n";
+        out << "skifree-initials-v1\n";
         for (std::size_t c = 0; c < tables.size(); ++c)
-          for (int value : tables[c]) out << c << ' ' << value << '\n';
+          for (const auto& entry : tables[c]) out << c << ' ' << entry.value << ' ' << entry.initials << '\n';
         out.close();
       }
       if (!out) { writable_ = false; return StoreStatus::WriteError; }
@@ -86,13 +100,16 @@ class Store {
   static bool valid(const Tables& tables) {
     for (std::size_t c = 0; c < tables.size(); ++c) {
       if (tables[c].size() > Limit) return false;
-      if (c < 2 ? !std::is_sorted(tables[c].begin(), tables[c].end())
-                : !std::is_sorted(tables[c].begin(), tables[c].end(), std::greater<int>{})) return false;
+      for (const auto& entry : tables[c]) if (!validInitials(entry.initials)) return false;
+      if (!std::is_sorted(tables[c].begin(), tables[c].end(), [c](const Entry& a, const Entry& b) {
+            return c < 2 ? a.value < b.value : a.value > b.value;
+          })) return false;
     }
     return true;
   }
   std::filesystem::path temp() const { auto result = path_; result += ".tmp"; return result; }
   std::filesystem::path path_;
+  std::filesystem::path legacy_;
   bool writable_ = false;
 };
 }

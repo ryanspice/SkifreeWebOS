@@ -10,10 +10,10 @@
       "path": "docs/media/skifree-original-c3.png"
     },
     {
-      "sha256": "75b21c4b68175daf40c159097fd2a25de169fc836d18e2ad41ef58b9203d089e",
+      "sha256": "9f174a0cf2cd0dc650af1df4363ed9a833c0ff4bd7c80c0e43021f65ff7d3973",
       "captured": "2026-11-04",
       "height": 720,
-      "context": "Native desktop UI test capture of Recreation",
+      "context": "Native desktop capture of the lighter Recreation HUD and hidden in-run footer",
       "width": 1280,
       "path": "docs/media/skifree-recreation-desktop.png"
     },

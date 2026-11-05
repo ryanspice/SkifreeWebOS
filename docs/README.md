@@ -1,0 +1,42 @@
+# Documentation map
+
+## Playing and support
+
+- [Installation, compatibility and score troubleshooting](INSTALL.md)
+- [Controls and run selection](../README.md#original-controls)
+- [Support Ryan and Champions of Snowboarding 2026](support.md)
+- [Screenshot context and attribution](media/README.md)
+
+## Development and evidence
+
+- [Contributor workflow](../CONTRIBUTING.md)
+- [Native build and tests](../native/README.md)
+- [Verification and remaining acceptance checks](../native/docs/VERIFICATION.md)
+- [Repository review](REPOSITORY-REVIEW.md)
+- [Local visual review](../native/docs/VISUAL-REVIEW-1.0.0.md)
+- [Original comparison](../native/docs/ORIGINAL-COMPARISON.md)
+- [Original parity contract](../native/docs/ORIGINAL-PARITY.md)
+- [Core provenance](../native/src/classic/PROVENANCE.md)
+- [webOS runtime compatibility](../native/docs/WEBOS-RUNTIME.md)
+
+## Release and rights
+
+- [Release preparation and Homebrew checklist](../release/README.md)
+- [1.0.0 notes](../release/RELEASE-NOTES-1.0.0.md)
+- [License scope](../LICENSE) and [attribution notices](../native/NOTICE.md)
+
+## Repository layout
+
+| Location | Purpose |
+| --- | --- |
+| `native/src/`, `native/include/` | Game, application and platform code |
+| `native/assets/` | Manifest and 89 original sprites |
+| `native/tests/` | Core, storage, UI and staging checks |
+| `native/scripts/`, `native/tools/` | Build, runtime audit and asset utilities |
+| `native/docs/` | Technical provenance and verification |
+| `docs/` | Player docs, support and approved screenshots |
+| `release/` | Packaging, source boundaries and release notes |
+| `.github/` | Issue template and support link |
+
+Builds, packages, local dependencies, raw evidence and unsent marketing drafts
+are ignored. They are not needed to navigate tracked source.

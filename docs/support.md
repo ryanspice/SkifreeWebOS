@@ -18,9 +18,11 @@ I'm also building **Champions of Snowboarding 2026**. If SkiFree brought you her
 
 Champions is my own separate game. This is a promotion from its developer, with no claim of affiliation with SkiFree or its author.
 
-## Help with SkiFreeWebOS
+## Help with SkiFree for webOS
 
 Useful reports include your TV model, exact firmware/webOS release, app version, input device and the steps that reproduce a problem. Please keep original executable files, private network addresses, credentials and unrelated TV logs out of public issues.
+
+[Installation and troubleshooting](INSTALL.md) · [Controls and high scores](../README.md#original-controls)
 
 ## Support my work
 

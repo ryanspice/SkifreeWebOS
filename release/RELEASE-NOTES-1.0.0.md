@@ -4,9 +4,13 @@ The opening now reads **WebOS 1.0.0** beneath the crossed-out original 1.04. The
 
 Original is the default and follows the reconstructed SkiFree 1.04 behavior. Recreation and its gentler Yeti Chase remain separate choices on Green and Yellow; Blue opens help.
 
-Score storage now rejects incomplete, malformed or incorrectly ranked tables before changing the displayed table or writing over a file. Saves retain the existing temporary-file/replace approach; failure and interrupted-save states preserve recovery material, disable further writes for that session and show a clear menu warning. The existing scores-v104.txt format and old prototype record.txt are preserved.
+The latest local revision replaces Recreation's dark HUD bar with compact white status areas and hides footer controls while skiing. Menus and the stationary Original opening retain their choices; physical colour shortcuts remain active.
 
-Ryan reported that tested inputs seem good and authorized this local 1.0 candidate under the intended-original-gameplay bar. The final source, build, package and TV evidence belongs in [verification](../native/docs/VERIFICATION.md). This is not a claim of exhaustive EXE runtime equivalence or compatibility with every LG TV. Public release and social posts remain separate from the local candidate.
+Qualifying Original scores now prompt for three arcade-style initials, starting at AAA. Keyboard, remote arrows/OK and pointer plus/minus controls are supported. Existing scores import with --- initials into `scores-initials-v1.txt`; the original `scores-v104.txt` and prototype `record.txt` remain untouched. Original's ranking and course rules are unchanged.
+
+Score storage rejects incomplete, malformed or incorrectly ranked tables before adopting them. Saves retain the temporary-file/replace approach; failure and interrupted-save states preserve recovery material, disable further writes for that session and show a clear menu warning. Older binaries do not read the new initials file.
+
+Owner playtesting provided positive aggregate input feedback. The source, build, package and TV evidence is recorded in [verification](../native/docs/VERIFICATION.md). Full Windows runtime equivalence and compatibility with every LG TV have not been established. This remains a local candidate; no public release or social post has been sent.
 
 
-The local candidate passes four sanitizer suites (118 assertions), 55 native UI cases, seven package-boundary cases and the ARM/package audits. It has been installed and rendered on the C3. The existing empty score file survived update/relaunch; non-empty TV upgrade survival is not yet established. See the verification record for the distinction between host, device and owner evidence.
+The earlier candidate passed four sanitizer suites (118 assertions), 55 native UI cases, seven package-boundary cases and ARM/package audits, and was installed and rendered on the C3. The initials/HUD revision has separate fresh host tests and captures; it has not been installed as part of this revision. The old empty score file survived the earlier update/relaunch; non-empty TV migration remains unverified. See the verification record for the current evidence.

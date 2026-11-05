@@ -64,18 +64,40 @@ def main():
     st=run('versions_choose','1 back\n2 down\n3 down\n4 down\n5 down\n6 ok\n7 down\n8 ok\n');assert st['edition']==1
     st=run('intro_lift_clearance',frames=1200);assert st['original_intro'] and st['lift_offset']<0
     st=run('lift_gameplay_position','1 down\n',frames=200);assert not st['original_intro'] and st['lift_offset']==0
-    st=run('score_current_row','1 score:SS:1000\n',expected='scores',scores='skifree-v104\n0 1000\n0 2000\n');assert st['score_rank']==2
+    st=run('score_current_row','1 score:SS:1000\n2 back\n',expected='scores',scores='skifree-v104\n0 1000\n0 2000\n');assert st['score_rank']==2
     st=run('score_outside_top_ten','1 score:SS:9999\n',expected='scores',scores='skifree-v104\n'+''.join(f'0 {i*100}\n' for i in range(1,11)));assert st['score_rank']==0 and st['score_value']==9999
-    st=run('score_freestyle','1 score:FS:250\n',expected='scores',scores='skifree-v104\n2 300\n2 200\n');assert st['score_rank']==2
-    st=run('score_store_saved','1 score:SS:1000\n',expected='scores');assert st['record_writable']
-    saved=(out/'score_store_saved'/'scores-v104.txt').read_text();assert saved=='skifree-v104\n0 1000\n'
+    st=run('score_freestyle','1 score:FS:250\n2 back\n',expected='scores',scores='skifree-v104\n2 300\n2 200\n');assert st['score_rank']==2
+    st=run('score_store_saved','1 score:SS:1000\n2 back\n',expected='scores');assert st['record_writable']
+    saved=(out/'score_store_saved'/'scores-initials-v1.txt').read_text();assert saved=='skifree-initials-v1\n0 1000 AAA\n'
     reloaded=out/'score_store_reloaded';reloaded.mkdir(exist_ok=True)
-    shutil.copy2(out/'score_store_saved'/'scores-v104.txt',reloaded/'scores-v104.txt')
-    st=run('score_store_reloaded','1 score:SS:2000\n',expected='scores');assert st['score_rank']==2
-    assert (reloaded/'scores-v104.txt').read_text()=='skifree-v104\n0 1000\n0 2000\n'
+    shutil.copy2(out/'score_store_saved'/'scores-initials-v1.txt',reloaded/'scores-initials-v1.txt')
+    st=run('score_store_reloaded','1 score:SS:2000\n2 back\n',expected='scores');assert st['score_rank']==2
+    assert (reloaded/'scores-initials-v1.txt').read_text()=='skifree-initials-v1\n0 1000 AAA\n0 2000 AAA\n'
     damaged='skifree-v104\n0 1000\n0'
-    st=run('score_store_invalid','1 score:SS:2000\n',expected='scores',scores=damaged);assert not st['record_writable']
+    st=run('score_store_invalid','1 score:SS:2000\n2 back\n',expected='scores',scores=damaged);assert not st['record_writable']
     assert (out/'score_store_invalid'/'scores-v104.txt').read_text()==damaged
+    assert not (out/'score_store_invalid'/'scores-initials-v1.txt').exists()
+    st=run('initials_entry','1 score:SS:12345\n',expected='initials');assert st['score_rank']==1
+    st=run('initials_keyboard','1 score:SS:12345\n2 scan:21\n3 scan:28\n4 scan:17\n5 scan:40\n',expected='scores')
+    assert (out/'initials_keyboard'/'scores-initials-v1.txt').read_text()=='skifree-initials-v1\n0 12345 RYN\n'
+    st=run('initials_remote','1 score:GS:23456\n2 up\n3 right\n4 down\n5 ok\n6 up\n7 ok\n8 ok\n',expected='scores')
+    assert (out/'initials_remote'/'scores-initials-v1.txt').read_text()=='skifree-initials-v1\n1 23456 BZB\n'
+    st=run('initials_pointer','1 score:FS:300\n2 click:520:316\n3 click:640:450\n4 click:760:316\n5 click:640:580\n',expected='scores')
+    assert (out/'initials_pointer'/'scores-initials-v1.txt').read_text()=='skifree-initials-v1\n2 300 BZB\n'
+    st=run('initials_backspace','1 score:SS:1000\n2 scan:21\n3 scan:28\n4 scan:42\n5 scan:4\n6 back\n',expected='scores')
+    assert (out/'initials_backspace'/'scores-initials-v1.txt').read_text()=='skifree-initials-v1\n0 1000 RAA\n'
+    st=run('initials_switch','1 score:SS:1000\n2 scan:21\n3 recreation\n');assert st['edition']==1
+    assert (out/'initials_switch'/'scores-initials-v1.txt').read_text()=='skifree-initials-v1\n0 1000 RAA\n'
+    st=run('initials_close_pending','1 score:SS:1000\n2 scan:21\n',expected='initials')
+    assert (out/'initials_close_pending'/'scores-initials-v1.txt').read_text()=='skifree-initials-v1\n0 1000 RAA\n'
+    st=run('initials_focus','1 score:SS:1000\n2 scan:21\n3 blur\n4 focus\n',expected='initials')
+    assert (out/'initials_focus'/'scores-initials-v1.txt').read_text()=='skifree-initials-v1\n0 1000 RAA\n'
+    st=run('initials_legacy_preserved','1 score:SS:1000\n2 back\n',expected='scores',scores='skifree-v104\n0 2000\n')
+    assert (out/'initials_legacy_preserved'/'scores-v104.txt').read_text()=='skifree-v104\n0 2000\n'
+    assert (out/'initials_legacy_preserved'/'scores-initials-v1.txt').read_text()=='skifree-initials-v1\n0 1000 AAA\n0 2000 ---\n'
+    st=run('recreation_hidden_footer','1 recreation\n2 click:760:685\n');assert st['edition']==1
+    st=run('recreation_light_hud','1 recreation\n2 fast\n',frames=60);assert st['edition']==1
+    st=run('initials_tenth','1 score:SS:9999\n2 back\n',expected='scores',scores='skifree-v104\n'+''.join(f'0 {i*1000}\n' for i in range(1,10)));assert st['score_rank']==10
     # Reach the real Slalom entrance through original character controls;
     # the normal downhill movement then crosses the start gate.
     route=''.join(f'{i+1} char:X\n' for i in range(224))

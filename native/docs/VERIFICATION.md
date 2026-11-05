@@ -2,6 +2,18 @@
 
 Updated November 4, 2026. This record describes the local candidate and distinguishes automated checks, physical-device observations and human feedback. It is not a claim of exhaustive equivalence to the Windows executable.
 
+## Latest local revision: quieter HUD and arcade initials
+
+The current source removes Recreation's dark HUD bar, places its statistics and boost status in a compact white panel, and hides the footer during active runs. Original's stationary opening and menus retain the colour choices. Physical colour shortcuts remain active.
+
+Qualifying Original results now open a three-letter initials screen, starting at AAA. Keyboard letters/Enter, remote-style arrows/OK and pointer plus/minus/save paths pass native UI tests. Back keeps the current letters. Closing or switching away preserves the edited initials, and the default AAA result is persisted before entry begins. The reconstructed Original core and Recreation's game rules are unchanged.
+
+Named scores use `scores-initials-v1.txt`; valid legacy `scores-v104.txt` tables import with --- initials only when the new file is absent. The old file is never rewritten. Invalid or interrupted legacy data blocks migration; invalid new data does not fall back to an older table. Host tests exercise named ranking, ties, migration, rejection, replacement and old-file preservation.
+
+Fresh validation: all four Linux ASan/UBSan suites and all four Windows MSVC Debug suites passed; **67 native desktop UI cases** passed. Captures of the lighter HUD, initials entry, completed table, tenth-place result and failed-save warning were inspected. The ARM32 build and 12-record dependency audit passed, and all 103 staged / 104 packaged files matched. The documentation image of Recreation was updated from the new native capture.
+
+This revised package has **not been installed on the C3**. The TV observations and initial artifact hashes below belong to the earlier 1.0.0 candidate. The revised IPK is SHA-256 `b60075a145641341f99de607f05fc09aacb64762e6986f10c5ba65bac4b9d69e`; its ARM executable is `b06fa50e6d97d08436c03867d37faa61bfb9c8641ca5d316b794d953abab70df`. Physical initials entry and score migration on the TV remain unverified.
+
 ## Original gameplay
 
 The core is adapted from the pinned SkiFree 1.04 reconstruction described in [provenance](../src/classic/PROVENANCE.md). The current inventory identifies **67 token-identical shared functions and 22 adapted functions** among 89 shared with the pinned SDL source. Selected direct EXE disassembly supports Tree Slalom start, finish, gate-side comparisons, five-second penalties, interpolation and yeti thresholds. The Original core required no gameplay change during the 1.0 hardening review.
@@ -26,6 +38,10 @@ These results belong to the candidate build work. Publication-only documentation
 
 Independent static reviews of Original timing/course/yeti behavior, input/lifecycle handling and release evidence found no demonstrated blocking gameplay defect. Static review is not a further test run or physical-TV acceptance.
 
+### Fresh local visual pass
+
+A subsequent strict Linux/WSL Release build passed all four CTest suites and reran all 55 native UI cases successfully. Sixteen additional capture runs brought the set to 71 screenshots, covering all seven application screens and representative gameplay states. The [visual review](VISUAL-REVIEW-1.0.0.md) records the inspected coverage, documentation corrections and one minor Recreation boost-label contrast issue. This pass used Mesa software GLES; it did not rerun sanitizers, rebuild the IPK or operate the TV.
+
 ## Physical TV
 
 Tested configuration: **LG OLED48C3PUA (C3), firmware 43.21.84, SDK 11.2.0**. The version information was queried again during publication preparation. The audited IPK installed and launched through the application manager, and its actual framebuffer was inspected at **1920×1080 on Mali-G52 / GLES 3.2**. Installed executable and asset-manifest hashes matched the audited stage.
@@ -46,7 +62,7 @@ Host tests cover non-empty save/reload, malformed tables, ranking validation, in
 
 On the C3, an existing empty 13-byte table remained byte-identical through update and close/relaunch. Startup reported writable storage and zero entries. That demonstrates preservation of the empty table only. **A human-earned score surviving close/reopen is awaiting the owner's result. Non-empty update survival and uninstall survival remain unverified.**
 
-## Artifact identity and disclosure
+## Earlier installed artifact identity and disclosure
 
 | Artifact | SHA-256 |
 | --- | --- |

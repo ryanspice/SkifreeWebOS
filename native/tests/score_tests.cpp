@@ -77,6 +77,18 @@ int main() {
     catch (const std::invalid_argument&) { rejected = true; }
     check(rejected && table == std::vector<int>(11, 42),
           "Oversized adapter input is rejected before mutation");
+    using ski::scores::Entry;
+    std::vector<Entry> named{{1000,"ONE"},{1000,"TWO"},{2000,"OLD"}};
+    result=submit(named,1000,true);
+    check(result.rank==3&&named==std::vector<Entry>{{1000,"ONE"},{1000,"TWO"},{1000,"AAA"},{2000,"OLD"}},
+          "Named ties preserve existing identities and place new initials on their own row");
+    named.clear();for(int i=1;i<=10;++i)named.emplace_back(i*100,"OLD");
+    const auto unchanged=named;result=submit(named,2000,true);
+    check(!result.qualified()&&named==unchanged,"Nonqualifying named result changes no initials");
+    result=submit(named,950,true);
+    check(result.rank==10&&named.size()==10&&named.back()==Entry{950,"AAA"},"Named tenth-place replacement preserves limit");
+    named={{300,"TOP"},{100,"LOW"}};result=submit(named,200,false);
+    check(result.rank==2&&named[0].initials=="TOP"&&named[1]==Entry{200,"AAA"}&&named[2].initials=="LOW","Freestyle initials stay attached to descending scores");
     std::cout << checks << " score behavior checks passed\n";
     return 0;
   } catch (const std::exception& error) {

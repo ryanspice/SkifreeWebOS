@@ -2,7 +2,7 @@
 
 C++20; original 1.04 reconstructed game core; SDL2 window/context/input; Spice Home raw GLES2 shaders. No browser or Rust runtime.
 
-Desktop dependencies: CMake, a C++20 compiler, SDL2 headers/runtime and libpng. The SDL functions are loaded dynamically. From this directory:
+Desktop dependencies: CMake, a C++20 compiler, SDL2 headers/runtime, libpng and a working GLES2 driver. The SDL functions are loaded dynamically. The following Linux commands run from this `native` directory:
 
 ```sh
 cmake -S . -B build/desktop -DSKIFREE_STRICT=ON
@@ -11,12 +11,16 @@ ctest --test-dir build/desktop --output-on-failure
 build/desktop/skifree-native --assets assets
 ```
 
-Native desktop UI checks (Linux/Mesa/Xvfb):
+On Windows, use a Visual Studio Developer PowerShell with CMake, Ninja and an existing vcpkg installation. `scripts/Build-Desktop.ps1 -VcpkgRoot <vcpkg-path> -Run` configures, builds, tests and launches the application. The SDL2 and PNG DLLs must be on the runtime search path. This helper does not install the toolchain or dependencies.
+
+Native desktop UI checks require Python 3, Mesa, Xvfb and `xvfb-run` (including its `xauth` dependency). They use isolated score files and a software renderer; they do not control a connected TV:
 
 ```sh
 python3 tests/classic_ui_qa.py --binary build/desktop/skifree-native --out evidence/classic-ui
 python3 tests/public_stage_tests.py
 ```
+
+Each UI case writes `frame.png`, `report.json`, its input script and a log below the output directory. Use a fresh output directory for each evidence run. Score-result and malformed-save cases are deliberate QA fixtures, not human-earned scores. The `--script` and `--fixed-frame` options are rejected by the webOS build.
 
 Sanitized core checks:
 
@@ -32,6 +36,8 @@ For webOS, set `SKIFREE_WEBOS_ENV` to the installed SDK environment script, or `
 
 The application includes 89 original resources. F2 restarts; F3/Back pauses; F toggles fast mode; click/OK performs the original mouse jump; Insert/Space performs the smaller keyboard jump. The remote pause menu exposes fast mode. Read the root README for the full input mapping.
 
-High scores use `scores-v104.txt` beside the SDL preference path, independently of the prototype's `record.txt`. The app does not overwrite the old record. On the tested TV the preference path resolves inside the installed app directory. The existing empty table survived the 0.8-to-1.0 update and relaunch unchanged. Non-empty round-trip passes on Windows/Linux and in native UI tests; a non-empty TV upgrade and uninstall survival remain unverified. Malformed data and orphaned temporary files are preserved, and the menu warns when saving is disabled.
+High scores use `scores-initials-v1.txt` in the SDL preference directory. When absent, the store imports a valid `scores-v104.txt` table with `---` initials, without writing to that old file or the prototype's `record.txt`. The new format records course, value and three uppercase initials per entry under a `skifree-initials-v1` header. Malformed named or legacy data and orphaned temporary files block writes and are preserved. Qualifying results start at `AAA`; confirmed or pending letters are persisted on save/exit. Older binaries do not read the new file.
+
+On the tested TV the preference path resolves inside the installed app directory. The original empty table survived the earlier 0.8-to-1.0 update and relaunch; that is not evidence of this new format on the TV. Non-empty round-trip, migration and old-file preservation are exercised by host/store/UI tests. TV migration, non-empty upgrade and uninstall survival remain unverified.
 
 Remote colours use native SDL-webOS scancodes 486–489 plus a Red-keycode compatibility path and keyboard-state edge detection. F5–F8 mirror Red/Green/Yellow/Blue. The optional `src/recreation` implementation shares the same 89 textures and retains independent in-session state. No launch preference is persisted: Original remains the default.
