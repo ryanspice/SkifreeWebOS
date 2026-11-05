@@ -4,7 +4,7 @@ These are unedited captures, not newly drawn game assets. `manifest.json` record
 
 | Image | Context | Attribution |
 | --- | --- | --- |
-| `skifree-original-c3.png` | Native 1.0.0 startup framebuffer, LG OLED48C3PUA, November 4, 2026 | Original SkiFree artwork by Chris Pirih; TV presentation by this project |
+| `skifree-original-c3.png` | Native 1.0.0 updated opening, LG OLED48C3PUA, November 5, 2026; status panel hidden until downhill movement | Original SkiFree artwork by Chris Pirih; TV presentation by this project |
 | `skifree-recreation-desktop.png` | Native desktop capture of the lighter Recreation HUD and hidden in-run footer, November 4, 2026 | Original SkiFree sprites by Chris Pirih; Recreation and TV presentation by this project |
 | `champions-development-preview.png` | Champions development home screen, October 15, 2026 | Champions of Snowboarding 2026 development preview supplied from Ryan's project |
 

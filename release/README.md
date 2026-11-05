@@ -20,11 +20,12 @@ The finalizer normalizes Unix modes, including execute permissions on the ELF. T
 
 The builder refuses existing output files. Preserve previous archives and use a fresh revision name after changes. The ZIP, adjacent SHA-256 file and per-file manifest form one source-release set. A source-only documentation refresh does not change the audited IPK or its checksum.
 
-The corrected C3 storage build is in `.ai/outbox/storage-fix-1.0.0/`. It retains
+The corrected C3 storage build is in `.ai/outbox/session-scores-1.0.0/`. It retains
 version 1.0.0 while the release is unpublished; use the installation guide's exact
 checksum. Its Developer Mode launch and actual non-root file creation/replacement
-are verified. A corrected-build earned-score playthrough and broader TV migration
-checks remain pending. The finalizer must preserve the sticky 01777 `state/`
+are verified. Owner-confirmed non-empty records survived a fresh session and the
+latest package update. Broader TV migration checks and final HUD/browser visual
+acceptance remain pending. The finalizer must preserve the sticky 01777 `state/`
 parent; direct packaging without this step does not satisfy the storage contract.
 See the [TV build brief](../docs/TV-BUILD.md), [compatibility synthesis](../docs/COMPATIBILITY.md)
 and [tag preparation](TAGGING.md).
@@ -53,7 +54,8 @@ alone is not used to fill minimum-release metadata.
 - [x] Earlier candidates: owner input observations and empty-score update/relaunch evidence recorded.
 - [x] Corrected storage IPK: Developer Mode install and native render on the C3, exact checksum recorded.
 - [x] Corrected storage IPK: actual score-file creation/replacement as non-root UID 6252; legacy bytes preserved.
-- [ ] Corrected storage IPK: earned score/initials after relaunch, broader controls/focus and non-empty migration.
+- [x] Owner-confirmed non-empty Slalom/Freestyle records reloaded and survived the UI package update unchanged.
+- [ ] Updated HUD/browser visual acceptance, broader controls/focus and migration routes.
 - [ ] Complete publication support claims only for specifically evidenced device/input/lifecycle/save cases.
 - [ ] Meaningful human code review, design explanation and honest AI disclosure.
 - [ ] Record original artwork and reconstruction redistribution terms; confirm repository pool.

@@ -135,6 +135,8 @@ struct App {
   bool initialsPending=false;
   std::string resultSeen;
   ski::scores::Placement scorePlacement;
+  std::size_t scoreCourse=0;
+  bool browsingScores=false;
   std::uint64_t resultSerial=0;
   bool deterministic=false;
   std::uint32_t seed=1;
@@ -142,6 +144,7 @@ struct App {
   std::array<ski::recreation::Game,2> recreation;
   std::array<bool,2> recreationStarted{};
   bool originalIntro=true;
+  bool originalHudStarted=false;
   ski::recreation::Game& extra(){return recreation[edition==Edition::Chase?1:0];}
   const ski::recreation::Game& extra()const{return recreation[edition==Edition::Chase?1:0];}
   std::string editionName()const{return edition==Edition::Original?"ORIGINAL 1.04":edition==Edition::Recreation?"RECREATION":"YETI CHASE";}
@@ -190,7 +193,7 @@ struct App {
   void start() {
     if(edition==Edition::Original){
       const auto runSeed=deterministic?++seed:static_cast<std::uint32_t>(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count());
-      ski::classic::reset(runSeed);resultSeen.clear();resultSerial=0;originalIntro=true;
+      ski::classic::reset(runSeed);resultSeen.clear();resultSerial=0;originalIntro=true;originalHudStarted=false;
     }
     else {extra().start(++seed,edition==Edition::Chase);recreationStarted[edition==Edition::Chase?1:0]=true;}
     screen=Screen::Run;selection=0;pointerActive=false;lastPointer.reset();
@@ -198,16 +201,20 @@ struct App {
   std::vector<std::string> buttons() const {
     switch(screen) {
       case Screen::Setup:return {"CHECK AGAIN","EXIT"};
-      case Screen::Pause:return {"RESUME","NEW RUN","CONTROLS",edition==Edition::Original?(ski::classic::state().fast?"FAST MODE: ON":"FAST MODE: OFF"):"RESUME AND BOOST","CHOOSE A RUN","EXIT"};
+      case Screen::Pause:return {"RESUME","NEW RUN","CONTROLS",edition==Edition::Original?(ski::classic::state().fast?"FAST MODE: ON":"FAST MODE: OFF"):"RESUME AND BOOST","CHOOSE A RUN","HIGH SCORES","EXIT"};
       case Screen::Help:return {"BACK"};
-      case Screen::Scores:return {"CONTINUE"};
+      case Screen::Scores:return browsingScores?std::vector<std::string>{"< COURSE","COURSE >","BACK"}:std::vector<std::string>{"CONTINUE"};
       case Screen::Initials:return {"SAVE INITIALS"};
       case Screen::Versions:return {"RED: ORIGINAL 1.04","GREEN: RECREATION","YELLOW: YETI CHASE","BACK"};
       case Screen::Quit:return {"CANCEL","EXIT"};
       default:return {};
     }
   }
-  Rect buttonRect(int i)const {return {310,screen==Screen::Help||screen==Screen::Scores||screen==Screen::Initials?420.0f:(screen==Screen::Setup?365.0f:235.0f)+static_cast<float>(i)*38,340,32};}
+  Rect buttonRect(int i)const {
+    if(screen==Screen::Scores&&browsingScores)return {250.0f+static_cast<float>(i)*155,420,150,32};
+    if(screen==Screen::Pause)return {310,223.0f+static_cast<float>(i)*34,340,32};
+    return {310,screen==Screen::Help||screen==Screen::Scores||screen==Screen::Initials?420.0f:(screen==Screen::Setup?365.0f:235.0f)+static_cast<float>(i)*38,340,32};
+  }
   void pause() {if(screen==Screen::Run){freeze(true);screen=Screen::Pause;selection=0;}}
   void action(std::string key,bool repeat=false) {
     pointerActive=false;
@@ -236,6 +243,10 @@ struct App {
         else{helpReturn=screen;freeze(true);screen=Screen::Help;selection=0;}
         return;
       }
+    }
+    if(screen==Screen::Scores&&browsingScores) {
+      if(key=="left"||key=="right") {if(!repeat)scoreCourse=(scoreCourse+(key=="left"?2u:1u))%3;return;}
+      if(key=="back"||key=="pause") {if(!repeat){screen=Screen::Pause;selection=5;}return;}
     }
     if(key=="back"||key=="pause") {
       if(repeat)return;
@@ -278,10 +289,14 @@ struct App {
         else if(selection==2){helpReturn=screen;screen=Screen::Help;selection=0;}
         else if(selection==3){if(edition==Edition::Original)ski::classic::key(ski::classic::Key::Fast);else{freeze(false);screen=Screen::Run;extra().action();}}
         else if(selection==4){screen=Screen::Versions;selection=0;}
+        else if(selection==5){screen=Screen::Scores;browsingScores=true;selection=0;}
         else{quitReturn=screen;screen=Screen::Quit;selection=0;}
       }else if(screen==Screen::Help){screen=helpReturn;selection=0;if(screen==Screen::Run)freeze(false);}
       else if(screen==Screen::Versions){if(selection<3)choose(static_cast<Edition>(selection));else{screen=Screen::Pause;selection=0;}}
-      else if(screen==Screen::Scores){screen=Screen::Run;ski::classic::pause(false);}
+      else if(screen==Screen::Scores){
+        if(browsingScores){if(selection<2)scoreCourse=(scoreCourse+(selection==0?2u:1u))%3;else{screen=Screen::Pause;selection=5;}}
+        else{screen=Screen::Run;ski::classic::pause(false);}
+      }
       else if(screen==Screen::Quit){if(selection==1){persist();running=false;}else{screen=quitReturn;selection=0;}}
     }
   }
@@ -330,6 +345,7 @@ struct App {
   }
   void finish(const ski::classic::Result& result) {
     resultSeen=result.course;resultSerial=result.serial;const auto c=result.course=="SS"?0u:result.course=="GS"?1u:2u;
+    scoreCourse=c;browsingScores=false;
     scorePlacement=ski::scores::submit(scores[c],result.value,result.timed);
     initials="AAA";initialsPending=scorePlacement.qualified();
     persist();ski::classic::pause(true);screen=initialsPending?Screen::Initials:Screen::Scores;selection=0;
@@ -350,10 +366,17 @@ std::string screenName(Screen screen) {
 std::string timeString(int ms) {
   char b[40];std::snprintf(b,sizeof b,"%02d:%02d:%02d.%02d",ms/3600000,(ms/60000)%60,(ms/1000)%60,(ms/10)%100);return b;
 }
+std::string bestScoreLabel(const App& app,const ski::classic::State& st) {
+  const auto course=static_cast<int>(st.course)-1;
+  if(course<0||course>2||app.scores[static_cast<std::size_t>(course)].empty())return "BEST: --";
+  const auto& best=app.scores[static_cast<std::size_t>(course)].front();
+  return "BEST: "+best.initials+" "+(course==2?std::to_string(best.value):timeString(best.value));
+}
 void draw(spice::Renderer& r,App& app,const spice::Viewport& view) {
   r.begin(view,White);
   const auto st=ski::classic::state();
   if(app.assetsReady&&app.edition==Edition::Original) {
+    if(st.y>0)app.originalHudStarted=true;
     const auto& scene=ski::classic::draws();
     if(app.originalIntro)app.originalIntro=std::any_of(scene.begin(),scene.end(),[](const auto& d){return d.sprite==53;});
     for(const auto& raw:scene) {
@@ -362,9 +385,14 @@ void draw(spice::Renderer& r,App& app,const spice::Viewport& view) {
       r.image(name,{d.x*1.5f,d.y*1.5f,d.width*1.5f,d.height*1.5f});
     }
     if(app.originalIntro)for(const auto& d:scene)if(d.sprite==54)versionNote(r,d);
-    r.rect({738,0,222,77},White);r.rect({738,0,222,77},Ink,0,1);
-    const std::array<std::string,4> stats{"TIME:  "+timeString(st.elapsedMs),"DIST:  "+std::to_string(st.distance)+"M","SPEED: "+std::to_string(st.speed)+"M/S","STYLE: "+std::to_string(st.style)};
-    float y=6;for(const auto& value:stats){text(r,value,747,y,1.5f);y+=18;}
+    if(app.originalHudStarted) {
+      const auto courseLabel=st.course==ski::classic::Course::Slalom?"SLALOM":st.course==ski::classic::Course::TreeSlalom?"TREE SLALOM":st.course==ski::classic::Course::Freestyle?"FREESTYLE":"FREE SKIING";
+      const bool timed=st.course==ski::classic::Course::Slalom||st.course==ski::classic::Course::TreeSlalom;
+      r.rect({738,0,222,113},White);r.rect({738,0,222,113},Ink,0,1);
+      text(r,std::string(courseLabel)+" / LIVE",747,6,1.3f);
+      const std::array<std::string,5> stats{"TIME:  "+(timed?timeString(st.elapsedMs):"--"),"DIST:  "+std::to_string(st.distance)+"M","SPEED: "+std::to_string(st.speed)+"M/S","STYLE: "+std::to_string(st.style),bestScoreLabel(app,st)};
+      float y=24;for(const auto& value:stats){text(r,value,747,y,1.5f);y+=18;}
+    }
     if(app.screen==Screen::Run&&st.x==0&&st.y==0) {
       r.rect({130,471,700,22},White);centeredText(r,"MOUSE AIM / ARROWS    CLICK / OK JUMP    BACK / F3 MENU",480,477,1.5f);
     }
@@ -410,13 +438,17 @@ void draw(spice::Renderer& r,App& app,const spice::Viewport& view) {
     }else if(app.screen==Screen::Versions) {
       text(r,"ORIGINAL: CLASSIC 1.04 RULES.",270,164,1.8f);text(r,"RECREATION: A FRESH TAKE.",270,197,1.8f);
     }else if(app.screen==Screen::Scores) {
-      const auto c=app.resultSeen=="SS"?0u:app.resultSeen=="GS"?1u:2u;
-      text(r,c==0?"SLALOM":c==1?"TREE SLALOM":"FREESTYLE",270,153,2);
+      const auto c=app.scoreCourse;
+      const std::string courseLabel=c==0?"SLALOM":c==1?"TREE SLALOM":"FREESTYLE";
+      text(r,(app.browsingScores?"ORIGINAL / ":"")+courseLabel,270,153,2);
       float y=178;std::size_t row=0;for(const auto& entry:app.scores[c]){
-        const bool current=app.scorePlacement.isCurrentRow(row);
+        const bool current=!app.browsingScores&&app.scorePlacement.isCurrentRow(row);
         text(r,std::to_string(++row)+". "+entry.initials+"  "+(c==2?std::to_string(entry.value):timeString(entry.value))+(current?"  <- YOU":""),260,y,1.6f);y+=21;
       }
-      if(!app.scorePlacement.qualified())text(r,(c==2?std::to_string(app.scorePlacement.value):timeString(app.scorePlacement.value))+"  - TRY AGAIN",260,397,1.6f);
+      if(app.browsingScores) {
+        if(app.scores[c].empty())centeredText(r,"NO SAVED SCORES YET",480,235,2);
+        centeredText(r,"LEFT / RIGHT: COURSE    BACK: MENU",480,397,1.4f);
+      }else if(!app.scorePlacement.qualified())text(r,(c==2?std::to_string(app.scorePlacement.value):timeString(app.scorePlacement.value))+"  - TRY AGAIN",260,397,1.6f);
     }else text(r,"LEAVE THE MOUNTAIN?",290,177,2);
     const auto bs=app.buttons();for(std::size_t i=0;i<bs.size();++i){const auto box=app.buttonRect(static_cast<int>(i));const bool focus=app.screen==Screen::Initials?app.selection==3:static_cast<int>(i)==app.selection;r.rect(box,focus?Blue:White,5);if(focus)r.rect(box,Blue,5,2);text(r,(focus?"> ":"  ")+bs[i],box.x+12,box.y+10,1.8f,focus?White:Ink);}
   }
@@ -622,6 +654,8 @@ int run(int argc,char** argv) {
     out<<"{\n  \"edition\": "<<static_cast<int>(app.edition)<<",\n  \"edition_name\": "<<jsonString(app.editionName())<<",\n  \"recreation_distance\": "<<app.recreation[0].distance()<<",\n  \"chase_distance\": "<<app.recreation[1].distance()<<",\n";
     out<<"  \"original_intro\": "<<(app.originalIntro?"true":"false")<<",\n  \"lift_offset\": "<<ski::presentation::liftOffset(app.originalIntro)<<",\n  \"score_rank\": "<<app.scorePlacement.rank<<",\n  \"score_value\": "<<app.scorePlacement.value<<",\n  \"player_x\": "<<ski::classic::state().x<<",\n";
     out<<"  \"race_elapsed_ms\": "<<ski::classic::state().elapsedMs<<",\n  \"course\": "<<static_cast<int>(ski::classic::state().course)<<",\n";
+    out<<"  \"browsing_scores\": "<<(app.browsingScores?"true":"false")<<",\n  \"score_course\": "<<app.scoreCourse<<",\n  \"score_counts\": ["<<app.scores[0].size()<<','<<app.scores[1].size()<<','<<app.scores[2].size()<<"],\n";
+    out<<"  \"original_hud_visible\": "<<(app.originalHudStarted?"true":"false")<<",\n  \"original_hud_best\": "<<jsonString(bestScoreLabel(app,ski::classic::state()))<<",\n";
     out<<"  \"screen\": "<<jsonString(screenName(app.screen))<<",\n  \"distance\": "<<(ski::classic::state().y/16.0)<<",\n  \"elapsed\": "<<(ski::classic::state().clockMs/1000.0)<<",\n  \"fast\": "<<(ski::classic::state().fast?"true":"false")<<",\n  \"entities\": "<<ski::classic::state().actors<<",\n  \"style\": "<<ski::classic::state().style<<",\n  \"in_air\": "<<ski::classic::state().inAir<<",\n  \"gles\": "<<(renderer.is_es?"true":"false")<<",\n  \"renderer\": "<<jsonString(renderer.renderer)<<",\n  \"gl_version\": "<<jsonString(renderer.version)<<",\n  \"drawable_width\": "<<view.drawable_w<<",\n  \"drawable_height\": "<<view.drawable_h<<",\n  \"swap_interval\": "<<vsync<<",\n  \"record_writable\": "<<(app.recordWritable?"true":"false")<<",\n  \"assets_ready\": "<<(app.assetsReady?"true":"false")<<",\n  \"assets_path\": "<<jsonString(opt.assets.string())<<",\n  \"asset_error\": "<<jsonString(app.assetError)<<",\n  \"heading\": "<<ski::classic::state().frame<<",\n  \"pointer_active\": "<<(app.pointerActive?"true":"false")<<"\n}\n";
   }
   std::cout<<"SkiFree native: "<<screenName(app.screen)<<", GLES "<<renderer.version<<", "<<view.drawable_w<<'x'<<view.drawable_h<<", distance "<<(ski::classic::state().y/16.0)<<" m\n";

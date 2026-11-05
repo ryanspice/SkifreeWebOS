@@ -18,8 +18,10 @@ def main():
         if r.returncode:raise AssertionError(name+': '+r.stdout+r.stderr)
         report=json.loads((directory/'report.json').read_text());assert report['screen']==expected,(name,report)
         checks.append(name);return report
-    st=run('original_start');assert st['heading']==3 and st['distance']==0 and not st['fast'] and st['assets_ready']
-    st=run('downhill','1 down\n',frames=40);assert st['distance']>0
+    st=run('original_start');assert st['heading']==3 and st['distance']==0 and not st['fast'] and st['assets_ready'] and not st['original_hud_visible']
+    st=run('downhill','1 down\n',frames=40);assert st['distance']>0 and st['original_hud_visible']
+    st=run('hud_hidden_until_downhill','1 char:x\n');assert not st['original_hud_visible']
+    st=run('hud_hidden_after_restart','1 down\n20 restart\n',frames=21);assert not st['original_hud_visible']
     st=run('fast_persistent','1 fast\n',frames=200);assert st['fast']
     st=run('fast_repeat_original','1 fast\n2 repeat-fast\n');assert not st['fast']
     st=run('uppercase_f_original','1 char:F\n');assert not st['fast']
@@ -98,12 +100,29 @@ def main():
     st=run('recreation_hidden_footer','1 recreation\n2 click:760:685\n');assert st['edition']==1
     st=run('recreation_light_hud','1 recreation\n2 fast\n',frames=60);assert st['edition']==1
     st=run('initials_tenth','1 score:SS:9999\n2 back\n',expected='scores',scores='skifree-v104\n'+''.join(f'0 {i*1000}\n' for i in range(1,10)));assert st['score_rank']==10
+    browse='1 back\n'+''.join(f'{i+2} down\n' for i in range(5))+'7 ok\n'
+    tables='skifree-v104\n0 1000\n1 2000\n2 300\n'
+    st=run('browser_empty',browse,expected='scores');assert st['browsing_scores'] and st['score_course']==0 and st['score_counts']==[0,0,0]
+    st=run('browser_next',browse+'8 right\n',expected='scores',scores=tables);assert st['score_course']==1 and st['score_counts']==[1,1,1]
+    st=run('browser_previous_wrap',browse+'8 left\n',expected='scores',scores=tables);assert st['score_course']==2
+    st=run('browser_pointer',browse+'8 click:640:580\n',expected='scores',scores=tables);assert st['score_course']==1
+    st=run('browser_back',browse+'8 back\n',expected='paused');assert st['browsing_scores']
+    st=run('browser_resume',browse+'8 back\n9 back\n');assert st['screen']=='playing'
+    st=run('browser_recreation','0 recreation\n'+browse,expected='scores',scores=tables);assert st['edition']==1 and st['browsing_scores']
+    st=run('pause_exit_after_browser_added','1 back\n'+''.join(f'{i+2} down\n' for i in range(6))+'8 ok\n',expected='exit-confirm')
+    st=run('browser_saved_session','1 score:SS:12345\n2 char:A\n3 char:B\n4 char:C\n5 ok\n6 back\n7 score:FS:250\n8 char:X\n9 char:Y\n10 char:Z\n11 ok\n',expected='scores');assert st['score_counts']==[1,0,1] and not st['browsing_scores']
+    saved=out/'browser_saved_session'/'scores-initials-v1.txt';contents=saved.read_text()
+    assert contents=='skifree-initials-v1\n0 12345 ABC\n2 250 XYZ\n'
+    st=run('browser_saved_reopened',browse,expected='scores',save_override=saved.parent/'record.txt');assert st['score_counts']==[1,0,1] and st['score_course']==0 and st['browsing_scores']
+    st=run('browser_saved_freestyle',browse+'8 left\n',expected='scores',save_override=saved.parent/'record.txt');assert st['score_course']==2 and st['score_counts']==[1,0,1] and saved.read_text()==contents
     # Reach the real Slalom entrance through original character controls;
     # the normal downhill movement then crosses the start gate.
     route=''.join(f'{i+1} char:X\n' for i in range(224))
     route+=''.join(f'{225+i} char:y\n' for i in range(319))+'546 down\n'
     baseline=run('slalom_timer_running',route,frames=650);assert baseline['course']==1 and baseline['race_elapsed_ms']>0
+    st=run('slalom_saved_record_hud',route,frames=650,scores='skifree-v104\n0 12345\n');assert st['original_hud_visible'] and st['course']==1 and st['original_hud_best']=='BEST: --- 00:00:12.34'
     st=run('slalom_timer_paused',route+'650 back\n',frames=720,expected='paused');assert st['race_elapsed_ms']==baseline['race_elapsed_ms']
+    st=run('slalom_timer_browsing',route+'650 back\n'+''.join(f'{651+i} down\n' for i in range(5))+'656 ok\n',frames=720,expected='scores');assert st['browsing_scores'] and st['race_elapsed_ms']==baseline['race_elapsed_ms']
     st=run('slalom_timer_resumed',route+'650 back\n700 back\n',frames=760);assert st['race_elapsed_ms']>baseline['race_elapsed_ms']
     st=run('startup_unwritable','1 back\n',expected='paused',save_override='/proc/skifree-unwritable/record.txt');assert not st['record_writable']
     with tempfile.TemporaryDirectory(prefix='skifree-ui-') as temp:

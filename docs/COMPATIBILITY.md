@@ -10,13 +10,13 @@ The candidate targets ARM32 EABI5 with `/usr/lib/ld-linux.so.3`, GLIBC 2.38 and
 GLIBCXX 3.4.32. The earlier package ran on an OLED48C3PUA, firmware 43.21.84,
 reported SDK 11.2.0. The November 5 storage-corrected package is installed,
 rendering and creating/replacing its score file as a non-root process on that C3.
-Its earned-score playthrough remains pending.
+Owner-confirmed non-empty Slalom/Freestyle records survived a fresh session and the latest package update unchanged.
 Marketing webOS names, firmware releases and SDK version fields identify different
 things; none alone establishes a native ABI minimum.
 
 | Target | Evidence | Next acceptance gate |
 | --- | --- | --- |
-| Observed C3 configuration | Corrected package installed/rendered; non-root score-file creation/replacement verified | Corrected package: earned-score run, broader controls/focus and non-empty migration |
+| Observed C3 configuration | Corrected package installed/rendered; non-root score-file creation/replacement verified | Updated browser/HUD visual acceptance, broader controls/focus and migration routes |
 | webOS TV 25/26 families | No family-wide native compatibility evidence | Exact firmware dependency inventory and representative TV runs |
 | webOS TV 22–24 / 6.x | Current binary may require newer libraries than individual firmwares export | Required-symbol comparison, then device tests |
 | webOS TV 4.x–5.x | ABI and SDL/Wayland compatibility unknown | Separate older-ABI build and SDL investigation |

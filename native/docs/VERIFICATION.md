@@ -2,7 +2,42 @@
 
 Updated November 5, 2026. This record describes the local candidate and distinguishes automated checks, physical-device observations and human feedback. It is not a claim of exhaustive equivalence to the Windows executable.
 
-## Current package: non-root score storage fix
+## Current package: saved-score browser and course-aware HUD
+
+The owner confirmed that the two records found on disk were the expected results.
+A fresh launch independently loaded one Slalom and one Freestyle entry, with no
+Tree Slalom entry. This resolved the apparent session loss: tables were separate
+per course and the old interface only showed a table after another finish.
+
+The pause menu now includes **High Scores**, with pointer buttons and Left/Right
+navigation across all three Original tables. Browsing pauses gameplay, suppresses
+the current-run marker and returns to the menu without changing the records.
+Original's top-right panel is hidden until downhill movement begins; it then
+identifies the active course, LIVE statistics and a separate saved BEST result.
+The clock displays a live race time only for the timed courses. Restarting hides
+the panel again. These are presentation adaptations; the simulation is unchanged.
+
+Package SHA-256: `494726b3024c7982d47596fc520515c8f529ae8322b53ae53e6d86676f3271fd`
+(1,999,474 bytes). ARM executable SHA-256:
+`ed646651be25509a7e04ac00cd9f66c76bc15dd9444e8172c486fac6e3075613`.
+It is installed on the C3. Both real records survived the package update byte for
+byte, and the new process loaded counts `[1,0,1]`. The old numeric file is also
+unchanged. This establishes non-empty relaunch and one package-update path on
+that configuration, not uninstall, UID-change or all-upgrade survival.
+
+All **83 native UI cases** passed, including two processes sharing the same score
+path, browser course switching/return/empty states, paused race timing, hidden
+intro/restart HUD and the saved-best row during a real Slalom entrance. Captures
+were inspected. Four Linux suites and four Linux ASan/UBSan suites also passed
+for the unchanged gameplay/storage core. The earlier Windows Debug four-suite
+result remains separate evidence. The new ARM stage/IPK audit matches all
+104 staged / 105 packaged files; the 89 original sprites and core are unchanged.
+
+The owner-requested HUD/browser is open for visual feedback. The public README
+image is a new C3 opening capture showing the hidden status panel. Final tag and
+public release remain separate from this private candidate preparation.
+
+## Historical November 5 non-root score storage fix
 
 The owner corrected the earlier score-survival response and reported **High scores
 are not being saved**. That warning is recorded as a real defect in the November 4

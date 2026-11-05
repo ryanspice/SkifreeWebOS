@@ -26,10 +26,10 @@ for the distinction between installation method and app privileges.
 1. Follow [LG's Developer Mode setup](https://webostv.developer.lge.com/develop/getting-started/developer-mode-app) to connect your TV and computer. The [webOS Homebrew setup guide](https://www.webosbrew.org/devmode/) is another walkthrough. LG requires an account for this installation method; SkiFree itself requires no account.
 2. Obtain the candidate IPK and compare its SHA-256 with the maintainer's checksum.
    The corrected storage build is `com.ryanspice.skifree_1.0.0_arm.ipk` (under
-   `.ai/outbox/storage-fix-1.0.0/` in the maintainer's local build), 1,989,972 bytes:
+   `.ai/outbox/session-scores-1.0.0/` in the maintainer's local build), 1,999,474 bytes:
 
    ```text
-   e7b3d6495e48e8cfd1307e6f47542947cb0ec4ebbaf3f09d1254a58eb5e165de
+   494726b3024c7982d47596fc520515c8f529ae8322b53ae53e6d86676f3271fd
    ```
 
    In PowerShell, use `Get-FileHash -Algorithm SHA256 <path-to-ipk>`.
@@ -61,7 +61,9 @@ The on-screen colour strip and footer hints stay hidden during skiing. The physi
 
 Original maintains a local high-score table. If storage is unreadable, malformed or cannot be replaced safely, the menu warns that scores cannot be saved. Preserve the existing file if investigating a problem; reinstalling or deleting data is not a recovery step.
 
-Tables appear after a course finish. Each Original course has its own table; lower times win in Slalom and Tree Slalom, higher style scores in Freestyle. A qualifying result prompts for three letters, starting at **AAA**. Type letters and press Enter, or use Left/Right, Up/Down and OK. The plus/minus buttons also work with a pointer. Back keeps the current letters. Reopening returns to the mountain, not a score browser. Finish the same course again to see its saved entries. Recreation and Yeti Chase scores are not added to these tables.
+Tables appear after a course finish. Each Original course has its own table; lower times win in Slalom and Tree Slalom, higher style scores in Freestyle. A qualifying result prompts for three letters, starting at **AAA**. Type letters and press Enter, or use Left/Right, Up/Down and OK. The plus/minus buttons also work with a pointer. Back keeps the current letters. Open **Back → High Scores** whenever you want to see saved records, including
+after reopening. Use **Left / Right** or the on-screen course buttons to change
+tables; **Back** returns to the pause menu. Recreation and Yeti Chase scores are not added to these tables.
 
 The corrected TV package writes `scores-initials-v1.txt` beneath
 `state/user-<runtime-uid>/` in its application folder. If absent, it imports a valid
@@ -74,9 +76,13 @@ The November 4 package pointed saves at the protected installation root and coul
 show the warning after a score. Use the corrected package above; root or TV-wide
 permission changes are unnecessary. Startup now verifies an actual write before
 reporting scores as available. On the C3, creation and relaunch replacement are
-checked; a new earned-score playthrough remains pending. Non-empty round-trip
-and migration pass host tests. Uninstall, app-UID changes and non-empty upgrade
-survival are not promised.
+checked. Owner-confirmed Slalom and Freestyle records survived a fresh launch
+and this package update unchanged. Non-empty import/migration also passes host
+tests. Uninstall, app-UID changes and other upgrade paths remain unverified.
+
+Original’s top-right status box is hidden on the opening screen. After downhill
+movement it shows the active course’s LIVE statistics and a separate saved BEST
+record. A new run’s live time/style values are distinct from the saved table.
 
 **Game files unavailable** is a different error: one or more bundled sprites could not load. A local desktop build needs the complete `native/assets` folder supplied through `--assets`. For an installed TV package, verify its checksum and obtain a complete package; preserve score data before reinstalling. **Check Again** retries loading the files. There is no artwork-import step.
 

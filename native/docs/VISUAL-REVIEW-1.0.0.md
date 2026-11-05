@@ -1,6 +1,6 @@
 # Local visual and documentation review — 1.0.0
 
-**Historical snapshot:** this review preceded the HUD/initials revision. The subsequent lighter HUD removes the boost-contrast issue recorded below and changes the footer and score-entry screens. See [HUD/initials evidence](VERIFICATION.md#historical-november-4-hud-and-initials-build) and [current storage-fix evidence](VERIFICATION.md#current-package-non-root-score-storage-fix).
+**Historical snapshot:** this review preceded the HUD/initials revision. The subsequent lighter HUD removes the boost-contrast issue recorded below and changes the footer and score-entry screens. See [HUD/initials evidence](VERIFICATION.md#historical-november-4-hud-and-initials-build), [storage-fix evidence](VERIFICATION.md#historical-november-5-non-root-score-storage-fix) and [current score-browser/HUD evidence](VERIFICATION.md#current-package-saved-score-browser-and-course-aware-hud).
 
 November 4, 2026. The current native source was built and run locally under Linux/WSL with GCC 13.3, strict warnings, SDL and Mesa software GLES. Rendering reported llvmpipe (LLVM 20.1.2), OpenGL ES 3.2 and Mesa 25.2.8. This is a desktop review, not a new TV installation or physical-input test.
 

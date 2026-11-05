@@ -8,6 +8,10 @@ The original game and artwork remain credited to Chris Pirih. Original launches 
 
 - The opening scene can be unique. Lift graphics shift left while its original credit is visible. No cable lines are added in 0.8.0; the original version label gets a drawn strike and an annotation, updated to WebOS 1.0.0 at the owner's request for the local 1.0 candidate. These drawing changes do not move world objects or collisions.
 - TV menus, status font, fixed logical viewport, local score file and colour-button switching replace Windows-specific interfaces.
+- The TV status panel is hidden on the opening, then shows the active course's
+  live values and saved best after downhill movement. The pause-menu browser
+  exposes all three saved tables. These presentation changes do not alter the
+  original course, timer, ranking or scoring rules.
 - Remote OK invokes the original mouse action. On webOS it shares Return's SDL input path, so ordinary keyboard Return there follows that convenience action too; desktop and keypad Enter keep the original restart-only role.
 - Back/focus loss pauses rather than minimizing the Windows program. Switching games freezes the inactive run.
 

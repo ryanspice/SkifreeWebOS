@@ -2,10 +2,10 @@
   "description": "Unedited documentation captures; excluded from the application package",
   "files": [
     {
-      "sha256": "8273c482ff121d0ddbcb0023a17dca25370e4a80c88b3c93331f54ab2efd60c9",
-      "captured": "2026-11-04",
+      "sha256": "5ee15e0689c97bc0919ac82f9884dbe2e177dbb59400403d817e86c7ab00a8b6",
+      "captured": "2026-11-05",
       "height": 1080,
-      "context": "Native 1.0.0 startup framebuffer on LG OLED48C3PUA",
+      "context": "Native 1.0.0 updated opening framebuffer on LG C3; status panel hidden until downhill movement",
       "width": 1920,
       "path": "docs/media/skifree-original-c3.png"
     },

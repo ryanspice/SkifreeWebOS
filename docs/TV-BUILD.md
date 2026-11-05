@@ -4,9 +4,9 @@ Build target: **LG C3 / ARM32**, application `com.ryanspice.skifree`, candidate
 version **1.0.0**. This package includes Original, Recreation, Yeti Chase and
 three-letter score entry. Build/package evidence does not replace its C3 run.
 
-Corrected local package: `.ai/outbox/storage-fix-1.0.0/com.ryanspice.skifree_1.0.0_arm.ipk`,
-**1,989,972 bytes**, SHA-256
-`e7b3d6495e48e8cfd1307e6f47542947cb0ec4ebbaf3f09d1254a58eb5e165de`.
+Corrected local package: `.ai/outbox/session-scores-1.0.0/com.ryanspice.skifree_1.0.0_arm.ipk`,
+**1,999,474 bytes**, SHA-256
+`494726b3024c7982d47596fc520515c8f529ae8322b53ae53e6d86676f3271fd`.
 The adjacent `SHA256SUMS.txt` and `.ipk.sha256` contain the same checksum.
 
 ## Build inputs
@@ -47,8 +47,9 @@ finalizer/verifier commands; each Python helper supports `--help`.
 
 Record package checksum and installation route. Verify Original opens by default,
 all four colours work, pointer/directions/OK/Back behave correctly, and focus loss
-pauses until resumed. Finish a course, enter initials, close/reopen and finish the
-same course to check its saved table. Verify legacy import with isolated fixtures
+pauses until resumed. Finish a course, enter initials, close/reopen, then use
+**Back → High Scores** to check its saved table. Check that the opening HUD is
+hidden and live statistics plus the correct course’s saved BEST appear while skiing. Verify legacy import with isolated fixtures
 or a protected copy; preserve the owner's actual scores.
 
 The current package requires GLIBC 2.38 and GLIBCXX 3.4.32. Rooted/unrooted routes

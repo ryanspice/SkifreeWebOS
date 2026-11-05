@@ -26,9 +26,10 @@ Use [1.0.0 release notes](RELEASE-NOTES-1.0.0.md) for the eventual release body,
   fixed with metadata-only rejection tests and a fresh strict IPK verification.
 - [x] Install and render the corrected storage IPK on the C3; non-root file
   creation/replacement and preserved old score bytes verified.
-- [ ] Confirm physical initials controls and a human-earned score after relaunch
-  on the corrected package. The earlier affirmative response was corrected to a
-  save-warning report; it is not counted as a pass.
+- [x] Owner confirmed the expected Slalom/Freestyle records; both were independently
+  read from disk and reloaded by a fresh process, then preserved through the UI update.
+  The earlier old-package save-warning report remains historical.
+- [ ] Final visual acceptance of the course-aware HUD and pause-menu score browser.
 - [ ] Final owner/human review of code, original-game quality, credits and claims.
 - [ ] Decide private tag versus public release. Complete rights and hosting fields
   before public redistribution/Homebrew submission.

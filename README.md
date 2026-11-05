@@ -24,10 +24,11 @@ The separate Recreation and Yeti Chase runs add simplified steering and boosts.
 This candidate adds a lighter Recreation HUD, hides the footer while skiing and
 lets qualifying Original scores carry three initials, starting at **AAA**.
 
-The corrected HUD/initials package is installed on the LG C3. Native rendering
-and real score-file creation are verified without root. It fixes the earlier
-save warning by keeping scores in a writable state directory. A fresh earned-score
-playthrough of this corrected package is pending.
+The updated package is installed on the LG C3. Saved Slalom and Freestyle records
+were verified across a fresh session and the package update. **Back → High Scores**
+opens the three saved course tables. Original’s status box stays hidden on the
+opening screen, then shows live course statistics and the saved **BEST** record
+after you start skiing downhill.
 [Build and acceptance details](native/docs/VERIFICATION.md).
 
 ## Install on your TV
@@ -98,6 +99,11 @@ Version **1.0.0** keeps the original lift sprites and opening credit, with the o
 
 </details>
 
+The top-right status box is hidden on the opening screen. Once you ski downhill,
+it identifies the active course and separates **LIVE** time/style values from
+the course’s saved **BEST** initials and result. **BEST: --** means no record is
+available for that course; free skiing has no ranked table.
+
 **TIME** is the original race clock: it starts at the Slalom or Tree Slalom start line, excludes pauses, includes five-second missed-gate penalties, and freezes at the finish. Free skiing and Freestyle do not start a new race clock.
 
 Keyboard input takes control until the pointer moves again. Focus loss pauses the game; returning does not silently resume it. The pause menu makes F-key functions available on a remote.
@@ -121,7 +127,12 @@ TV package stores named scores in writable application state and preserves the
 old installation-root files. It verifies saving at startup. This is a TV
 score-entry adaptation; Original's ranking, penalties and course rules are unchanged.
 
-Reopening starts at the original mountain. To see previously saved entries, finish the same course again; there is no separate score-browser menu in 1.0.0. Recreation and Yeti Chase do not use these tables. If a menu says **High scores are not being saved**, see [score troubleshooting](docs/INSTALL.md#scores-and-troubleshooting).
+Reopening starts at the original mountain. Open **Back → High Scores** at any
+time to view saved entries. **Left / Right** changes between Slalom, Tree Slalom
+and Freestyle; pointer users can click the course buttons. **Back** returns to
+the pause menu. Each course has its own table; Recreation and Yeti Chase do not
+add scores to these tables. If a menu says **High scores are not being saved**,
+see [score troubleshooting](docs/INSTALL.md#scores-and-troubleshooting).
 
 ## Build and release
 
