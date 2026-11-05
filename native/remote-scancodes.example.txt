@@ -1,0 +1,17 @@
+# Optional SDL scancode overrides: decimal scancode followed by action.
+# These are standard SDL scancodes, not web/browser keycodes.
+# Capture the actual TV with --log-input before changing a mapping.
+80 left
+79 right
+82 up
+81 down
+40 ok
+41 back
+270 back
+19 pause
+
+# SDL-webOS native colour buttons (not browser keycodes)
+486 original
+487 recreation
+488 chase
+489 help

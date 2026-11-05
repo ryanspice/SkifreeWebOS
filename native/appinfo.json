@@ -1,0 +1,14 @@
+{
+  "id": "com.ryanspice.skifree",
+  "version": "1.0.0",
+  "vendor": "Ryan Spice",
+  "type": "native",
+  "main": "skifree-native",
+  "title": "SkiFree for webOS",
+  "icon": "icon.png",
+  "largeIcon": "icon.png",
+  "visible": true,
+  "resolution": "1920x1080",
+  "requiredACG": [],
+  "appDescription": "SkiFree for LG webOS TVs. Choose Original for the reconstructed SkiFree 1.04 rules, or Recreation for free skiing and a gentler Yeti Chase. Supports Magic Remote, mouse and keyboard. Original game and artwork by Chris Pirih."
+}

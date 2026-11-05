@@ -1,0 +1,29 @@
+{
+  "description": "Unedited documentation captures; excluded from the application package",
+  "files": [
+    {
+      "sha256": "8273c482ff121d0ddbcb0023a17dca25370e4a80c88b3c93331f54ab2efd60c9",
+      "captured": "2026-11-04",
+      "height": 1080,
+      "context": "Native 1.0.0 startup framebuffer on LG OLED48C3PUA",
+      "width": 1920,
+      "path": "docs/media/skifree-original-c3.png"
+    },
+    {
+      "sha256": "75b21c4b68175daf40c159097fd2a25de169fc836d18e2ad41ef58b9203d089e",
+      "captured": "2026-11-04",
+      "height": 720,
+      "context": "Native desktop UI test capture of Recreation",
+      "width": 1280,
+      "path": "docs/media/skifree-recreation-desktop.png"
+    },
+    {
+      "sha256": "d6f91e6302eb6c129a8694802b5e905593823939527b3f268dd97a8da0d72e3d",
+      "captured": "2026-10-15",
+      "height": 800,
+      "context": "Champions development home interface; concept course panel, not gameplay",
+      "width": 1280,
+      "path": "docs/media/champions-development-preview.png"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+# TEMPLATE ONLY. Generate the concrete package file with Prepare-Homebrew.ps1.
+title: SkiFreeWebOS
+iconUri: "{{PUBLIC_ORIGINAL_ICON_URL}}"
+manifestUrl: "{{PUBLIC_MANIFEST_URL}}"
+category: game
+pool: "{{PACKAGE_POOL}}"
+shortDescription: "Native SkiFree 1.04 adaptation with original courses and TV controls."
+description: |
+  A native C++/GLES2 downhill skiing recreation for LG webOS TVs.
+
+  Free to play, with the required gameplay artwork included. No import,
+  payment or account is required. The original Windows executable is not
+  included or run.
+
+  Includes the original Slalom, Tree Slalom and Freestyle courses. Keyboard, mouse, directional remote
+  and pointer input paths are implemented; check the release's tested-device list.
+
+  Original game and artwork: Chris Pirih. This independent recreation is not
+  affiliated with or endorsed by Chris Pirih, Microsoft or LG.
+
+  [Website and optional support](https://ryanspice.com/)
+  | [More from Ryan, including Champions of Snowboarding 2026]({{PUBLIC_SUPPORT_PAGE_URL}})
+requirements:
+  webosRelease: "{{MINIMUM_TESTED_WEBOS_RELEASE}}"

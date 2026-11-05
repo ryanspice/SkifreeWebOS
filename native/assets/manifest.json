@@ -1,0 +1,543 @@
+{
+  "schema": 1,
+  "original_game_and_artwork": "Chris Pirih",
+  "code_license_does_not_cover_artwork": true,
+  "source_executable_sha256": "3572d3757638bc1ae388c3d007ba59ba1f370911901e2a35d2f1297e8cf0ff35",
+  "executable_included": false,
+  "files": [
+    {
+      "name": "ski32_001.png",
+      "resource": 1,
+      "bytes": 377,
+      "sha256": "2db05fb3129af11e2cdc35b277bbaef8270a9acabe335c58921c84fb168adfd5"
+    },
+    {
+      "name": "ski32_002.png",
+      "resource": 2,
+      "bytes": 394,
+      "sha256": "86083211011848865e3ac19c43dc05ad4b1fd63178d084c4995a312420dccdd1"
+    },
+    {
+      "name": "ski32_003.png",
+      "resource": 3,
+      "bytes": 403,
+      "sha256": "a34c5791931b3fde09b9aa9494040a09a495d4124e5f9e47ad41d7aa188cf2da"
+    },
+    {
+      "name": "ski32_004.png",
+      "resource": 4,
+      "bytes": 335,
+      "sha256": "05745b2de8efea0d8209f6f48ef5a61213826e6c5f1cee86669f43ff12761969"
+    },
+    {
+      "name": "ski32_005.png",
+      "resource": 5,
+      "bytes": 403,
+      "sha256": "0b5c7106819c3772fbdaf1c424ef3e74cd88348aa1a863ca972916edcc050681"
+    },
+    {
+      "name": "ski32_006.png",
+      "resource": 6,
+      "bytes": 410,
+      "sha256": "3f8ff3e8a31fe04a2053029a1596867005fa89502eeb53553e42691244b5fdaf"
+    },
+    {
+      "name": "ski32_007.png",
+      "resource": 7,
+      "bytes": 328,
+      "sha256": "08b8ce386419fb184c5792fb9368dbb5a602fc815bdcf8ba244cb93bce74fb92"
+    },
+    {
+      "name": "ski32_008.png",
+      "resource": 8,
+      "bytes": 360,
+      "sha256": "9c737996dbd76813627cf7d12fc304fcf3eff378914caab275f8d5e68e75ce8c"
+    },
+    {
+      "name": "ski32_009.png",
+      "resource": 9,
+      "bytes": 359,
+      "sha256": "75d4deb7473f6aea04fc5ef93182faf557ceea5a2f837e4f654a310e77735a9b"
+    },
+    {
+      "name": "ski32_010.png",
+      "resource": 10,
+      "bytes": 397,
+      "sha256": "137f07561c971507d3ba6ac7fcce04e91ae85e1b26703a01755432006f3caf2e"
+    },
+    {
+      "name": "ski32_011.png",
+      "resource": 11,
+      "bytes": 377,
+      "sha256": "284160412b42c11c33a613cde851c602350948a0e9112915d714f226c4454610"
+    },
+    {
+      "name": "ski32_012.png",
+      "resource": 12,
+      "bytes": 406,
+      "sha256": "6f01c7024b281af13d2501c5131027e997dcd100cdd449ba59b917e3c51b33d3"
+    },
+    {
+      "name": "ski32_013.png",
+      "resource": 13,
+      "bytes": 432,
+      "sha256": "c6e36e0db5a30057170e8a19679ce7cdca5d69773b263008d51280e0a3709b9a"
+    },
+    {
+      "name": "ski32_014.png",
+      "resource": 14,
+      "bytes": 466,
+      "sha256": "a8dfb1ea1bd8ea000a35fa25eb0b00c53da449b671c97e30b2170789b3a5d4eb"
+    },
+    {
+      "name": "ski32_015.png",
+      "resource": 15,
+      "bytes": 423,
+      "sha256": "05b8d08eea036330643a0aea7c64bbd87e2c3a51e0493648aedaf4ebf4f27717"
+    },
+    {
+      "name": "ski32_016.png",
+      "resource": 16,
+      "bytes": 418,
+      "sha256": "5d17901782f17591eb5199109dc9cdd12211ce022304b9dd17de8335043b15a3"
+    },
+    {
+      "name": "ski32_017.png",
+      "resource": 17,
+      "bytes": 504,
+      "sha256": "e474f4e7dc2d155b57a0d50589da692527a8a71ddc33a23a1d0426717e5534c7"
+    },
+    {
+      "name": "ski32_018.png",
+      "resource": 18,
+      "bytes": 459,
+      "sha256": "d19d6b6ae7723216851e398424a8d733043db1e469db3aba583b44e67f2566fa"
+    },
+    {
+      "name": "ski32_019.png",
+      "resource": 19,
+      "bytes": 318,
+      "sha256": "be515c4ffaf00c9f6bc6ab8e5b5a2ec66ab4b4c81804b72794ef148bd0f0977c"
+    },
+    {
+      "name": "ski32_020.png",
+      "resource": 20,
+      "bytes": 331,
+      "sha256": "3f747f9d20fdb65da34236ebd0576b71d16bc000fb5626f3c2c78861676fb50f"
+    },
+    {
+      "name": "ski32_021.png",
+      "resource": 21,
+      "bytes": 422,
+      "sha256": "31a74a44944c89dfe0e5c746de8d75f99d12e235377f08a761bde6c27a18f16d"
+    },
+    {
+      "name": "ski32_022.png",
+      "resource": 22,
+      "bytes": 440,
+      "sha256": "f37afe21d6e91c9ccb3af36f544a23f204ff8d155e5a0243295639609447da75"
+    },
+    {
+      "name": "ski32_023.png",
+      "resource": 23,
+      "bytes": 142,
+      "sha256": "3440a7da2dfe26b28327a5efb817211bd143eec10c29be3d3f28fb70a7679693"
+    },
+    {
+      "name": "ski32_024.png",
+      "resource": 24,
+      "bytes": 149,
+      "sha256": "9122465b4e2b1d059c664692d5edbf6901d03898b9fe84df46d3421287d7be33"
+    },
+    {
+      "name": "ski32_025.png",
+      "resource": 25,
+      "bytes": 189,
+      "sha256": "f87e708437f86c2491e4b2cd9cc50da7b92d5cb4b6037ab213acebcf6068285b"
+    },
+    {
+      "name": "ski32_026.png",
+      "resource": 26,
+      "bytes": 185,
+      "sha256": "e4cc83764ba7853b2b872008c28f27bd620aa871c3f39996e65a2345f02c4257"
+    },
+    {
+      "name": "ski32_027.png",
+      "resource": 27,
+      "bytes": 377,
+      "sha256": "b7068c1ed28be895c31d811819fdd8660c22c90a7fd9a5a3b5754eea2365ffdc"
+    },
+    {
+      "name": "ski32_028.png",
+      "resource": 28,
+      "bytes": 376,
+      "sha256": "ffa8b5b831b22bbe1e84a672447581302a55564fad77541a8e549d4047e441c3"
+    },
+    {
+      "name": "ski32_029.png",
+      "resource": 29,
+      "bytes": 364,
+      "sha256": "a413d4864380ad71fd690e9e0549a9d72c28ba591b1c293137095681a7787d1d"
+    },
+    {
+      "name": "ski32_030.png",
+      "resource": 30,
+      "bytes": 356,
+      "sha256": "20f9844e23712edbd7af819fb1483061097847db4085af7bc125678d975bf86e"
+    },
+    {
+      "name": "ski32_031.png",
+      "resource": 31,
+      "bytes": 406,
+      "sha256": "762d236cbb59cef155e4f78fd3f8fad0fa6ff4456c3c5a2bc731b45cb9a146d9"
+    },
+    {
+      "name": "ski32_032.png",
+      "resource": 32,
+      "bytes": 413,
+      "sha256": "1f15d5e1ba404ef0096efc66e79e4af8821042afba715b783159a09d14d2d7d4"
+    },
+    {
+      "name": "ski32_033.png",
+      "resource": 33,
+      "bytes": 228,
+      "sha256": "8b5e78efc7d5068d2da8e0e3ff17aa3a947d4807c147fa5c8d8f05a03a301d3c"
+    },
+    {
+      "name": "ski32_034.png",
+      "resource": 34,
+      "bytes": 228,
+      "sha256": "608d6b51db54a94bcfadc3c79c5e5e781eb95e923d6f8bf3ea95383b9865d15b"
+    },
+    {
+      "name": "ski32_035.png",
+      "resource": 35,
+      "bytes": 260,
+      "sha256": "88513d717f05773036eccf3b80618127b233fa06d6f2cb99fcadd77184a4b0d5"
+    },
+    {
+      "name": "ski32_036.png",
+      "resource": 36,
+      "bytes": 260,
+      "sha256": "0190769c1bc1b5f95f601b01c51604325a79a8fe9b541cdfddc474c8c8ef0f49"
+    },
+    {
+      "name": "ski32_037.png",
+      "resource": 37,
+      "bytes": 448,
+      "sha256": "4712ad6364376ed99cecda3f13150a9bac44d16072b3f30657f4c661bbddedf1"
+    },
+    {
+      "name": "ski32_038.png",
+      "resource": 38,
+      "bytes": 387,
+      "sha256": "42ee2b5f6fe779e9f8bbcfeb66f5128d16534d2a4aebf6f7244723d39244c370"
+    },
+    {
+      "name": "ski32_039.png",
+      "resource": 39,
+      "bytes": 411,
+      "sha256": "c6ecb0542cf8bc15f204edc74e86d916bc5f735ac19cd682c812e311f5858e3e"
+    },
+    {
+      "name": "ski32_040.png",
+      "resource": 40,
+      "bytes": 476,
+      "sha256": "bc5fc7f93db43a96ae64123354f6c049b7f8c0b998d9a12728e8e05c827e5aef"
+    },
+    {
+      "name": "ski32_041.png",
+      "resource": 41,
+      "bytes": 485,
+      "sha256": "0e4ec1e7e08b0f384d437f76f6aad5823a9ebdefd838d8441d5c2083572a299e"
+    },
+    {
+      "name": "ski32_042.png",
+      "resource": 42,
+      "bytes": 510,
+      "sha256": "364de8215e2b5500a7a87be2ec751a9287fbcb64da3737727c54ee2a645aab01"
+    },
+    {
+      "name": "ski32_043.png",
+      "resource": 43,
+      "bytes": 407,
+      "sha256": "44413b687dd40a896f68a98242407cac94b1b04a92c47190d6a3d683e10c8411"
+    },
+    {
+      "name": "ski32_044.png",
+      "resource": 44,
+      "bytes": 422,
+      "sha256": "53f0892633e87f7863b074b17295a8dab572acccea06cf46bc2fc47432842673"
+    },
+    {
+      "name": "ski32_045.png",
+      "resource": 45,
+      "bytes": 225,
+      "sha256": "60fc05f3ea97b53b93da5d8f4b0eaee6cf445d0c5207c03112ecb880d05d78c1"
+    },
+    {
+      "name": "ski32_046.png",
+      "resource": 46,
+      "bytes": 217,
+      "sha256": "7143b9c549e8b79e03e0136eff4111af0c64913b78545d4d51ea3ed4edd3c376"
+    },
+    {
+      "name": "ski32_047.png",
+      "resource": 47,
+      "bytes": 114,
+      "sha256": "c6ce8669f78642a53beddf98c26e3454b69e45b3b27c75a6c502173e3cf06eb8"
+    },
+    {
+      "name": "ski32_048.png",
+      "resource": 48,
+      "bytes": 135,
+      "sha256": "dfcc853253af7b716e1d2b039936a16b4efcf3310ecfe4e58c5753979ae8d3fe"
+    },
+    {
+      "name": "ski32_049.png",
+      "resource": 49,
+      "bytes": 513,
+      "sha256": "dd809ccad41f8693c661f4d93254473e32179c7ec47799ede2bc19e865fc0a3b"
+    },
+    {
+      "name": "ski32_050.png",
+      "resource": 50,
+      "bytes": 302,
+      "sha256": "cdd42a6de2469074eeae0a09543ce70b629970e9231f5fbc371259595b09f0be"
+    },
+    {
+      "name": "ski32_051.png",
+      "resource": 51,
+      "bytes": 599,
+      "sha256": "c4bde35cfeb1233b5271551f42f531a1246a19b21319f61a47c23fca9d6d802c"
+    },
+    {
+      "name": "ski32_052.png",
+      "resource": 52,
+      "bytes": 109,
+      "sha256": "4733ff5767770cac748acd007759239ad2389a7b5571cc79be37a2f4389f1d76"
+    },
+    {
+      "name": "ski32_053.png",
+      "resource": 53,
+      "bytes": 1254,
+      "sha256": "5f283130d1eb109a0df72b37f9b237078efd65c532118ef9a3ad7009e48a1580"
+    },
+    {
+      "name": "ski32_054.png",
+      "resource": 54,
+      "bytes": 221,
+      "sha256": "bd54c00ea97d88aa4c600623c148399f26bf43d557fcc9aa7f6cb5f58155a115"
+    },
+    {
+      "name": "ski32_055.png",
+      "resource": 55,
+      "bytes": 453,
+      "sha256": "e556e7ef609e7e694a5ffa5db1b08e5988a338467a75cc5cd7c7f9fc60b3165c"
+    },
+    {
+      "name": "ski32_056.png",
+      "resource": 56,
+      "bytes": 452,
+      "sha256": "5f266658d083bbf48ec727de2eabf6889b01b17546615e706256592c2408f35b"
+    },
+    {
+      "name": "ski32_057.png",
+      "resource": 57,
+      "bytes": 341,
+      "sha256": "42718d0a8f64e384404eecb80f41796ff9b4563e2f9f615fa194e24cd68fe3e9"
+    },
+    {
+      "name": "ski32_058.png",
+      "resource": 58,
+      "bytes": 336,
+      "sha256": "dbf7bf82d7c12db0c1dd242bc171804b166f1f7e0620ed00a4f9d4059196297d"
+    },
+    {
+      "name": "ski32_059.png",
+      "resource": 59,
+      "bytes": 354,
+      "sha256": "05fbe5c19985b1f97ea4614258041a3fefd23a02652cc1240f9db8374b608082"
+    },
+    {
+      "name": "ski32_060.png",
+      "resource": 60,
+      "bytes": 367,
+      "sha256": "9ca7948e99d586f92023d128ce6a83139558d106c703f56a93294189071dacc4"
+    },
+    {
+      "name": "ski32_061.png",
+      "resource": 61,
+      "bytes": 440,
+      "sha256": "44c5f3b47e3c985cf4b8677d1baecdcbf8999882e63f4604f68b42eda6d0fea9"
+    },
+    {
+      "name": "ski32_062.png",
+      "resource": 62,
+      "bytes": 461,
+      "sha256": "6cfd102b13484f756c0515f470fed37ace13a09f292eda0e602da28a0deb9cb2"
+    },
+    {
+      "name": "ski32_063.png",
+      "resource": 63,
+      "bytes": 431,
+      "sha256": "1ae828021bd66dce84f371287515d5c5416e833d5b67ed181c0f99f5dd59ac58"
+    },
+    {
+      "name": "ski32_064.png",
+      "resource": 64,
+      "bytes": 301,
+      "sha256": "f0e7059ba2ef3649f7af38cf283cd9c27c4cb463408c23b35ae48f9a9e463298"
+    },
+    {
+      "name": "ski32_065.png",
+      "resource": 65,
+      "bytes": 318,
+      "sha256": "049c0dde4d454cf6c9794230e9aca306213b18c99dfba32d47de251735bb72c7"
+    },
+    {
+      "name": "ski32_066.png",
+      "resource": 66,
+      "bytes": 219,
+      "sha256": "41a3390db1134b7b82514b5e61e42f4d5455107e20ae9d20c6516a0f7c6cdc57"
+    },
+    {
+      "name": "ski32_067.png",
+      "resource": 67,
+      "bytes": 164,
+      "sha256": "609f8ad1c3813f1c8d9ea879f56e6d3df6b7d3ccc66e26935db063d88777cbde"
+    },
+    {
+      "name": "ski32_068.png",
+      "resource": 68,
+      "bytes": 444,
+      "sha256": "01536618e5c7ea743ed291ead4189a9d3eb4246fd265adff7716bf585bf1436c"
+    },
+    {
+      "name": "ski32_069.png",
+      "resource": 69,
+      "bytes": 455,
+      "sha256": "ec13b4bd17f90a032cbcde671b5a7e59e8b2159eb3969a10141aa1bbe7b3d910"
+    },
+    {
+      "name": "ski32_070.png",
+      "resource": 70,
+      "bytes": 437,
+      "sha256": "223b1391c4cbb9f10a190f41d2ca74dfac9dc72be8d948eb9a3ea878c4f0efd5"
+    },
+    {
+      "name": "ski32_071.png",
+      "resource": 71,
+      "bytes": 439,
+      "sha256": "43441c97eddb4d4535c5ae1150693f01f79db193f26064febb1d16826486c199"
+    },
+    {
+      "name": "ski32_072.png",
+      "resource": 72,
+      "bytes": 449,
+      "sha256": "04427135d2bfafde569d586253f8eeea8bde8097dab90bac6d29e06c357c9546"
+    },
+    {
+      "name": "ski32_073.png",
+      "resource": 73,
+      "bytes": 441,
+      "sha256": "c6f668c0547e2dcbcc22bacf3fcae738feafca27b970e9de1b96e2cc204e42c0"
+    },
+    {
+      "name": "ski32_074.png",
+      "resource": 74,
+      "bytes": 390,
+      "sha256": "f338f2baa8dbc893e9fd4ca00b9aa96aaab2b3ca17a65ea603d3a5e7ceb9a8b2"
+    },
+    {
+      "name": "ski32_075.png",
+      "resource": 75,
+      "bytes": 376,
+      "sha256": "e3c2eae3bc39041001ee0301171c3b33120e9e4b70b2cb596704ba9525436b1b"
+    },
+    {
+      "name": "ski32_076.png",
+      "resource": 76,
+      "bytes": 682,
+      "sha256": "9fdd151508506c7560025ab78cc93e3b7858a6b6b67d29485fabdc423bffe495"
+    },
+    {
+      "name": "ski32_077.png",
+      "resource": 77,
+      "bytes": 648,
+      "sha256": "9fc02674cfb5d0aed8862262195ce79a01bf747b7b051ec4279686ccddf9eaea"
+    },
+    {
+      "name": "ski32_078.png",
+      "resource": 78,
+      "bytes": 549,
+      "sha256": "26f6bccc1c10b369d4e32895082bc35952fae761689125f53a9af04db3c9ea03"
+    },
+    {
+      "name": "ski32_079.png",
+      "resource": 79,
+      "bytes": 453,
+      "sha256": "40a97bd75eb0a3674a759a21cde5e6dbc8c15086039c11b1fd6194291a9b8e80"
+    },
+    {
+      "name": "ski32_080.png",
+      "resource": 80,
+      "bytes": 438,
+      "sha256": "01a2a337cdd52ffb291c88e5219cd11d048eb090f14a812332734289f902d370"
+    },
+    {
+      "name": "ski32_081.png",
+      "resource": 81,
+      "bytes": 441,
+      "sha256": "86eb9a06c50d06f036789d6979f86b38dde4c74720d75f07300257ee215b2a03"
+    },
+    {
+      "name": "ski32_082.png",
+      "resource": 82,
+      "bytes": 126,
+      "sha256": "8039352df53f4a078fc98cadb4d9916c406c92ac8fa94a586289c775e9314e35"
+    },
+    {
+      "name": "ski32_083.png",
+      "resource": 83,
+      "bytes": 429,
+      "sha256": "e08cfb7232631bc3340a144240d36c237c744f706ef6106c41cbaa028f5a8582"
+    },
+    {
+      "name": "ski32_084.png",
+      "resource": 84,
+      "bytes": 411,
+      "sha256": "aa84b584ee7b89b1bfbd9682dfc928a195439e4082ae5ad590462fc8a5241d72"
+    },
+    {
+      "name": "ski32_085.png",
+      "resource": 85,
+      "bytes": 392,
+      "sha256": "1852369c41e607df6d7f9c8b568c306fdf576c48dcf7883ef4f95f5db87c7de8"
+    },
+    {
+      "name": "ski32_086.png",
+      "resource": 86,
+      "bytes": 158,
+      "sha256": "0b6b387e34f0e29071fc5e099929a61d2019a4346ed1c82a1119fbd28509ccd3"
+    },
+    {
+      "name": "ski32_087.png",
+      "resource": 87,
+      "bytes": 586,
+      "sha256": "c0418333db4e34ae2c2ee18d57354a84bd0a58e8033f4e133c03d2e77e8be2ae"
+    },
+    {
+      "name": "ski32_088.png",
+      "resource": 88,
+      "bytes": 556,
+      "sha256": "6130d8647e063f1725b527a038d981638a37e28f31abb31757392438d80c06f6"
+    },
+    {
+      "name": "ski32_089.png",
+      "resource": 89,
+      "bytes": 562,
+      "sha256": "a1646ead0625729817f2391a9b5f64833813c3951e74f21dc0c27b7e22b00e98"
+    }
+  ]
+}

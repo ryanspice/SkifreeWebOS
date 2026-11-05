@@ -1,0 +1,19 @@
+private/
+**/build/
+**/dist/
+**/evidence/
+**/__pycache__/
+*.pyc
+*.ipk
+*.exe
+*.zip
+vendor/
+*.pem
+*.key
+
+# Local working instructions, planning records and unsent launch material.
+/AGENTS.md
+/native/docs/wayfinder/
+/native/docs/PUBLISHING-PLAN-2026-11-04.md
+/docs/marketing/
+/release/HOMEBREW-PR-DRAFT.md

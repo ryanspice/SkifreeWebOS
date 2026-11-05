@@ -1,0 +1,38 @@
+{
+  "recorded_date": "2026-11-04",
+  "source_root": "B:/Dev/webos/spice-home-cpp",
+  "source_license": "MIT, Copyright (c) 2026 Spice Home contributors",
+  "source_modified": false,
+  "scope": "SDL window/input loader, raw GLES2 quad/texture renderer, viewport geometry, strict build/staging scaffolding",
+  "adaptations": [
+    "Extracted only Point, Rect and Viewport; removed launcher settings, layout, services, JSON and curl.",
+    "Changed logical design space from 1920x1080 to 960x540.",
+    "Removed FreeType and all font discovery/rasterization.",
+    "Removed unconditional launcher artwork loads; preload only immediate PNG files in the supplied asset directory, keyed by filename stem.",
+    "Added named image loading, imageSize, hasImage and sprite source rectangles, with nearest texture filtering.",
+    "Reduced shader modes to solid and textured quads; retained optional rounded rectangle/stroke geometry.",
+    "Always require real SDL2 SDK headers; removed the desktop ABI declaration fallback.",
+    "Retained real ARM cross-toolchain checks and non-overwriting staging. A separate explicit staging helper bundles only SDL-webOS and its required pinned PNG codec, with licenses; no platform libraries or fonts are copied."
+  ],
+  "sources": [
+    {"path":"include/spice/core.hpp","sha256":"aed50e801252cee148a6e4878ada47a341d53bf90e94bcae2629aab02d970f0d","destination":"include/spice/core.hpp"},
+    {"path":"src/core.cpp","sha256":"bfac5540acb1e7f157e763f4b394277cc7dd8de8d8aedd841c747fa2c9fb43b5","destination":"src/platform/core.cpp"},
+    {"path":"include/spice/runtime.hpp","sha256":"20c9f607b1205f9c00b03065e73761cae3bcfc54f91263a72c2db7d3c55adf32","destination":"include/spice/runtime.hpp"},
+    {"path":"src/runtime.cpp","sha256":"8983312b03946c13a98e24dba93fa73db70c8d9d9a8b6085dfeaea13d7b44101","destination":"src/platform/runtime.cpp"},
+    {"path":"include/spice/render.hpp","sha256":"56f3a2de76bc806830a9b36b45cb84251bf4f3fa7b85145427d18f008091b4b3","destination":"include/spice/render.hpp"},
+    {"path":"src/render.cpp","sha256":"8dbfdaa9824fff8e1976cfc4680a00f812b8a70497da2eb4193aa025d905a923","destination":"src/platform/render.cpp"},
+    {"path":"compat/native_abi.hpp","sha256":"5368b808c1b38ea8bb7855fa1329fa3c9ae7bffd2b20b85416752f472523c6c5","destination":"compat/native_abi.hpp"},
+    {"path":"CMakeLists.txt","sha256":"0c49646c9bc18c566b8dd2622b1c4b2b4aa496d95996f2f905ff45eb986fc6b5","destination":"CMakeLists.txt"},
+    {"path":"scripts/build-desktop.sh","sha256":"9cc77d9abd23bfb4e01f6525c13eeb265f773dc86d042b5e063e7607a3220059","destination":"scripts/build-desktop.sh"},
+    {"path":"scripts/build-webos.sh","sha256":"e8a344368d4fa55325d8c00a355b6d701af0b3648f5b2f451644432122c069ea","destination":"scripts/build-webos.sh"},
+    {"path":"scripts/Build-Desktop.ps1","sha256":"2fe5a9928ee2ff5f5a1e6a4629034e530bbf6f3c64bfe4844500ddb4c1209ba1","destination":"scripts/Build-Desktop.ps1"},
+    {"path":"LICENSE","sha256":"d4aae6ea76062030de400f4b6262e898741c0bd0a72b8a88a7e63dbc75f0f70c","destination":"provided by integration lead with distribution notices"}
+  ],
+  "verification": {
+    "strict_platform_syntax": "PASS: WebOSBuild g++ C++20 -Wall -Wextra -Wpedantic -Wshadow -Wformat=2 -Werror -fsyntax-only for core/runtime/render",
+    "shell_script_syntax": "PASS: bash -n for both .sh files",
+    "powershell_script_syntax": "PASS: PowerShell language Parser.ParseFile",
+    "full_application_build": "integration lead owns desktop checks; strict ARM cross-build and stage passed, see native/docs/WEBOS-RUNTIME.md",
+    "arm_build_and_device_acceptance": "ARM32 build/static dependency audit passed; TV launch and compatibility NOT TESTED"
+  }
+}
