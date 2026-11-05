@@ -25,10 +25,11 @@ and package boundaries. For SDL/GLES desktop builds, sanitizer runs and scripted
 UI tests, follow [native setup](native/README.md). ARM cross-compilation, runtime
 staging and IPK auditing are in [release preparation](release/README.md).
 
-The example uses a serial build for Windows compatibility. Increase parallelism
-on a toolchain/filesystem that supports it. The local MSVC parallel trial hit
-PDB/library write errors, and a serial Debug retry stalled at link time. Release
-avoids that Debug PDB path; keep build-environment failures separate from tests.
+The example uses a serial Release build. Debug and parallel builds are supported:
+the earlier PDB/library write failures were investigated and B: was found to have
+zero free bytes. A fresh parallel MSVC Debug build on C: passed all four suites
+with unchanged compiler settings. Choose a build directory on a volume with
+enough free space; see the [diagnostic record](native/docs/DEBUG-BUILD.md).
 
 ## Making a change
 

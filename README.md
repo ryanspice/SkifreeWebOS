@@ -1,5 +1,12 @@
 # SkiFree for webOS
 
+[![Version: 1.0.0 candidate](https://img.shields.io/badge/version-1.0.0_candidate-b88a3b)](release/TAGGING.md)
+[![Platform: LG webOS TV](https://img.shields.io/badge/platform-LG_webOS_TV-a50034)](docs/INSTALL.md)
+[![Native: C++20 and GLES2](https://img.shields.io/badge/native-C%2B%2B20_%2B_GLES2-00599c)](native/README.md)
+[![Target: ARM32](https://img.shields.io/badge/target-ARM32-555555)](native/docs/WEBOS-RUNTIME.md)
+[![TV evidence: LG C3](https://img.shields.io/badge/TV_evidence-LG_C3-6b8e23)](native/docs/VERIFICATION.md)
+[![License: separate code and artwork terms](https://img.shields.io/badge/license-see_notices-yellow)](native/NOTICE.md)
+
 A free, independent adaptation of SkiFree for LG webOS TVs. Play with a Magic Remote, mouse or keyboard. Original game and artwork by **Chris Pirih**.
 
 ![SkiFree for webOS 1.0.0 opening screen on an LG C3](docs/media/skifree-original-c3.png)
@@ -9,6 +16,46 @@ A free, independent adaptation of SkiFree for LG webOS TVs. Play with a Magic Re
 **[Install and play](docs/INSTALL.md)** · [Controls](#original-controls) · [Compatibility and checks](native/docs/VERIFICATION.md) · [Champions of Snowboarding 2026](docs/support.md)
 
 **Release status:** 1.0.0 is a locally tested candidate. A public download and Homebrew Channel listing have not been published.
+
+## Release brief
+
+Original preserves the reconstructed 1.04 mountain, courses, characters and rules.
+The separate Recreation and Yeti Chase runs add simplified steering and boosts.
+This candidate adds a lighter Recreation HUD, hides the footer while skiing and
+lets qualifying Original scores carry three initials, starting at **AAA**.
+
+The earlier candidate ran on an LG C3. The updated HUD/initials build has host
+tests and an audited ARM package; its C3 playthrough and earned-score relaunch
+check are pending. [Build and acceptance details](native/docs/VERIFICATION.md).
+
+## Install on your TV
+
+1. Obtain the maintainer's **ARM IPK and matching SHA-256**, or follow the
+   [TV build brief](docs/TV-BUILD.md). Downloadable release assets are being prepared.
+2. Set up your TV with [LG Developer Mode](https://webostv.developer.lge.com/develop/getting-started/developer-mode-app)
+   and the webOS CLI. This is the intended installation route; the exact current
+   package still needs a device check. [Rooted and unrooted notes](docs/COMPATIBILITY.md).
+3. Verify and install the supplied package, replacing `my-tv` with your CLI device:
+
+   ```powershell
+   Get-FileHash -Algorithm SHA256 .\com.ryanspice.skifree_1.0.0_arm.ipk
+   ares-install --device my-tv .\com.ryanspice.skifree_1.0.0_arm.ipk
+   ares-launch --device my-tv com.ryanspice.skifree
+   ```
+
+Original opens automatically. Aim with the pointer or directional keys and press
+OK to jump. **Back** opens the menu. Developer Mode expires; see the
+[full installation guide](docs/INSTALL.md) for setup, checksums, session upkeep
+and score troubleshooting.
+
+| At a glance | Current status |
+| --- | --- |
+| TV target | LG C3 / OLED48C3PUA, observed firmware 43.21.84 |
+| Native runtime | ARM32; GLIBC 2.38 and GLIBCXX 3.4.32 required |
+| Controls | Magic Remote pointer and directions, mouse, keyboard |
+| Saved scores | Original top ten per course, three-letter initials, legacy import |
+| Other webOS generations | Compatibility research and separate validation planned |
+| Tag and downloads | [Release preparation and remaining gates](release/TAGGING.md) |
 
 ## Choose your run
 
@@ -73,6 +120,8 @@ Reopening starts at the original mountain. To see previously saved entries, fini
 ## Build and release
 
 [Contributing](CONTRIBUTING.md) · [Documentation map](docs/README.md) · [Repository review](docs/REPOSITORY-REVIEW.md)
+
+[TV build brief](docs/TV-BUILD.md) · [Compatibility research and synthesis plan](docs/COMPATIBILITY.md) · [Tag preparation](release/TAGGING.md)
 
 [Native build instructions](native/README.md) · [Release preparation](release/README.md) · [1.0.0 notes](release/RELEASE-NOTES-1.0.0.md) · [Local visual review](native/docs/VISUAL-REVIEW-1.0.0.md)
 

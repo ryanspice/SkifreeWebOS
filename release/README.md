@@ -12,14 +12,14 @@ Package that directory with `ares-package`. On Windows, write this first package
 python release/finalize_ipk.py --input $intermediateIpk --output $finalIpk
 python release/verify_ipk.py --ipk $finalIpk --stage-audit $stageAudit --report $finalAudit
 python release/source_archive_tests.py
-python release/prepare_source_archive.py --out native/dist/SkifreeWebOS-1.0.0-source-public-rc7.zip
+python release/prepare_source_archive.py --out native/dist/SkifreeWebOS-1.0.0-source-public-rc8.zip
 ```
 
-The finalizer normalizes Unix modes, including execute permissions on the ELF. The verifier compares every packaged app file against the audited stage. The source builder permits source/documentation files, the original procedural icon, the 89 hash-verified sprites and three hash-verified documentation images. It rejects the original EXE/ZIP, raw resource dumps, credentials, private reports, internal planning, unsent launch drafts and generated release metadata. Documentation images are not added to the IPK. Source ZIPs include the Git-visible tree, including allowed uncommitted files, and omit ignored build dependencies; pinned dependency preparation remains documented.
+The finalizer normalizes Unix modes, including execute permissions on the ELF. The verifier compares every packaged app file against the audited stage. The source builder permits source files, explicitly listed documentation, the original procedural icon, the 89 hash-verified sprites and three hash-verified documentation images. It excludes original EXE/ZIP files, raw resource dumps, known private/planning paths, unsent launch drafts, unapproved documentation text and generated release metadata. This path/asset gate is not a content-level secret scanner; review source contents before publication. Documentation images are not added to the IPK. Source ZIPs include the Git-visible tree, including allowed uncommitted files, and omit ignored build dependencies; pinned dependency preparation remains documented.
 
 The builder refuses existing output files. Preserve previous archives and use a fresh revision name after changes. The ZIP, adjacent SHA-256 file and per-file manifest form one source-release set. A source-only documentation refresh does not change the audited IPK or its checksum.
 
-The latest HUD/initials revision changes the native executable and has its own audited local IPK in `native/dist/ui-initials-1.0.0/`. It retains version 1.0.0 while the release is unpublished; use its exact checksum from the installation guide, not the earlier C3-installed artifact. This revision's TV input and score migration checks are still pending.
+The latest C3 build of the HUD/initials source has its own audited local IPK in `native/dist/tv-c3-1.0.0-20261104/`. It retains version 1.0.0 while the release is unpublished; use its exact checksum from the installation guide, not an earlier artifact. This build's TV input and score migration checks are still pending. See the [TV build brief](../docs/TV-BUILD.md), [compatibility synthesis](../docs/COMPATIBILITY.md) and [tag preparation](TAGGING.md).
 
 ## Homebrew metadata
 
@@ -36,8 +36,10 @@ alone is not used to fill minimum-release metadata.
 ## Submission checklist
 
 - [x] Strict native builds, game/input checks and exact package audit.
-- [x] Install and native GPU title-screen launch on OLED48C3PUA, firmware 43.21.84.
-- [x] Owner reports tested inputs seem good; local 1.0.0 install/render and empty-score update/relaunch checks recorded.
+- [x] Earlier candidate: install and native GPU title-screen launch on OLED48C3PUA, firmware 43.21.84.
+- [x] Earlier candidates: owner input observations and empty-score update/relaunch evidence recorded.
+- [ ] Current HUD/initials IPK: install and render on the C3, identified by its exact checksum.
+- [ ] Current HUD/initials IPK: physical controls, focus/resume, earned-score relaunch and legacy migration.
 - [ ] Complete publication support claims only for specifically evidenced device/input/lifecycle/save cases.
 - [ ] Meaningful human code review, design explanation and honest AI disclosure.
 - [ ] Record original artwork and reconstruction redistribution terms; confirm repository pool.

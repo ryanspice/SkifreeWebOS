@@ -2,6 +2,31 @@
 
 Updated November 4, 2026. This record describes the local candidate and distinguishes automated checks, physical-device observations and human feedback. It is not a claim of exhaustive equivalence to the Windows executable.
 
+## Release preparation follow-up
+
+Three requested GPT-6.1 Terra lanes completed: scoped peer review, rooted/unrooted
+research and consumer webOS version research. The peer found two release issues:
+the checklist mixed earlier TV evidence with current acceptance, and documentation
+source paths were too broadly accepted. The checklist now identifies artifacts;
+the source builder explicitly lists approved docs and rejects unapproved credential
+and receipt-like text paths. All six source-boundary tests and seven stage cases pass.
+
+The Debug investigation demonstrated a full B: volume, then a fresh parallel
+MSVC Debug build on C: passed all four suites without compiler flag changes.
+See [Debug diagnostics](DEBUG-BUILD.md). Research conclusions and proposed ABI/SDL
+work are in the [compatibility plan](../../docs/COMPATIBILITY.md).
+
+A fresh ARM Release build used the same gameplay source and SDK, with build/stage
+outputs on C:. It passed the existing 12-record SDK path/ELF audit, the 103-file
+stage audit and the exact 104-file IPK comparison. This is a distinct build with
+its own identity; SDK audits do not verify every required symbol against TV
+firmware. Package: **1,983,374 bytes**, SHA-256
+`b29b9117425001c0700bd23a8a0f00e0386d41db2451ea3de20b607aaedae648`.
+ARM executable: `e691bc1eb39e376ac7ab95c7412dd565f2eeafe304618984a9dec1c54dc31efb`.
+It is available locally under `native/dist/tv-c3-1.0.0-20261104/` and has not been
+installed on the C3. Earlier host UI/sanitizer evidence covers the same unchanged
+gameplay sources; it was not rerun as a new physical or firmware compatibility test.
+
 ## Latest local revision: quieter HUD and arcade initials
 
 The current source removes Recreation's dark HUD bar, places its statistics and boost status in a compact white panel, and hides the footer during active runs. Original's stationary opening and menus retain the colour choices. Physical colour shortcuts remain active.

@@ -61,3 +61,19 @@ measure, not a comprehensive security audit.
 
 GitHub source hosting is a private handoff. No downloadable release, Homebrew
 submission or social post is part of this repository push.
+
+## Terra follow-up
+
+The requested independent GPT-6.1 Terra source review found two release issues:
+earlier TV observations appeared as completed current-package gates, and broad
+documentation text rules could admit unapproved credential/receipt files to a
+source archive. The checklist now labels earlier evidence and leaves current TV
+gates open. Documentation paths are explicitly allowlisted, with negative cases
+for unapproved JSON, text, Markdown and YAML files. The expanded six-test source
+suite passes; no exposed sensitive file was identified by the review.
+
+No demonstrated initials/migration defect was found in that bounded static pass.
+The [Debug follow-up](../native/docs/DEBUG-BUILD.md) identifies disk exhaustion and
+a passing fresh parallel Debug build. Two research lanes informed the
+[compatibility plan](COMPATIBILITY.md); neither operated a TV. This AI peer review
+does not fulfill Homebrew's meaningful human review requirement.

@@ -10,11 +10,17 @@ The ARM32 build requires GLIBC 2.38 and GLIBCXX 3.4.32. Older TV software may no
 
 ## Install through Developer Mode
 
+This is the intended setup route for the current native candidate. Its exact IPK
+has not yet been verified through this route. LG's official Developer Mode
+instructions describe app setup/testing; the native TV toolchain and SDL port
+used here are community-supported. See the [compatibility brief](COMPATIBILITY.md)
+for the distinction between installation method and app privileges.
+
 1. Follow [LG's Developer Mode setup](https://webostv.developer.lge.com/develop/getting-started/developer-mode-app) to connect your TV and computer. The [webOS Homebrew setup guide](https://www.webosbrew.org/devmode/) is another walkthrough. LG requires an account for this installation method; SkiFree itself requires no account.
-2. Obtain the candidate IPK and compare its SHA-256 with the maintainer's checksum. The latest audited HUD/initials revision is `com.ryanspice.skifree_1.0.0_arm.ipk` (under `native/dist/ui-initials-1.0.0/` in the maintainer's local build):
+2. Obtain the candidate IPK and compare its SHA-256 with the maintainer's checksum. The latest audited C3 build is `com.ryanspice.skifree_1.0.0_arm.ipk` (under `native/dist/tv-c3-1.0.0-20261104/` in the maintainer's local build), 1,983,374 bytes:
 
    ```text
-   b60075a145641341f99de607f05fc09aacb64762e6986f10c5ba65bac4b9d69e
+   b29b9117425001c0700bd23a8a0f00e0386d41db2451ea3de20b607aaedae648
    ```
 
    In PowerShell, use `Get-FileHash -Algorithm SHA256 <path-to-ipk>`.

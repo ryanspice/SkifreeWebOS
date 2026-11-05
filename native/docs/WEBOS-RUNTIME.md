@@ -9,3 +9,15 @@ Run the dependency audit and public-stage hash audit before packaging. The final
 The C3 target reports OLED48C3PUA, firmware 43.21.84, SDK 11.2.0, glibc 2.39 and GLIBCXX_3.4.32. Its Developer Mode jail does not expose `/etc/starfish-release`; minimum-release metadata must not be inferred from a marketing name. Runtime/install/input acceptance for the current artifact is recorded separately in VERIFICATION.md.
 
 Launch via the webOS application manager. Direct execution over the Developer Mode SSH service was rejected as the wrong application identity and is not a valid graphics test.
+
+Source review found no declared elevated permission or identified root-service
+dependency. That does not establish the installed process UID, jail capabilities
+or success on rooted/unrooted TVs. Developer Mode and rooted Homebrew are separate
+installation routes; a rooted installation does not imply the app runs as root.
+See the [compatibility research and plan](../../docs/COMPATIBILITY.md).
+
+The current runtime audit resolves dependency paths and checks ELF32 ARM while
+recording required symbol versions. It does not compare every undefined symbol
+and version with exports from an exact TV firmware, and dynamically loaded
+libraries are not a complete proven closure. A passing SDK audit is packaging
+evidence; it cannot establish older-firmware compatibility.

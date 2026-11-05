@@ -16,7 +16,7 @@ LOCAL_PREFIXES = ("private/", "native/docs/wayfinder/", "docs/marketing/")
 PUBLIC_MEDIA = {"docs/media/skifree-original-c3.png", "docs/media/skifree-recreation-desktop.png",
                 "docs/media/champions-development-preview.png"}
 # Release generators must write to ignored build/private directories, never the source tree.
-RELEASE_FILES = {"README.md", "AGENTS.md", "Prepare-Homebrew.ps1", "homebrew-package.yml.in",
+RELEASE_FILES = {"README.md", "AGENTS.md", "TAGGING.md", "Prepare-Homebrew.ps1", "homebrew-package.yml.in",
                  "finalize_ipk.py", "verify_ipk.py", "prepare_source_archive.py",
                  "source_archive_tests.py", "RELEASE-NOTES-1.0.0.md",
                  "RELEASE-NOTES-0.3.0.md", "RELEASE-NOTES-0.4.0.md", "RELEASE-NOTES-0.5.0.md",
@@ -25,6 +25,13 @@ NATIVE_FILES = {"CMakeLists.txt", "appinfo.json", "LICENSE", "NOTICE.md", "READM
                 "icon.png", "remote-scancodes.example.txt"}
 TEXT_SUFFIXES = {".md", ".txt", ".py", ".ps1", ".sh", ".json", ".yml", ".yaml",
                  ".in", ".cpp", ".hpp", ".h", ".c", ".svg"}
+PUBLIC_DOCS = {"docs/INSTALL.md", "docs/README.md", "docs/REPOSITORY-REVIEW.md",
+               "docs/TV-BUILD.md", "docs/COMPATIBILITY.md", "docs/support.md",
+               "docs/media/README.md", "docs/media/manifest.json",
+               "native/docs/ASSETS.md", "native/docs/CPP-SUBSET.md",
+               "native/docs/ORIGINAL-COMPARISON.md", "native/docs/ORIGINAL-PARITY.md",
+               "native/docs/VERIFICATION.md", "native/docs/VISUAL-REVIEW-1.0.0.md",
+               "native/docs/WEBOS-RUNTIME.md", "native/docs/DEBUG-BUILD.md"}
 
 
 def allowed(name):
@@ -48,7 +55,9 @@ def allowed(name):
         return False
     if path.parts[0] == "release":
         return len(path.parts) == 2 and path.name in RELEASE_FILES
-    if path.parts[0] in {"docs", ".github"}:
+    if path.parts[0] == "docs" or name.startswith("native/docs/"):
+        return name in PUBLIC_DOCS
+    if path.parts[0] == ".github":
         return True
     return (len(path.parts) >= 3 and path.parts[0] == "native" and
             path.parts[1] in {"src", "include", "compat", "scripts", "tools", "tests", "docs"})
