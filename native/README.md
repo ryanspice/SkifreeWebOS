@@ -13,6 +13,10 @@ ctest --test-dir ../.ai/evidence/desktop --output-on-failure
 
 On Windows, use a Visual Studio Developer PowerShell with CMake, Ninja and an existing vcpkg installation. `scripts/Build-Desktop.ps1 -VcpkgRoot <vcpkg-path> -Run` configures, builds, tests and launches the application. The SDL2 and PNG DLLs must be on the runtime search path. This helper does not install the toolchain or dependencies.
 
+The Linux `scripts/build-desktop.sh` helper defaults to the repository's ignored
+`.ai/evidence/desktop-linux/`; override `SKIFREE_BUILD_DIR` for an isolated build.
+Preserve existing evidence and use a fresh named output for a release check.
+
 Native desktop UI checks require Python 3, Mesa, Xvfb and `xvfb-run` (including its `xauth` dependency). They use isolated score files and a software renderer; they do not control a connected TV:
 
 ```sh

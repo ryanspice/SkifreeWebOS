@@ -15,6 +15,7 @@ cmake -S native -B .ai/evidence/core-build -DSKIFREE_BUILD_UI=OFF -DSKIFREE_STRI
 cmake --build .ai/evidence/core-build --config Release --parallel 1
 ctest --test-dir .ai/evidence/core-build -C Release --output-on-failure
 python release/source_archive_tests.py
+python release/ipk_permissions_tests.py
 python native/tests/public_stage_tests.py
 git diff --check
 ```
@@ -24,6 +25,12 @@ Original, Recreation, ranking and score storage. Python checks validate source
 and package boundaries. For SDL/GLES desktop builds, sanitizer runs and scripted
 UI tests, follow [native setup](native/README.md). ARM cross-compilation, runtime
 staging and IPK auditing are in [release preparation](release/README.md).
+
+The [host/source CI workflow](.github/workflows/checks.yml) runs the four core
+suites, source/stage boundaries, IPK permission checks and source ZIP creation
+on Linux. It does not build the SDL UI or ARM package, contact the TV, upload
+artifacts or publish a release. A local equivalent pass does not establish that
+the hosted workflow has run successfully.
 
 The example uses a serial Release build. Debug and parallel builds are supported:
 the earlier PDB/library write failures were investigated and B: was found to have
@@ -52,9 +59,14 @@ details or original executable/resource archives.
 ## Release boundaries
 
 Desktop checks do not prove TV input, save survival, exhaustive EXE equivalence
-or compatibility with all LG TVs. The latest HUD/initials revision has host and
-ARM evidence; physical-TV acceptance remains pending. Current details live in
+or compatibility with all LG TVs. The latest package has C3 launch and non-empty
+score persistence evidence; final HUD/browser visual feedback and broader device
+acceptance remain pending. Current details live in
 [verification](native/docs/VERIFICATION.md).
+
+The [1.1.0 online-score plan](docs/ROADMAP-1.1.0.md) is separate from the current
+offline 1.0.0 candidate. Keep planned features labelled until implemented and
+tested; do not bump runtime versions merely to add planning documents.
 
 Use fresh output names and exact hashes. GitHub source hosting does not publish
 an IPK or submit to Homebrew. See the [release checklist](release/README.md#submission-checklist).

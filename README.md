@@ -17,6 +17,10 @@ A free, independent adaptation of SkiFree for LG webOS TVs. Play with a Magic Re
 
 **Release status:** 1.0.0 is a locally tested candidate. A public download and Homebrew Channel listing have not been published.
 
+**Next: [1.1.0 — optional online high scores](docs/ROADMAP-1.1.0.md).** Planned:
+an opt-in leaderboard, an Off setting and reliable offline play. Online scores
+are not part of this 1.0.0 build.
+
 ## Release brief
 
 Original preserves the reconstructed 1.04 mountain, courses, characters and rules.

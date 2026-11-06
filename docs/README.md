@@ -11,6 +11,7 @@
 
 ## Development and evidence
 
+- [1.1.0 plan: optional online scores, settings and acceptance](ROADMAP-1.1.0.md)
 - [Contributor workflow](../CONTRIBUTING.md)
 - [Native build and tests](../native/README.md)
 - [Verification and remaining acceptance checks](../native/docs/VERIFICATION.md)
@@ -40,7 +41,7 @@
 | `native/docs/` | Technical provenance and verification |
 | `docs/` | Player docs, support and approved screenshots |
 | `release/` | Packaging, source boundaries and release notes |
-| `.github/` | Issue template and support link |
+| `.github/` | Host/source CI, issue template and support link |
 
 Builds, packages, local dependencies, raw evidence and unsent marketing drafts
 are ignored. They are not needed to navigate tracked source.

@@ -15,7 +15,7 @@ LOCAL_FILES = {"native/docs/PUBLISHING-PLAN-2026-11-04.md",
 LOCAL_PREFIXES = (".ai/", "private/", "native/docs/wayfinder/", "docs/marketing/")
 PUBLIC_MEDIA = {"docs/media/skifree-original-c3.png", "docs/media/skifree-recreation-desktop.png",
                 "docs/media/champions-development-preview.png"}
-# Release generators must write to ignored build/private directories, never the source tree.
+# New release outputs belong in ignored project-local .ai/ directories.
 RELEASE_FILES = {"README.md", "AGENTS.md", "TAGGING.md", "Prepare-Homebrew.ps1", "homebrew-package.yml.in",
                  "finalize_ipk.py", "verify_ipk.py", "prepare_source_archive.py",
                  "source_archive_tests.py", "ipk_permissions_tests.py", "RELEASE-NOTES-1.0.0.md",
@@ -26,6 +26,7 @@ NATIVE_FILES = {"CMakeLists.txt", "appinfo.json", "LICENSE", "NOTICE.md", "READM
 TEXT_SUFFIXES = {".md", ".txt", ".py", ".ps1", ".sh", ".json", ".yml", ".yaml",
                  ".in", ".cpp", ".hpp", ".h", ".c", ".svg"}
 PUBLIC_DOCS = {"docs/INSTALL.md", "docs/README.md", "docs/REPOSITORY-REVIEW.md",
+               "docs/ROADMAP-1.1.0.md",
                "docs/TV-BUILD.md", "docs/COMPATIBILITY.md", "docs/support.md",
                "docs/media/README.md", "docs/media/manifest.json",
                "native/docs/ASSETS.md", "native/docs/CPP-SUBSET.md",

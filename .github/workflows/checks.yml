@@ -1,0 +1,41 @@
+name: Host and source checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: checks-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  host:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+      - name: Check core, package boundaries and source archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .ai/evidence/ci/tmp .ai/outbox/ci
+          export TMPDIR="$GITHUB_WORKSPACE/.ai/evidence/ci/tmp"
+          export TEMP="$TMPDIR" TMP="$TMPDIR"
+          cmake -S native -B .ai/evidence/ci/core -DSKIFREE_BUILD_UI=OFF -DSKIFREE_STRICT=ON -DCMAKE_BUILD_TYPE=Release
+          cmake --build .ai/evidence/ci/core --parallel 2
+          ctest --test-dir .ai/evidence/ci/core --output-on-failure
+          python release/source_archive_tests.py
+          python release/ipk_permissions_tests.py
+          python native/tests/public_stage_tests.py
+          python release/prepare_source_archive.py --out .ai/outbox/ci/SkifreeWebOS-source.zip
+          git diff --exit-code
+          git diff --check
