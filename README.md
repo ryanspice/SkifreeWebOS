@@ -144,6 +144,8 @@ see [score troubleshooting](docs/INSTALL.md#scores-and-troubleshooting).
 
 [TV build brief](docs/TV-BUILD.md) · [Compatibility research and synthesis plan](docs/COMPATIBILITY.md) · [Tag preparation](release/TAGGING.md)
 
+[Release walkthrough: GitHub → Homebrew](docs/RELEASE-GUIDE.md) · [Visual tutorial](docs/RELEASE-WALKTHROUGH.html)
+
 [Native build instructions](native/README.md) · [Release preparation](release/README.md) · [1.0.0 notes](release/RELEASE-NOTES-1.0.0.md) · [Local visual review](native/docs/VISUAL-REVIEW-1.0.0.md)
 
 C++20 and GLES2 draw the game; SDL2 supplies the window and input. App ID: `com.ryanspice.skifree`. Homebrew publication and social posts remain drafts. The new platform code's MIT license does not cover the original resources or reconstructed core; see [notices](native/NOTICE.md).

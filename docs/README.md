@@ -25,6 +25,8 @@
 
 ## Release and rights
 
+- [Release walkthrough: GitHub and Homebrew](RELEASE-GUIDE.md)
+- [Visual release tutorial (download/open locally)](RELEASE-WALKTHROUGH.html)
 - [Release preparation and Homebrew checklist](../release/README.md)
 - [1.0.0 notes](../release/RELEASE-NOTES-1.0.0.md)
 - [Tag preparation](../release/TAGGING.md)

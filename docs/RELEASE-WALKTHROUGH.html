@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SkiFree release walkthrough</title>
+<style>
+  :root { color-scheme: light dark; }
+  html, body { margin: 0; background: transparent; }
+  #skifree-release { color: var(--foreground, light-dark(#202832, #e8edf2)); font-family: var(--font-sans, system-ui, sans-serif); font-size: 14px; line-height: 1.6; }
+  #skifree-release * { box-sizing: border-box; }
+  #skifree-release h1, #skifree-release h2, #skifree-release h3, #skifree-release p { margin: 0; }
+  #skifree-release h1 { font-size: 24px; font-weight: 500; }
+  #skifree-release h2 { font-size: 20px; font-weight: 500; }
+  #skifree-release h3 { font-size: 16px; font-weight: 500; }
+  #skifree-release a { color: var(--info, light-dark(#175a94, #8cc8fa)); overflow-wrap: anywhere; }
+  #skifree-release .intro, #skifree-release .detail, #skifree-release .sections { display: grid; gap: 12px; }
+  #skifree-release .muted { color: var(--muted-foreground, light-dark(#536273, #aab8c8)); }
+  #skifree-release .facts { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 12px; }
+  #skifree-release .facts strong { font-weight: 500; }
+  #skifree-release .flow { display: grid; grid-template-columns: 1fr 24px 1fr 24px 1fr; align-items: center; gap: 4px; margin: 18px 0; }
+  #skifree-release figure { margin: 0; text-align: center; min-width: 0; }
+  #skifree-release figure svg { width: 100%; max-width: 180px; height: auto; display: block; margin: auto; }
+  #skifree-release figcaption { margin-top: 5px; }
+  #skifree-release figcaption span { display: block; font-size: 12px; }
+  #skifree-release .flow-arrow { width: 24px; height: 24px; }
+  #skifree-release .shell { display: grid; grid-template-columns: 172px minmax(0, 1fr); gap: 22px; align-items: start; }
+  #skifree-release nav { display: grid; gap: 5px; }
+  #skifree-release button { font: inherit; color: inherit; cursor: pointer; }
+  #skifree-release .step { text-align: left; background: transparent; border: 1px solid var(--border, light-dark(#d5dde5, #3a4653)); border-radius: 7px; padding: 8px 10px; display: grid; grid-template-columns: 20px 1fr; gap: 5px; }
+  #skifree-release .step[aria-current="step"] { background: var(--secondary, light-dark(#e7edf2, #253241)); border-color: var(--ring, light-dark(#57778e, #8aa4bd)); }
+  #skifree-release .step small { display: block; font-size: 12px; color: var(--muted-foreground, light-dark(#536273, #aab8c8)); }
+  #skifree-release .step .number { font-variant-numeric: tabular-nums; }
+  #skifree-release .step.completed .number::after { content: '✓'; }
+  #skifree-release .step.completed .number span { display: none; }
+  #skifree-release .step-panel { display: grid; gap: 12px; min-width: 0; }
+  #skifree-release [hidden] { display: none !important; }
+  #skifree-release .cue { border-left: 3px solid var(--info, light-dark(#175a94, #8cc8fa)); padding-left: 12px; }
+  #skifree-release .gate { background: var(--warning-surface, light-dark(#fff2d9, #332b1d)); padding: 12px; border-radius: var(--radius, 8px); }
+  #skifree-release pre { margin: 0; padding: 12px; background: var(--code-background, light-dark(#edf1f4, #182330)); border-radius: var(--radius, 8px); white-space: pre-wrap; overflow-wrap: anywhere; }
+  #skifree-release code { font-family: var(--font-mono, ui-monospace, monospace); font-size: 12px; overflow-wrap: anywhere; }
+  #skifree-release ul, #skifree-release ol { margin: 0; padding-left: 21px; }
+  #skifree-release li + li { margin-top: 6px; }
+  #skifree-release .actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  #skifree-release .action { background: var(--secondary, light-dark(#e7edf2, #253241)); border: 1px solid var(--border, light-dark(#d5dde5, #3a4653)); border-radius: 6px; padding: 6px 12px; }
+  #skifree-release .footer { margin-top: 18px; padding-top: 12px; border-top: 1px solid var(--border, light-dark(#d5dde5, #3a4653)); display: grid; gap: 12px; }
+  #skifree-release .check { display: flex; gap: 8px; align-items: center; }
+  #skifree-release .check input { width: 18px; height: 18px; margin: 0; }
+  #skifree-release .status { min-height: 22px; font-size: 12px; }
+  #skifree-release .hash { word-break: break-all; }
+  #skifree-release .bottom { display: flex; justify-content: space-between; gap: 8px; }
+  @media (max-width: 560px) {
+    #skifree-release .shell { grid-template-columns: 1fr; gap: 16px; }
+    #skifree-release nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #skifree-release .step { padding: 8px; }
+    #skifree-release .flow { grid-template-columns: 1fr; gap: 7px; }
+    #skifree-release figure { display: grid; grid-template-columns: 100px minmax(0, 1fr); align-items: center; text-align: left; gap: 16px; }
+    #skifree-release figure svg text { display: none; }
+    #skifree-release .flow-arrow { transform: rotate(90deg); margin-left: 38px; }
+  }
+  @media (pointer: coarse) { #skifree-release button { min-height: 44px; } }
+  @media print {
+    #skifree-release nav, #skifree-release .footer, #skifree-release .copy { display: none; }
+    #skifree-release .shell { display: block; }
+    #skifree-release .step-panel[hidden] { display: grid !important; }
+    #skifree-release .step-panel { break-inside: avoid; margin: 20px 0; }
+  }
+</style>
+</head>
+<body>
+<main id="skifree-release">
+  <header class="intro">
+    <h1>SkiFree: from main to Homebrew</h1>
+    <p>Follow the eight steps. Commands are examples for PowerShell 7; nothing here executes them. Snapshot: 5 November 2026.</p>
+    <p class="muted">1.0.0 is the offline release candidate. Optional online scores belong to the 1.1.0 roadmap.</p>
+  </header>
+  <div class="facts"><span><strong>Source:</strong> main consolidated</span><span><strong>GitHub:</strong> private draft</span><span><strong>Homebrew:</strong> not submitted</span></div>
+  <div class="flow" aria-label="Release flow: exact files go to a public GitHub release; Homebrew points to its manifest; users install on a supported TV">
+    <figure>
+      <svg viewBox="0 0 180 94" role="img" aria-label="A release contains an IPK, manifest and source archive">
+        <rect x="20" y="6" width="140" height="80" rx="3" fill="var(--card, Canvas)" stroke="currentColor" stroke-width="1"/>
+        <path d="M20 24H160M33 40H145M33 56H145M33 72H145" stroke="currentColor" stroke-width="1" fill="none"/>
+        <text x="32" y="19" fill="currentColor" font-size="11">GITHUB RELEASE</text>
+        <text x="35" y="37" fill="currentColor" font-size="11">IPK · SHA-256</text><text x="35" y="53" fill="currentColor" font-size="11">manifest.json</text><text x="35" y="69" fill="currentColor" font-size="11">source.zip · notes</text>
+      </svg>
+      <figcaption>Public release<span class="muted">Hosts the actual files</span></figcaption>
+    </figure>
+    <svg class="flow-arrow" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M1 12H22M16 6L22 12 16 18"/></svg>
+    <figure>
+      <svg viewBox="0 0 180 94" role="img" aria-label="A Homebrew package file points at the hosted manifest">
+        <path d="M32 5H129L148 24V87H32Z" fill="var(--card, Canvas)" stroke="currentColor" stroke-width="1"/>
+        <path d="M129 5V24H148M44 37H132M44 53H132M44 69H120" stroke="currentColor" stroke-width="1" fill="none"/>
+        <text x="42" y="24" fill="currentColor" font-size="11">PACKAGE.YML</text><text x="46" y="49" fill="currentColor" font-size="11">manifestUrl →</text><text x="46" y="65" fill="currentColor" font-size="11">requirements</text>
+      </svg>
+      <figcaption>Homebrew PR<span class="muted">A listing, not an IPK upload</span></figcaption>
+    </figure>
+    <svg class="flow-arrow" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M1 12H22M16 6L22 12 16 18"/></svg>
+    <figure>
+      <svg viewBox="0 0 180 94" role="img" aria-label="A TV downloads the supported version from the public release">
+        <rect x="12" y="8" width="156" height="66" rx="4" fill="var(--card, Canvas)" stroke="currentColor" stroke-width="1"/>
+        <path d="M72 85H108M90 74V85M30 42H150M30 57H116" stroke="currentColor" stroke-width="1" fill="none"/>
+        <text x="30" y="29" fill="currentColor" font-size="11">SKIFREE 1.0.0</text><text x="30" y="53" fill="currentColor" font-size="11">Install · Launch · Update</text>
+      </svg>
+      <figcaption>Supported TV<span class="muted">Verify launch and saved scores</span></figcaption>
+    </figure>
+  </div>
+  <div class="shell">
+    <nav aria-label="Release steps">
+      <button class="step" type="button" data-step="0" aria-current="step" aria-controls="panel-0"><span class="number"><span>1</span></span><span>Consolidate main<small>Source checkpoint</small></span></button>
+      <button class="step" type="button" data-step="1" aria-controls="panel-1"><span class="number"><span>2</span></span><span>Accept candidate<small>Review and TV</small></span></button>
+      <button class="step" type="button" data-step="2" aria-controls="panel-2"><span class="number"><span>3</span></span><span>Freeze files<small>Exact identity</small></span></button>
+      <button class="step" type="button" data-step="3" aria-controls="panel-3"><span class="number"><span>4</span></span><span>Tag and hosting<small>Public-release gate</small></span></button>
+      <button class="step" type="button" data-step="4" aria-controls="panel-4"><span class="number"><span>5</span></span><span>Make manifest<small>Homebrew metadata</small></span></button>
+      <button class="step" type="button" data-step="5" aria-controls="panel-5"><span class="number"><span>6</span></span><span>Publish and verify<small>No sign-in required</small></span></button>
+      <button class="step" type="button" data-step="6" aria-controls="panel-6"><span class="number"><span>7</span></span><span>Submit listing<small>webosbrew/apps-repo</small></span></button>
+      <button class="step" type="button" data-step="7" aria-controls="panel-7"><span class="number"><span>8</span></span><span>Confirm and share<small>Listing and updates</small></span></button>
+    </nav>
+    <div class="detail">
+      <section class="step-panel" id="panel-0" aria-labelledby="title-0">
+        <h2 id="title-0">1. Consolidate main</h2>
+        <p class="cue">Look for a clean working tree and the same main commit locally and on GitHub.</p>
+        <p>The consolidation found only main, with origin as its tracking remote and no open PRs. The remote had no changes to merge. Keep the planning/cleanup and this guide on main; no branch deletion is needed.</p>
+        <pre><code>git status --short
+git fetch origin
+git switch main
+git merge --ff-only origin/main
+git rev-list --left-right --count main...origin/main
+git log -3 --oneline</code></pre>
+        <p class="muted">Expected after pushing: <code>0 0</code>. Diverged branches need a reviewed merge, not a reset or force-push.</p>
+      </section>
+      <section class="step-panel" id="panel-1" aria-labelledby="title-1" hidden>
+        <h2 id="title-1">2. Accept the candidate</h2>
+        <p class="cue">Look for named evidence for this exact package, including the final HUD/browser review.</p>
+        <ul><li>Confirm controls, course timing, initials and scores after relaunch.</li><li>Complete meaningful human code review and describe the design choices.</li><li>Record the terms/permission for the bundled artwork and reconstructed core.</li><li>Review current CI and the 1.0.0 tag checklist.</li></ul>
+        <pre><code>python release/source_archive_tests.py
+python release/ipk_permissions_tests.py
+python native/tests/public_stage_tests.py
+git diff --check
+gh run list --repo ryanspice/SkifreeWebOS --workflow checks.yml --limit 3</code></pre>
+        <p class="gate">Homebrew eligibility remains a review gate. AI peer reviews do not establish human review, and a non-free package pool does not settle distribution rights.</p>
+        <p><a href="https://www.webosbrew.org/develop/guides/publishing/rules/" target="_blank" rel="noopener noreferrer">Current Homebrew rules</a> · <a href="https://github.com/ryanspice/SkifreeWebOS/blob/main/release/TAGGING.md" target="_blank" rel="noopener noreferrer">Tag checklist</a></p>
+      </section>
+      <section class="step-panel" id="panel-2" aria-labelledby="title-2" hidden>
+        <h2 id="title-2">3. Freeze one exact bundle</h2>
+        <p class="cue">Match the IPK hash, source commit and release receipts before uploading files.</p>
+        <p>Use <code>.ai/outbox/release-tutorial-1.0.0/</code>: IPK, source ZIP, source file manifest, notes, release manifest and checksums. The current C3-tested IPK is 1,999,474 bytes.</p>
+        <pre><code>$repo = 'ryanspice/SkifreeWebOS'
+$tag = 'v1.0.0'
+$bundle = '.ai/outbox/release-tutorial-1.0.0'
+$ipk = Join-Path $bundle 'com.ryanspice.skifree_1.0.0_arm.ipk'
+$expected = '494726b3024c7982d47596fc520515c8f529ae8322b53ae53e6d86676f3271fd'
+if ((Get-FileHash $ipk -Algorithm SHA256).Hash.ToLowerInvariant() -ne $expected) {
+  throw 'IPK differs from the audited candidate'
+}
+Get-Content (Join-Path $bundle 'RELEASE-MANIFEST.json')</code></pre>
+        <p>Documentation-only commits can keep this binary and its evidence. Native changes need a fresh build, package audit and affected TV checks. Always regenerate the source archive after source changes.</p>
+      </section>
+      <section class="step-panel" id="panel-3" aria-labelledby="title-3" hidden>
+        <h2 id="title-3">4. Tag and prepare public hosting</h2>
+        <p class="cue">GitHub should show the reviewed tag and a release draft with matching attachments.</p>
+        <p class="gate">Future publishing steps. Complete step 2 first. Do not move an existing published tag.</p>
+        <pre><code>$releaseCommit = (git rev-parse HEAD).Trim()
+git tag --list v1.0.0
+git ls-remote --tags origin refs/tags/v1.0.0
+# Continue only if both checks are empty.
+git tag -a v1.0.0 $releaseCommit -m 'SkiFree for webOS 1.0.0'
+git push origin v1.0.0</code></pre>
+        <ol><li>Review tracked files/history for public release.</li><li>GitHub → Settings → General → Danger Zone → Change repository visibility, when ready.</li><li>Releases → existing 1.0.0 draft → Edit. Check tag, target, notes and attachments.</li><li>Keep it a draft until the manifest is attached.</li></ol>
+        <p>A private repo/draft will not serve public downloads. Source hosting and Homebrew listing are separate actions.</p>
+      </section>
+      <section class="step-panel" id="panel-4" aria-labelledby="title-4" hidden>
+        <h2 id="title-4">5. Generate Homebrew metadata</h2>
+        <p class="cue">The manifest describes one IPK; the package YAML points at the stable manifest URL.</p>
+        <p>Install the official toolbox generator if absent. Our helper accepts the current <code>webosbrew-gen-manifest</code> name and the older toolbox name. Keep the variables from step 3.</p>
+        <pre><code>$minimumRelease = Read-Host 'Measured minimum starfish release'
+$metadata = '.ai/outbox/homebrew-' + (Get-Date -Format 'yyyyMMdd-HHmmss')
+$releaseBase = 'https://github.com/ryanspice/SkifreeWebOS/releases/download/v1.0.0'
+$manifestUrl = 'https://github.com/ryanspice/SkifreeWebOS/releases/latest/download/com.ryanspice.skifree.manifest.json'
+./release/Prepare-Homebrew.ps1 `
+  -IpkPath $ipk `
+  -SourceUrl 'https://github.com/ryanspice/SkifreeWebOS/tree/v1.0.0' `
+  -IconUrl 'https://raw.githubusercontent.com/ryanspice/SkifreeWebOS/v1.0.0/native/icon.png' `
+  -IpkUrl "$releaseBase/com.ryanspice.skifree_1.0.0_arm.ipk" `
+  -ManifestUrl $manifestUrl `
+  -SupportPageUrl 'https://github.com/ryanspice/SkifreeWebOS/blob/v1.0.0/docs/support.md' `
+  -RootRequired false -MinimumWebOSRelease $minimumRelease `
+  -Pool non-free -OutputDirectory $metadata</code></pre>
+        <p class="gate">Use compatibility evidence and <code>/etc/starfish-release</code> for the minimum. Firmware, SDK and marketing version numbers are different. The exact minimum is not established here.</p>
+        <p>Inspect JSON/YAML, including title, hash, size, pool and requirements. RootRequired describes the app, not how the Homebrew installer is obtained.</p>
+        <p><a href="https://github.com/webosbrew/dev-toolbox-cli" target="_blank" rel="noopener noreferrer">Official toolbox</a> · <a href="https://www.webosbrew.org/develop/guides/publishing/how-to/" target="_blank" rel="noopener noreferrer">Submission reference</a></p>
+      </section>
+      <section class="step-panel" id="panel-5" aria-labelledby="title-5" hidden>
+        <h2 id="title-5">6. Publish, then verify downloads</h2>
+        <p class="cue">A signed-out visitor must be able to download the manifest and its exact IPK.</p>
+        <ol><li>Attach the generated <code>com.ryanspice.skifree.manifest.json</code> to the draft.</li><li>For stable 1.0.0, clear Pre-release, choose Latest, then Publish release.</li><li>Download without account credentials and compare hash and size.</li><li>Check icon, source and support links too.</li></ol>
+        <pre><code>$verify = '.ai/evidence/public-download-' + (Get-Date -Format 'yyyyMMdd-HHmmss')
+New-Item -ItemType Directory -Path $verify | Out-Null
+$manifestFile = Join-Path $verify 'manifest.json'
+Invoke-WebRequest -Uri $manifestUrl -OutFile $manifestFile
+$m = Get-Content $manifestFile -Raw | ConvertFrom-Json
+$downloaded = Join-Path $verify 'download.ipk'
+Invoke-WebRequest -Uri $m.ipkUrl -OutFile $downloaded
+if ((Get-FileHash $downloaded -Algorithm SHA256).Hash.ToLowerInvariant() -ne $m.ipkHash.sha256) { throw 'Hash differs' }
+if ((Get-Item $downloaded).Length -ne $m.ipkSize) { throw 'Size differs' }
+if ($m.ipkHash.sha256 -ne $expected) { throw 'Different candidate' }</code></pre>
+        <p>The stable <code>releases/latest/download/</code> route needs a public stable latest release. Drafts and prereleases are not sufficient.</p>
+      </section>
+      <section class="step-panel" id="panel-6" aria-labelledby="title-6" hidden>
+        <h2 id="title-6">7. Submit the Homebrew listing</h2>
+        <p class="cue">The PR adds one package YAML to webosbrew/apps-repo. Your IPK stays on your release host.</p>
+        <ol><li>Fork webosbrew/apps-repo and create a feature branch in a separate checkout under <code>.ai/inbox/</code>.</li><li>Copy the generated file to <code>packages/com.ryanspice.skifree.yml</code>.</li><li>Open a PR against webosbrew/apps-repo → main.</li><li>Complete the current template with actual TV/release evidence and honest AI disclosure.</li><li>Address maintainer checks and review before merge.</li></ol>
+        <p class="gate">Do not claim full human review until it happened. A generated description, hosted release or passing CI alone does not establish listing acceptance.</p>
+        <p><a href="https://github.com/webosbrew/apps-repo" target="_blank" rel="noopener noreferrer">Open apps-repo</a> · <a href="https://github.com/webosbrew/apps-repo/blob/main/.github/pull_request_template.md" target="_blank" rel="noopener noreferrer">Read current PR template</a></p>
+      </section>
+      <section class="step-panel" id="panel-7" aria-labelledby="title-7" hidden>
+        <h2 id="title-7">8. Confirm the listing and share it</h2>
+        <p class="cue">The listing appears, its download works, and its version/hash matches your release.</p>
+        <ul><li>Check installation, launch and update on a supported TV. Preserve existing scores; do not uninstall the owner's game as a test.</li><li>Finish the Reddit, LinkedIn and X drafts with actual download/listing links and checked community rules.</li><li>Keep optional support and Champions links in the description/support page.</li><li>For 1.1.0, keep the app ID, create a new version/tag, and regenerate the manifest at the stable URL. Review package requirements when compatibility changes.</li></ul>
+        <p>Homebrew maintainers control listing acceptance. Announcing the app and enabling future online scores are separate steps.</p>
+      </section>
+      <div class="footer">
+        <div class="actions"><button class="action copy" id="copy-command" type="button">Copy commands</button><button class="action" id="print-guide" type="button">Print all steps</button></div>
+        <label class="check"><input type="checkbox" id="step-done"><span>I completed this step</span></label>
+        <p class="muted">Checkmarks are saved locally when available. They do not update the repository, release or acceptance evidence.</p>
+        <p class="status" id="guide-status" aria-live="polite"></p>
+        <div class="bottom"><button class="action" id="previous-step" type="button" disabled>Previous</button><button class="action" id="next-step" type="button">Next step</button></div>
+      </div>
+    </div>
+  </div>
+</main>
+<script>
+(() => {
+  const root = document.getElementById('skifree-release');
+  const buttons = [...root.querySelectorAll('[data-step]')];
+  const panels = [...root.querySelectorAll('.step-panel')];
+  const done = root.querySelector('#step-done');
+  const previous = root.querySelector('#previous-step');
+  const next = root.querySelector('#next-step');
+  const copy = root.querySelector('#copy-command');
+  const status = root.querySelector('#guide-status');
+  const storageKey = 'skifree-release-guide-20261105-v1';
+  let active = 0;
+  let completed = [];
+  try {
+    const saved = JSON.parse(localStorage.getItem(storageKey) || 'null');
+    if (saved && Array.isArray(saved.completed)) completed = saved.completed.filter(n => Number.isInteger(n) && n >= 0 && n < panels.length);
+  } catch (_) { /* Local storage is optional in embedded previews. */ }
+  function show(index) {
+    active = index;
+    panels.forEach((panel, i) => { panel.hidden = i !== active; });
+    buttons.forEach((button, i) => {
+      if (i === active) button.setAttribute('aria-current', 'step');
+      else button.removeAttribute('aria-current');
+      button.classList.toggle('completed', completed.includes(i));
+    });
+    done.checked = completed.includes(active);
+    previous.disabled = active === 0;
+    next.disabled = active === panels.length - 1;
+    copy.hidden = !panels[active].querySelector('pre code');
+    status.textContent = '';
+  }
+  buttons.forEach((button, index) => button.addEventListener('click', () => show(index)));
+  previous.addEventListener('click', () => { if (active > 0) show(active - 1); });
+  next.addEventListener('click', () => { if (active < panels.length - 1) show(active + 1); });
+  done.addEventListener('change', () => {
+    completed = done.checked ? [...new Set([...completed, active])] : completed.filter(n => n !== active);
+    try { localStorage.setItem(storageKey, JSON.stringify({completed})); } catch (_) { /* Session still works. */ }
+    show(active);
+    status.textContent = done.checked ? 'Marked complete in your local checklist.' : 'Removed from your local checklist.';
+  });
+  copy.addEventListener('click', async () => {
+    const code = panels[active].querySelector('pre code');
+    if (!code) return;
+    try {
+      await navigator.clipboard.writeText(code.textContent);
+      status.textContent = 'Commands copied. Review them before running.';
+    } catch (_) {
+      const selection = window.getSelection();
+      const range = document.createRange(); range.selectNodeContents(code);
+      selection.removeAllRanges(); selection.addRange(range);
+      status.textContent = 'Commands selected. Use your normal Copy shortcut.';
+    }
+  });
+  root.querySelector('#print-guide').addEventListener('click', () => window.print());
+  show(0);
+})();
+</script>
+</body>
+</html>

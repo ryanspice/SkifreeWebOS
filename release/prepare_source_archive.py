@@ -27,6 +27,7 @@ TEXT_SUFFIXES = {".md", ".txt", ".py", ".ps1", ".sh", ".json", ".yml", ".yaml",
                  ".in", ".cpp", ".hpp", ".h", ".c", ".svg"}
 PUBLIC_DOCS = {"docs/INSTALL.md", "docs/README.md", "docs/REPOSITORY-REVIEW.md",
                "docs/ROADMAP-1.1.0.md",
+               "docs/RELEASE-GUIDE.md", "docs/RELEASE-WALKTHROUGH.html",
                "docs/TV-BUILD.md", "docs/COMPATIBILITY.md", "docs/support.md",
                "docs/media/README.md", "docs/media/manifest.json",
                "native/docs/ASSETS.md", "native/docs/CPP-SUBSET.md",
@@ -52,7 +53,7 @@ def allowed(name):
     if len(path.parts) == 3 and path.parts[:2] == ("native", "assets") and path.suffix == ".png":
         manifest = json.loads((ROOT / "native/assets/manifest.json").read_text(encoding="utf-8-sig"))
         return path.name in {item["name"] for item in manifest["files"]}
-    if path.suffix not in TEXT_SUFFIXES:
+    if path.suffix not in TEXT_SUFFIXES and name not in PUBLIC_DOCS:
         return False
     if path.parts[0] == "release":
         return len(path.parts) == 2 and path.name in RELEASE_FILES

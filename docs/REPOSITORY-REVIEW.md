@@ -45,6 +45,17 @@ historical evidence. Do not mass-format the Original core, move sprite resources
 delete ignored build directories or recompress approved images as incidental
 cleanup. Revisit version-specific release checks when implementing 1.1.0.
 
+### Main consolidation and release tutorial
+
+An authenticated fetch found only main on origin, matching the local branch,
+with no separate upstream remote or open PR. Fast-forward merge had no remote
+changes to integrate. The cleanup/roadmap landed as `b284697`; its hosted
+[host/source workflow passed](https://github.com/ryanspice/SkifreeWebOS/actions/runs/42162092585).
+The [release guide](RELEASE-GUIDE.md) and [visual walkthrough](RELEASE-WALKTHROUGH.html)
+cover the remaining GitHub/Homebrew sequence. Public visibility, tag creation,
+Homebrew submission and social posting are future steps, not effects of this
+consolidation. No branch deletion or force-push was needed.
+
 ## Historical review — 2026-11-04
 
 The sections below describe the earlier handoff. Their acceptance gaps and test

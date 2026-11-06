@@ -2,6 +2,10 @@
 
 Version 1.0.0 is a free bundled candidate. This folder prepares artifacts and drafts; it does not publish or send anything.
 
+Follow the [release walkthrough](../docs/RELEASE-GUIDE.md) or open its
+[visual tutorial](../docs/RELEASE-WALKTHROUGH.html) locally for the sequence from
+main consolidation through GitHub hosting and a Homebrew submission.
+
 ## Build, package and verify
 
 Build using `native/README.md`. Stage the executable, the explicit 89-sprite inventory, icon, licenses and required SDL/libpng runtimes. Run `native/scripts/audit_public_stage.py --stage <stage> --report <outside-stage-report.json>`.

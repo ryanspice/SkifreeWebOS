@@ -3,6 +3,9 @@
 Proposed tag: **`v1.0.0`**. The current repository is private. Preparing this
 checklist does not create a Git tag, publish a GitHub Release or submit Homebrew.
 
+The [release walkthrough](../docs/RELEASE-GUIDE.md) explains these steps in order,
+including public hosting, generated Homebrew metadata and the listing PR.
+
 ## Release brief
 
 SkiFree for webOS brings the reconstructed Original 1.04 game to LG TVs with
