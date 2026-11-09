@@ -24,9 +24,7 @@ The finalizer normalizes Unix modes, including execute permissions on the ELF. T
 
 The builder refuses existing output files. Preserve previous archives and use a fresh revision name after changes. The ZIP, adjacent SHA-256 file and per-file manifest form one source-release set. A source-only documentation refresh does not change the audited IPK or its checksum.
 
-The corrected C3 storage build is in `.ai/outbox/session-scores-1.0.0/`. It retains
-version 1.0.0 while the release is unpublished; use the installation guide's exact
-checksum. Its Developer Mode launch and actual non-root file creation/replacement
+The package verified on the C3 (SHA-256 `494726b3…`) is kept in `.ai/outbox/session-scores-1.0.0/`. Use the checksum in the installation guide. Its Developer Mode launch and actual non-root file creation/replacement
 are verified. Owner-confirmed non-empty records survived a fresh session and the
 latest package update. Broader TV migration checks and final HUD/browser visual
 acceptance remain pending. The finalizer must preserve the sticky 01777 `state/`

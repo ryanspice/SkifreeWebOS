@@ -31,7 +31,7 @@ The seven checked data ranges total **944 bytes**. Six tables match in full; the
 - **Session switching:** red returns to Original-style, green opens the earlier recreation, yellow its extra chase, blue help. Each run is retained within the current app session; this does not imply persisted runs after closing the app. Extras are labelled and are never the launch default.
 - **Runtime comparison limit:** the Windows executable was launched, but the capture did not reliably target its game window. Computer Use was stopped by the user's physical Escape key, and no further desktop input was sent. Therefore side-by-side Windows gameplay, precise timing and full collision/score equivalence remain **unverified**. Do not present the attempted launch as a completed runtime review.
 
-## Validation
+## Validation (November 4 review build)
 
 26 original-core checks pass under AddressSanitizer/UndefinedBehaviorSanitizer, including 72,000 mixed-input simulation ticks. 31 native software-GLES UI checks pass, including colour scancodes, the native Red-keycode fallback, clickable colour choices, both directions of run preservation, menu selection and all prior input/lifecycle/asset cases. Separately, the owner confirmed **"All four colours work"** on the C3 with 0.5.0 on November 4, 2026. This passes physical colour-button acceptance for that tested TV/remote; it does not prove every other input or full gameplay equivalence.
 

@@ -1,6 +1,6 @@
-# Red Original: behaviour parity contract
+# Original: behaviour parity contract
 
-Red Original targets the observable behaviour of the supplied SkiFree 1.04 executable. Implement reproducible movement, controls, collisions, NPCs, course rules, scoring, timing, restart and yeti behaviour in C++ wherever practical. Use the executable as the authority when it differs from a reconstruction. Lack of the author's original C source is not itself an implementation blocker.
+Original targets the observable behaviour of the supplied SkiFree 1.04 executable. Implement reproducible movement, controls, collisions, NPCs, course rules, scoring, timing, restart and yeti behaviour in C++ wherever practical. Use the executable as the authority when it differs from a reconstruction. Lack of the author's original C source is not itself an implementation blocker.
 
 The original game and artwork remain credited to Chris Pirih. Original launches by default; Recreation and its gentler chase are separate choices.
 

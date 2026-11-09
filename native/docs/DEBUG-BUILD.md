@@ -1,31 +1,28 @@
-# Windows Debug write investigation — 2026-11-04
+# Windows Debug build: disk-space failure
 
-The earlier parallel MSVC Debug build failed with C2471 while writing compiler
-PDBs and LNK1108 while writing a library. Its serial retry later stalled in the
-linker. An existing Debug build and a fresh Release build passed their tests.
+## Symptom
 
-The follow-up established that **B: had zero free bytes**. A new configure failed
-with `No space left on device` while writing CMake's compiler-ID source, and a
-source recovery-copy write failed for the same reason. This demonstrates current
-storage exhaustion and supports it as the explanation for the earlier write
-errors; the exact free-space state of that earlier build was not recorded.
+A parallel MSVC Debug build failed with C2471 while writing compiler PDB files, and
+with LNK1108 while writing a library. A serial retry later stalled in the linker.
 
-Generated output from the failed Debug build was copied to C: and hash-checked.
-Its top-level Debug output was moved to C: to reclaim a small amount of space.
-No user source, scores, published artifacts or unrelated data were removed.
-New build outputs used C: while B: was nearly full. B: was freed on November 5;
-project-owned external outputs were then ingested/hash-checked into `.ai/archive/`
-with originals retained. A fresh parallel Debug build on B: also passed all four
-suites. New outputs use `.ai/evidence/` under the owning project.
+## Cause
 
-## Verification
+The build volume had no free space. A later configure step failed with
+`No space left on device` while writing CMake's compiler-ID source. That confirms
+storage exhaustion as the likely cause of the earlier write errors. The free space
+at the time of the first failure was not recorded.
 
-A fresh Visual Studio 2022 / MSVC 19.44.35226.0 configuration on C: built Debug
-with four parallel jobs in 5.2 seconds. All four CTest suites passed. This used
-the repository's existing `/Zi` configuration; no `/Z7`, `/FS`, toolchain or
-global environment change was needed.
+## Resolution
 
-For a local reproduction, use a fresh project-local directory with free space:
+Build on a volume with free space. A fresh parallel Debug build on C: with four jobs
+passed all four CTest suites, using the repository's existing `/Zi` setting. No
+toolchain or global environment change was needed.
+
+Test environment: Visual Studio 2022, MSVC 19.44.35226.0.
+
+## Reproduce
+
+Use a writable build directory on a volume with free space:
 
 ```powershell
 cmake -S native -B .ai/evidence/debug-build -DSKIFREE_BUILD_UI=OFF -DSKIFREE_STRICT=ON
@@ -33,11 +30,10 @@ cmake --build .ai/evidence/debug-build --config Debug --parallel 4
 ctest --test-dir .ai/evidence/debug-build -C Debug --output-on-failure
 ```
 
-Use an existing writable build root appropriate for your machine. If C2471
-returns with sufficient free space, inspect file permissions/sharing and retain
-the precise build log before changing flags. Microsoft's
+## If C2471 returns with free space available
+
+Check file permissions and sharing conflicts, and keep the full build log before
+changing any flags. Microsoft's
 [C2471 guidance](https://learn.microsoft.com/en-us/cpp/error-messages/compiler-errors-1/compiler-error-c2471?view=msvc-170)
-identifies free space, read-only files and sharing conflicts as checks.
-Compiler debug-format changes such as CMake's
-[CMP0141 setting](https://cmake.org/cmake/help/latest/policy/CMP0141.html)
-remain an option to investigate, not a demonstrated fix needed here.
+lists the same checks. The [CMP0141 policy](https://cmake.org/cmake/help/latest/policy/CMP0141.html)
+(debug-format setting) is an option to investigate, not a demonstrated fix.

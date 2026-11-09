@@ -4,23 +4,21 @@ Build target: **LG C3 / ARM32**, application `com.ryanspice.skifree`, candidate
 version **1.0.0**. This package includes Original, Recreation, Yeti Chase and
 three-letter score entry. Build/package evidence does not replace its C3 run.
 
-Corrected local package: `.ai/outbox/session-scores-1.0.0/com.ryanspice.skifree_1.0.0_arm.ipk`,
+TV-verified local package (November 5 build): `.ai/outbox/session-scores-1.0.0/com.ryanspice.skifree_1.0.0_arm.ipk`,
 **1,999,474 bytes**, SHA-256
 `494726b3024c7982d47596fc520515c8f529ae8322b53ae53e6d86676f3271fd`.
-The adjacent `SHA256SUMS.txt` and `.ipk.sha256` contain the same checksum.
+The adjacent `SHA256SUMS.txt` contains the same checksum.
 
 ## Build inputs
 
 - C++20, CMake, Ninja and the verified ARM webOS SDK environment/toolchain.
 - SDL-webOS 2.32.10 headers/runtime and libpng 1.6.43 built for the same target.
-- The manifest's 89 sprites, generated icon and attribution/license files.
+- The manifest's 89 sprites, the checked-in icon (`native/icon.png`) and attribution/license files.
 - The webOS CLI packager plus Python 3 for finalization and exact package audit.
 
 See [native setup](../native/README.md) and
 [runtime staging](../native/docs/WEBOS-RUNTIME.md). Choose fresh build/stage/output
 paths under `.ai/evidence/<task>/`, and release deliverables under `.ai/outbox/`.
-B: has been freed. Earlier external recovery/build products were ingested and
-hash-checked under `.ai/archive/` while preserving their originals.
 
 ## Build and package sequence
 

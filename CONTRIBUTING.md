@@ -32,12 +32,10 @@ on Linux. It does not build the SDL UI or ARM package, contact the TV, upload
 artifacts or publish a release. A local equivalent pass does not establish that
 the hosted workflow has run successfully.
 
-The example uses a serial Release build. Debug and parallel builds are supported:
-the earlier PDB/library write failures were investigated and B: was found to have
-zero free bytes. A fresh parallel MSVC Debug build on C: passed all four suites
-with unchanged compiler settings. B: has since been freed. New work products stay
-under the project's `.ai/`; external tool output requires ingestion and hash
-evidence. See the [diagnostic record](native/docs/DEBUG-BUILD.md).
+The example uses a serial Release build. Debug and parallel builds are supported. If a
+Windows build fails with disk-full or PDB/library write errors, see the
+[Debug build notes](native/docs/DEBUG-BUILD.md). New work products stay under the
+project's `.ai/`; external tool output requires ingestion and hash evidence.
 
 ## Making a change
 
@@ -59,9 +57,9 @@ details or original executable/resource archives.
 ## Release boundaries
 
 Desktop checks do not prove TV input, save survival, exhaustive EXE equivalence
-or compatibility with all LG TVs. The latest package has C3 launch and non-empty
-score persistence evidence; final HUD/browser visual feedback and broader device
-acceptance remain pending. Current details live in
+or compatibility with all LG TVs. Device evidence on the C3 covers launch and
+non-empty score persistence for the packages recorded in verification. Final
+HUD/browser visual feedback and broader device acceptance remain pending. Current details live in
 [verification](native/docs/VERIFICATION.md).
 
 The [1.1.0 online-score plan](docs/ROADMAP-1.1.0.md) is separate from the current

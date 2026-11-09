@@ -1,6 +1,15 @@
 # Verification — SkiFree for webOS 1.0.0
 
-Updated November 5, 2026. This record describes the local candidate and distinguishes automated checks, physical-device observations and human feedback. It is not a claim of exhaustive equivalence to the Windows executable.
+Updated November 9, 2026. This record separates automated checks, physical-device observations and human feedback. It is not a claim of exhaustive equivalence to the Windows executable.
+
+## Status on November 9, 2026
+
+- **Verified on the C3:** the package with SHA-256 `494726b3…` (1,999,474 bytes; ARM executable `ed646651…`). Its executable contains the initials and named-score strings. It was installed and launched through Developer Mode, and owner-confirmed Slalom and Freestyle records survived a fresh launch and a package update. See *Current package* below.
+- **Storage-fix package:** SHA-256 `e7b3d649…` (1,989,972 bytes; ARM executable `60397dfc…`). It was launched as non-root UID 6252, and score-file creation and replacement were checked. See *Historical November 5 non-root score storage fix*.
+- **Current draft release asset (not verified):** SHA-256 `e455a6f2…` (2,987,776 bytes; ARM executable `17cc6e5d…`). Its executable lacks the `scores-initials-v1` and `skifree-initials-v1` strings, so it predates the initials and named-score store. Its executable hash matches the earlier 1,953,364-byte package in the table near the end of this file; the size difference is the new 1254-pixel icon. No TV installation of this package is recorded.
+- **Repository source (`c51f237`):** contains the initials, named-score and browser code. It has not been built into a new package or installed on a TV.
+
+TV evidence in this file applies only to the verified package. Until a release package is built from the intended source and checked on a TV, do not describe the draft release asset as the tested build.
 
 ## Current package: saved-score browser and course-aware HUD
 

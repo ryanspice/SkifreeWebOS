@@ -20,7 +20,7 @@ Platform changes:
 - A 640×360 logical game area is scaled to the TV; the original window was resizable. The status font and pause/help/score dialogs are platform adaptations, not original Windows UI pixels.
 - The platform pauses on focus loss, maps remote OK to the original mouse click action, and exposes fast mode in the pause menu for remotes without F.
 - Course results use an app-local top-ten table instead of `entpack.ini`. TV update/uninstall persistence has not been established.
-- The original absent audio backend remains inactive. Native tests have no bearing on physical input or human authenticity acceptance.
+- The original audio backend remains inactive. Native tests do not establish physical input behaviour or human acceptance.
 
 `classic_fixtures.hpp` is included only by the test build. It supplies no teleport/debug interface in the installed application. At the owner's explicit request, 0.5.0 includes the earlier 0.3.0 simulation separately under `src/recreation`; it is selectable with coloured buttons, labelled as a recreation, and does not change this original-style core or the default selection.
 

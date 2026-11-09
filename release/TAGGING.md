@@ -1,7 +1,9 @@
 # Prepare the 1.0.0 tag
 
-Proposed tag: **`v1.0.0`**. The current repository is private. Preparing this
-checklist does not create a Git tag, publish a GitHub Release or submit Homebrew.
+Proposed tag: **`v1.0.0`**. The current repository is private. This checklist does
+not publish a GitHub Release or submit Homebrew. A private annotated tag `v1.0.0`
+(object `42cac15`, peeled to commit `c51f237`) and a draft release exist; neither is
+public.
 
 The [release walkthrough](../docs/RELEASE-GUIDE.md) explains these steps in order,
 including public hosting, generated Homebrew metadata and the listing PR.

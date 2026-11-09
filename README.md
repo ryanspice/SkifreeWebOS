@@ -28,8 +28,8 @@ The separate Recreation and Yeti Chase runs add simplified steering and boosts.
 This candidate adds a lighter Recreation HUD, hides the footer while skiing and
 lets qualifying Original scores carry three initials, starting at **AAA**.
 
-The updated package is installed on the LG C3. Saved Slalom and Freestyle records
-were verified across a fresh session and the package update. **Back → High Scores**
+The package verified on the LG C3 kept saved Slalom and Freestyle records across
+a fresh session and a package update. **Back → High Scores**
 opens the three saved course tables. Original’s status box stays hidden on the
 opening screen, then shows live course statistics and the saved **BEST** record
 after you start skiing downhill.
@@ -37,12 +37,11 @@ after you start skiing downhill.
 
 ## Install on your TV
 
-1. Obtain the maintainer's **ARM IPK and matching SHA-256**, or follow the
-   [TV build brief](docs/TV-BUILD.md). Downloadable release assets are being prepared.
+1. Get the **ARM IPK and its SHA-256** from the maintainer, or build it by following the
+   [TV build brief](docs/TV-BUILD.md). No public download is available yet.
 2. Set up your TV with [LG Developer Mode](https://webostv.developer.lge.com/develop/getting-started/developer-mode-app)
-   and the webOS CLI. This is the intended installation route; the exact current
-   package has been installed and launched on the C3 using the non-root app
-   identity. [Rooted and unrooted notes](docs/COMPATIBILITY.md).
+   and the webOS CLI. This is the route used for the C3 tests. The package verified there
+   was installed and launched as a non-root app. [Rooted and unrooted notes](docs/COMPATIBILITY.md).
 3. Verify and install the supplied package, replacing `my-tv` with your CLI device:
 
    ```powershell
@@ -71,7 +70,7 @@ and score troubleshooting.
 - **Recreation** offers free skiing with simplified steering, timed boosts and aerial tricks.
 - **Yeti Chase** is Recreation's pursuit mode, with a head start and room to recover after a fall.
 
-Original is the default. **Red** selects Original, **Green** selects Recreation, **Yellow** selects Yeti Chase, and **Blue** opens controls. Click the on-screen choices or use **Back → Choose a Run**. Keyboard F5–F8 provide the same shortcuts. Switching preserves each run until the app closes.
+Original is the default. **Red** selects Original, **Green** selects Recreation, **Yellow** selects Yeti Chase, and **Blue** opens help, which lists the controls. Click the on-screen choices or use **Back → Choose a Run**. Keyboard F5–F8 provide the same shortcuts. Switching preserves each run until the app closes.
 
 The on-screen colour strip and footer hints stay hidden during skiing. Remote colours and F5–F8 still work; opening the pause menu brings the choices back. Original's stationary opening screen retains its controls.
 
@@ -126,9 +125,9 @@ Finishing an Original course opens its high-score table. Slalom and Tree Slalom 
 
 Type three letters and press **Enter**, or use **Left / Right** to select a letter, **Up / Down** to change it, and **OK** to advance to **Save Initials**. Pointer users can click the plus/minus buttons and **Save Initials**. **Back** keeps the current letters and shows the table. The result is saved automatically with its current initials; nonqualifying results skip entry.
 
-Existing scores import with **---** where no initials were recorded. The corrected
-TV package stores named scores in writable application state and preserves the
-old installation-root files. It verifies saving at startup. This is a TV
+Existing scores import with **---** where no initials were recorded. The TV package
+stores named scores in writable application state and leaves the old
+installation-root files in place. It checks that saving works at startup. This is a TV
 score-entry adaptation; Original's ranking, penalties and course rules are unchanged.
 
 Reopening starts at the original mountain. Open **Back → High Scores** at any

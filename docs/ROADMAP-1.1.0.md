@@ -73,9 +73,9 @@ not existing public endpoints:
   MAC address, account identifier or shared secret compiled into the app.
 - `POST /scores`: accept a unique random submission ID, course, integer result,
   three uppercase initials, app version and ruleset ID. Validate the schema of
-  the client's eligibility metadata; it is a claim, not proof of play. Same
-  identity/ID/payload returns
-  the original receipt; same identity/ID with changed payload is rejected.
+  the client's eligibility metadata; it is a claim, not proof of play. The same
+  identity, ID and payload return the original receipt; the same identity and ID
+  with a changed payload are rejected.
 - `GET /leaderboards?course=slalom&ruleset=original-1.04-standard-v1`: return at
   most 50 ranked best results, server timestamp and schema version. Tree Slalom
   and Freestyle use distinct course values; timed values are integer milliseconds,

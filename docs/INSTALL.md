@@ -4,8 +4,8 @@ SkiFree for webOS 1.0.0 is currently a local release candidate. There is no publ
 
 ## Compatibility
 
-The corrected 1.0.0 package was installed and rendered on one tested TV only: the
-owner's **LG OLED48C3PUA (C3), firmware 43.21.84**, on November 5, 2026. The TV
+The 1.0.0 test package was installed and rendered on one TV only: the owner's
+**LG OLED48C3PUA (C3), firmware 43.21.84**, on November 5, 2026. The TV
 reports SDK 11.2.0. Its non-root application process created the new score file
 successfully. Other TVs, webOS releases and firmware versions are TBD, and so is
 the minimum webOS release.
@@ -18,22 +18,22 @@ and other installation routes are not established. See
 
 ## Install through Developer Mode
 
-This is the tested setup route for the current native candidate on the C3.
-LG's official Developer Mode
-instructions describe app setup/testing; the native TV toolchain and SDL port
+This is the route used for the C3 tests. LG's official Developer Mode
+instructions describe app setup and testing; the native TV toolchain and SDL port
 used here are community-supported. See the [compatibility brief](COMPATIBILITY.md)
 for the distinction between installation method and app privileges.
 
 1. Follow [LG's Developer Mode setup](https://webostv.developer.lge.com/develop/getting-started/developer-mode-app) to connect your TV and computer. The [webOS Homebrew setup guide](https://www.webosbrew.org/devmode/) is another walkthrough. LG requires an account for this installation method; SkiFree itself requires no account.
-2. Obtain the candidate IPK and compare its SHA-256 with the maintainer's checksum.
-   The corrected storage build is `com.ryanspice.skifree_1.0.0_arm.ipk` (under
-   `.ai/outbox/session-scores-1.0.0/` in the maintainer's local build), 1,999,474 bytes:
+2. Obtain the IPK and its `SHA256SUMS.txt` from the same release, then compare the
+   package's SHA-256 with the listed checksum. In PowerShell, use
+   `Get-FileHash -Algorithm SHA256 <path-to-ipk>`. The package verified on the C3 is
+   1,999,474 bytes with SHA-256:
 
    ```text
    494726b3024c7982d47596fc520515c8f529ae8322b53ae53e6d86676f3271fd
    ```
 
-   In PowerShell, use `Get-FileHash -Algorithm SHA256 <path-to-ipk>`.
+   A different package has not been verified on that TV.
 3. With the webOS CLI installed and your TV configured, replace `my-tv` with its device name:
 
    ```powershell
@@ -52,7 +52,7 @@ Original opens automatically. Move the Magic Remote pointer or mouse to aim, or 
 - **Red:** Original, with the Slalom, Tree Slalom and Freestyle courses.
 - **Green:** Recreation, with simplified controls, boosts and tricks.
 - **Yellow:** Recreation's gentler Yeti Chase.
-- **Blue:** Controls and help.
+- **Blue:** Help, which lists the controls.
 
 The on-screen buttons and **Back → Choose a Run** offer the same choices. Keyboard F5–F8 also work. **Back / Escape** pauses or opens the menu; **F2** starts a new game. Switching runs preserves their progress until the app closes. [Full Original controls](../README.md#original-controls).
 
@@ -66,19 +66,19 @@ Tables appear after a course finish. Each Original course has its own table; low
 after reopening. Use **Left / Right** or the on-screen course buttons to change
 tables; **Back** returns to the pause menu. Recreation and Yeti Chase scores are not added to these tables.
 
-The corrected TV package writes `scores-initials-v1.txt` beneath
+The TV package writes `scores-initials-v1.txt` beneath
 `state/user-<runtime-uid>/` in its application folder. If absent, it imports a valid
 installation-root named table first, or a valid numeric `scores-v104.txt` table
 with **---** initials. The old files and `record.txt` remain untouched. Invalid
 or interrupted data blocks migration. Older app builds read only the old location,
 so newer results do not appear after downgrading.
 
-The November 4 package pointed saves at the protected installation root and could
-show the warning after a score. Use the corrected package above; root or TV-wide
-permission changes are unnecessary. Startup now verifies an actual write before
-reporting scores as available. On the C3, creation and relaunch replacement are
-checked. Owner-confirmed Slalom and Freestyle records survived a fresh launch
-and this package update unchanged. Non-empty import/migration also passes host
+Builds from November 4 saved to the protected installation folder and could
+show the warning after a score. Install the current package instead; root or
+TV-wide permission changes are not needed. Startup now verifies an actual write
+before reporting scores as available. On the C3, score-file creation and replacement
+after relaunch were checked. Owner-confirmed Slalom and Freestyle records survived
+a fresh launch and a package update unchanged. Non-empty import/migration also passes host
 tests. Uninstall, app-UID changes and other upgrade paths remain unverified.
 
 Original’s top-right status box is hidden on the opening screen. After downhill
