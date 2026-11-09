@@ -3,9 +3,9 @@
 Published tag: **`v1.0.0`**. The source repository and the GitHub release are
 public, and the annotated tag points at the final 1.0.0 release commit.
 
-For 1.0.0, the tag was refreshed once before the final assets were replaced
-because it predated the final documentation cleanup. That refresh is recorded
-here; future releases use a new version and tag.
+For 1.0.0, the tag was refreshed during final packaging because it predated the
+final documentation and timestamp fix. That refresh is recorded here; future
+releases use a new version and tag.
 
 The [release walkthrough](../docs/RELEASE-GUIDE.md) explains these steps in order,
 including public hosting, generated Homebrew metadata and the listing PR.
@@ -25,9 +25,10 @@ Use [1.0.0 release notes](RELEASE-NOTES-1.0.0.md) for the eventual release body,
 ## Current package
 
 - IPK: `com.ryanspice.skifree_1.0.0_arm.ipk`
-- Bytes: **3,033,558**
-- SHA-256: `b0e38b31545c153494795c0fcd7f98b42c37c2425d7dfe872c69984791df3588`
+- Bytes: **3,033,578**
+- SHA-256: `a1244a9c2d40effac00445265a6c45654769e14b6b08a2d753628cd41cda4cd6`
 - Executable: `ed646651…` (byte-identical to the earlier C3-verified package)
+- Package: Homebrew-compatible repack with real 2026 timestamps; file contents unchanged.
 - Minimum webOS: **11.2.0** (measured on the C3; no claim below)
 - C3: installed and launched through Developer Mode on 2026-11-09.
 
@@ -59,8 +60,8 @@ release.
 ## Published state
 
 The ARM IPK, source ZIP/manifest, checksums, release notes and package audit are
-attached to the published GitHub release. The 1.0.0 tag was moved once to this
-final documentation commit before the assets were replaced. A tag or successful
+attached to the published GitHub release. The 1.0.0 tag was refreshed to the final
+release commit before the assets were replaced. A tag or successful
 download does not establish all-version compatibility, a Homebrew listing or
 maintainer acceptance. Keep social drafts unsent until the listing and
 community-specific copy are finalized.

@@ -11,7 +11,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from finalize_ipk import normalize_data
+from finalize_ipk import PACKAGE_MTIME, normalize_data
 import verify_ipk
 
 APP = "usr/palm/applications/com.ryanspice.skifree"
@@ -83,6 +83,13 @@ class Permissions(unittest.TestCase):
                     self.assertEqual(item.mode, 0o1777 if item.name == APP + "/state" else
                                      0o755 if item.isdir() or item.name.endswith("/skifree-native") else 0o644)
             self.assertEqual(archive.extractfile(APP + "/assets/sprite.png").read(), b"sprite")
+
+    def test_package_entries_have_real_timestamps(self):
+        with tarfile.open(fileobj=io.BytesIO(normalize_data(fixture())), mode="r:gz") as archive:
+            for item in archive:
+                with self.subTest(path=item.name):
+                    self.assertEqual(item.mtime, PACKAGE_MTIME)
+                    self.assertGreater(item.mtime, 0)
 
     def test_missing_state_directory_rejected(self):
         with self.assertRaisesRegex(ValueError, "state directory missing"):

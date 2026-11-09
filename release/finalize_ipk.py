@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Normalize a locally packaged IPK's Unix permissions without changing file bytes.
+"""Normalize a locally packaged IPK's permissions and timestamps.
 
-The Windows ares packager can omit executable bits for extensionless ELF files.
+The Windows ares packager can omit executable bits for extensionless ELF files
+and may leave the data archive dated 1970, which some TVs refuse to install.
 Always verify the result with verify_ipk.py against the audited public stage.
 """
 import argparse
@@ -12,8 +13,10 @@ import tarfile
 
 from verify_ipk import ar_members
 
+PACKAGE_MTIME = 1794182400  # 2026-11-09T00:00:00Z; real, fixed, reproducible
 
-def normalize_data(raw):
+
+def normalize_data(raw, mtime=PACKAGE_MTIME):
     output = io.BytesIO()
     main = "usr/palm/applications/com.ryanspice.skifree/skifree-native"
     state = "usr/palm/applications/com.ryanspice.skifree/state"
@@ -29,7 +32,8 @@ def normalize_data(raw):
                 name = item.name.removeprefix("./")
                 if name.startswith("/") or ".." in Path(name).parts:
                     raise ValueError("Unsafe archive path")
-                item.uid = item.gid = item.mtime = 0
+                item.uid = item.gid = 0
+                item.mtime = mtime
                 item.uname = item.gname = "root"
                 item.mode = 0o755 if item.isdir() or name == main else 0o644
                 if name == state:

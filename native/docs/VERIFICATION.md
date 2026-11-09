@@ -4,12 +4,12 @@ Updated November 9, 2026. This record separates automated checks, physical-devic
 
 ## Status on November 9, 2026
 
-- **Release package:** `com.ryanspice.skifree_1.0.0_arm.ipk`, **3,033,558 bytes**, SHA-256 `b0e38b31545c153494795c0fcd7f98b42c37c2425d7dfe872c69984791df3588`; ARM executable `ed646651…`. It was installed and launched through Developer Mode on the C3 on 2026-11-09. It reuses the executable from the earlier C3-verified package (`494726b3…`, 1,999,474 bytes) and adds the current notices. The executable contains the initials and named-score markers.
+- **Release package:** `com.ryanspice.skifree_1.0.0_arm.ipk`, **3,033,578 bytes**, SHA-256 `a1244a9c2d40effac00445265a6c45654769e14b6b08a2d753628cd41cda4cd6`; ARM executable `ed646651…`. It was installed and launched through Developer Mode on the C3 on 2026-11-09. It is a Homebrew-compatible repack with real 2026 archive timestamps and unchanged file contents. It reuses the executable from the earlier C3-verified package (`494726b3…`, 1,999,474 bytes) and adds the current notices. The executable contains the initials and named-score markers.
 - **Earlier C3-verified package:** SHA-256 `494726b3…` (1,999,474 bytes; the same `ed646651…` executable). Owner-confirmed Slalom and Freestyle records survived a fresh launch and a package update. Its non-root score-file creation/replacement and empty-table preservation were checked.
 - **Storage-fix package:** SHA-256 `e7b3d649…` (1,989,972 bytes; ARM executable `60397dfc…`). It was launched as non-root UID 6252, and score-file creation and replacement were checked. See *Historical November 5 non-root score storage fix*.
 - **Source:** the final release commit is recorded in `RELEASE-MANIFEST.json`. No gameplay source changed after the `494726b3` package; the release IPK is a repack with the current notices, not a new compile.
 
-The repackaged IPK's install and launch are recorded below. Its score file was read after install and contains records; the owner confirmed score saving. The non-empty, non-root and update evidence also applies to the byte-identical executable from the earlier package.
+The timestamp-corrected IPK's install and launch are recorded below. Its score file was read after install and contains records; the owner confirmed score saving. The non-empty, non-root and update evidence also applies to the byte-identical executable from the earlier package.
 
 ## Current package: saved-score browser and course-aware HUD
 
@@ -27,8 +27,8 @@ The clock displays a live race time only for the timed courses. Restarting hides
 the panel again. These are presentation adaptations; the simulation is unchanged.
 
 Release package SHA-256:
-`b0e38b31545c153494795c0fcd7f98b42c37c2425d7dfe872c69984791df3588`
-(3,033,558 bytes). ARM executable SHA-256:
+`a1244a9c2d40effac00445265a6c45654769e14b6b08a2d753628cd41cda4cd6`
+(3,033,578 bytes). ARM executable SHA-256:
 `ed646651be25509a7e04ac00cd9f66c76bc15dd9444e8172c486fac6e3075613`.
 The executable is byte-identical to the earlier C3-verified package (`494726b3…`).
 It is installed on the C3. The earlier package's real records survived its update

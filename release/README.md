@@ -20,18 +20,20 @@ python release/ipk_permissions_tests.py
 python release/prepare_source_archive.py --out .ai/outbox/release-1.0.0/SkifreeWebOS-1.0.0-source.zip
 ```
 
-The finalizer normalizes Unix modes, including execute permissions on the ELF. The verifier compares every packaged app file against the audited stage. The source builder permits source files, explicitly listed documentation and policies, required app files, the 89 hash-verified sprites and two hash-verified documentation images. It excludes original EXE/ZIP files, raw resource dumps, known private/planning paths, unsent launch drafts, unapproved documentation text and generated release metadata. This path/asset gate is not a content-level secret scanner; review source contents before publication. Documentation images are not added to the IPK. Source ZIPs include the Git-visible tree, including allowed uncommitted files, and omit ignored build dependencies; pinned dependency preparation remains documented.
+The finalizer normalizes Unix modes, including execute permissions on the ELF, and sets real fixed archive timestamps (not 1970) so TV installers accept the package. The verifier compares every packaged app file against the audited stage. The source builder permits source files, explicitly listed documentation and policies, required app files, the 89 hash-verified sprites and two hash-verified documentation images. It excludes original EXE/ZIP files, raw resource dumps, known private/planning paths, unsent launch drafts, unapproved documentation text and generated release metadata. This path/asset gate is not a content-level secret scanner; review source contents before publication. Documentation images are not added to the IPK. Source ZIPs include the Git-visible tree, including allowed uncommitted files, and omit ignored build dependencies; pinned dependency preparation remains documented.
 
 The builder refuses existing output files. Preserve previous archives and use a fresh revision name after changes. The ZIP, adjacent SHA-256 file and per-file manifest form one source-release set. A source-only documentation refresh does not change the audited IPK or its checksum.
 
-The release package (SHA-256 `b0e38b31…`, 3,033,558 bytes) is attached to the
-public 1.0.0 GitHub release. It reuses the
+The release package (SHA-256 `a1244a9c…`, 3,033,578 bytes) is attached to the
+public 1.0.0 GitHub release. It is a Homebrew-compatible repack with real 2026
+archive timestamps and unchanged file contents; it reuses the
 C3-verified executable from the earlier `494726b3…` package and was installed and
 launched on the C3 on 2026-11-09. The earlier package's actual non-root file
 creation/replacement and owner-confirmed non-empty records are the storage
 evidence. Broader TV migration checks remain pending. The finalizer must preserve
-the sticky 01777 `state/` parent; direct packaging without this step does not
-satisfy the storage contract. See the [TV build brief](../docs/TV-BUILD.md),
+the sticky 01777 `state/` parent and set real archive timestamps; direct packaging
+without these steps does not satisfy the install/storage contract. See the
+[TV build brief](../docs/TV-BUILD.md),
 [compatibility synthesis](../docs/COMPATIBILITY.md) and [tag preparation](TAGGING.md).
 
 New work products use `.ai/inbox/`, `.ai/outbox/`, `.ai/evidence/` and `.ai/archive/`.

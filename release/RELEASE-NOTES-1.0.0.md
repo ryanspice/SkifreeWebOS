@@ -28,10 +28,10 @@ The full mapping is in `README.md` in the attached source ZIP.
 2. Compare the package SHA-256 with the listed value:
 
    ```text
-   b0e38b31545c153494795c0fcd7f98b42c37c2425d7dfe872c69984791df3588
+   a1244a9c2d40effac00445265a6c45654769e14b6b08a2d753628cd41cda4cd6
    ```
 
-   The release IPK is **3,033,558 bytes**.
+   The release IPK is **3,033,578 bytes**.
 3. Install and launch through the webOS CLI:
 
    ```powershell
@@ -39,7 +39,7 @@ The full mapping is in `README.md` in the attached source ZIP.
    ares-launch --device my-tv com.ryanspice.skifree
    ```
 
-The same package was installed and launched on the owner's LG OLED48C3PUA (C3), firmware 43.21.84, on November 9, 2026. Its executable is byte-identical to the earlier C3-verified 1.0.0 package.
+The timestamp-corrected package was installed and launched on the owner's LG OLED48C3PUA (C3), firmware 43.21.84, on November 9, 2026. Its executable is byte-identical to the earlier C3-verified 1.0.0 package, and its files are unchanged; only the archive timestamps are real 2026 dates so TV installers accept it.
 
 ## Compatibility and limits
 

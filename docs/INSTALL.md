@@ -6,9 +6,10 @@ SkiFree for webOS 1.0.0 is published on GitHub and verified on the owner's C3. T
 
 The 1.0.0 release package was installed and launched on one TV only: the owner's
 **LG OLED48C3PUA (C3), firmware 43.21.84, webOS 11.2.0**, on November 9, 2026.
-Its executable is byte-identical to the earlier C3-verified 1.0.0 package, whose
-non-root process created the new score file successfully. The TV reports SDK
-11.2.0.
+Its executable is byte-identical to the earlier C3-verified 1.0.0 package. The
+Homebrew-compatible repack uses real 2026 archive timestamps; file contents are
+unchanged. Its non-root process created the new score file successfully. The TV
+reports SDK 11.2.0.
 
 1.0.0 is a single-TV release. The measured minimum is **11.2.0**. No release below
 11.2.0 has been tested. Other TVs, webOS releases and firmware versions are
@@ -31,10 +32,10 @@ for the distinction between installation method and app privileges.
 2. Obtain the IPK and its `SHA256SUMS.txt` from the same release, then compare the
    package's SHA-256 with the listed checksum. In PowerShell, use
    `Get-FileHash -Algorithm SHA256 <path-to-ipk>`. The release package installed
-   and launched on the C3 is 3,033,558 bytes with SHA-256:
+   and launched on the C3 is 3,033,578 bytes with SHA-256:
 
    ```text
-   b0e38b31545c153494795c0fcd7f98b42c37c2425d7dfe872c69984791df3588
+   a1244a9c2d40effac00445265a6c45654769e14b6b08a2d753628cd41cda4cd6
    ```
 
    Its executable is byte-identical to the earlier C3-verified package

@@ -8,17 +8,15 @@ checkboxes are your personal checklist, not acceptance evidence.
 This guide covers the **offline 1.0.0 release**. Online scores are planned for
 [1.1.0](ROADMAP-1.1.0.md). Commands below run from the repository root in
 PowerShell 7. **1.0.0 is published**; this guide records the sequence used,
-including the final documentation refresh that replaced its assets. Future
-releases use a new version and tag. Recheck the official links before a later
-release.
+including the final packaging refresh that replaced its assets. Future releases
+use a new version and tag. Recheck the official links before a later release.
 
 ## 1. Consolidate and verify main
 
 Current state: the source repository, `v1.0.0` tag and GitHub release are public.
 The tag points at the final release commit and `main` contains the full history.
-The 1.0.0 tag was moved once for the final documentation refresh before the
-assets were replaced. Future releases start from `main` with a new version and
-tag.
+The 1.0.0 tag was refreshed during final packaging before the assets were
+replaced. Future releases start from `main` with a new version and tag.
 
 At the 2026-11-05 consolidation, only `main` existed locally and on origin. No
 separate upstream remote or open PR needed merging. Fetch plus fast-forward
@@ -77,7 +75,7 @@ $tag = 'v1.0.0'
 $bundle = $env:SKIFREE_RELEASE_BUNDLE
 if (-not $bundle) { throw 'Set SKIFREE_RELEASE_BUNDLE to the private handoff folder.' }
 $ipk = Join-Path $bundle 'com.ryanspice.skifree_1.0.0_arm.ipk'
-$expected = 'b0e38b31545c153494795c0fcd7f98b42c37c2425d7dfe872c69984791df3588'
+$expected = 'a1244a9c2d40effac00445265a6c45654769e14b6b08a2d753628cd41cda4cd6'
 if ((Get-FileHash $ipk -Algorithm SHA256).Hash.ToLowerInvariant() -ne $expected) {
     throw 'IPK differs from the audited C3 candidate. Rebuild/review its evidence.'
 }
@@ -89,12 +87,12 @@ If native source changes, follow [the TV build brief](TV-BUILD.md), create a fre
 stage/IPK and repeat its audits and affected TV acceptance. If source changes
 after this handoff, regenerate the explicit source ZIP in a fresh output folder
 and update its commit/checksum receipts. Never reuse a reviewed output path. The
-final 1.0.0 documentation refresh was the one tag update for this release.
+1.0.0 tag was refreshed only for final release packaging.
 
 ## 4. Tag and publish hosting
 
 For 1.0.0, the annotated tag and GitHub release were refreshed from the final
-documentation commit before the assets were replaced. The release page is the
+release commit before the assets were replaced. The release page is the
 source/download URL for Homebrew.
 
 ```powershell

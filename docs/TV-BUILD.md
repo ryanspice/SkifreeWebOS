@@ -5,10 +5,11 @@ version **1.0.0**. This package includes Original, Recreation, Yeti Chase and
 three-letter score entry. Build/package evidence does not replace its C3 run.
 
 Release package: `com.ryanspice.skifree_1.0.0_arm.ipk`,
-**3,033,558 bytes**, SHA-256
-`b0e38b31545c153494795c0fcd7f98b42c37c2425d7dfe872c69984791df3588`.
+**3,033,578 bytes**, SHA-256
+`a1244a9c2d40effac00445265a6c45654769e14b6b08a2d753628cd41cda4cd6`.
 It reuses the C3-verified executable (`ed646651…`) from the November 5 build
-with the current notices. The exact package was installed and
+with the current notices. This Homebrew-compatible repack uses real 2026 archive
+timestamps; file contents are unchanged. The exact package was installed and
 launched on the C3 on November 9, 2026. The earlier package's non-root score-file
 evidence remains the storage evidence.
 
