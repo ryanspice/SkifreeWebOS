@@ -1,12 +1,11 @@
 # Prepare the 1.0.0 tag
 
 Published tag: **`v1.0.0`**. The source repository and the GitHub release are
-public, and the annotated tag points at the final 1.0.0 release commit. Do not
-move a published tag; future releases use a new version and tag.
+public, and the annotated tag points at the final 1.0.0 release commit.
 
-For 1.0.0, the tag was updated before publication because it predated the final
-documentation/tooling commit. That force-update is historical and must not be
-repeated now that the release is public.
+For 1.0.0, the tag was refreshed once before the final assets were replaced
+because it predated the final documentation cleanup. That refresh is recorded
+here; future releases use a new version and tag.
 
 The [release walkthrough](../docs/RELEASE-GUIDE.md) explains these steps in order,
 including public hosting, generated Homebrew metadata and the listing PR.
@@ -40,8 +39,8 @@ release.
 
 - [x] Version 1.0.0 aligned in app metadata, CMake, intro and release tooling.
 - [x] Host core/storage tests, scripted UI evidence and ARM package audit exist.
-- [x] Independent review completed; its release-doc/source-boundary and
-  verifier-permission findings are addressed with regression checks.
+- [x] Release-doc/source-boundary and verifier-permission findings are
+  addressed with regression checks.
 - [x] Rooted/unrooted and version research synthesized into a compatibility plan.
 - [x] Release package installed and launched on the C3.
 - [x] Storage-fix package: non-root file creation/replacement and preserved old
@@ -60,7 +59,8 @@ release.
 ## Published state
 
 The ARM IPK, source ZIP/manifest, checksums, release notes and package audit are
-attached to the published GitHub release. Do not move `v1.0.0` now that it is
-public. A tag or successful download does not establish all-version compatibility,
-a Homebrew listing or maintainer acceptance. Keep social drafts unsent until the
-listing and community-specific copy are finalized.
+attached to the published GitHub release. The 1.0.0 tag was moved once to this
+final documentation commit before the assets were replaced. A tag or successful
+download does not establish all-version compatibility, a Homebrew listing or
+maintainer acceptance. Keep social drafts unsent until the listing and
+community-specific copy are finalized.

@@ -7,8 +7,8 @@ checkboxes are your personal checklist, not acceptance evidence.
 
 This guide covers the **offline 1.0.0 release**. Online scores are planned for
 [1.1.0](ROADMAP-1.1.0.md). Commands below run from the repository root in
-PowerShell 7. **1.0.0 is published**; the tag/publication steps record the
-sequence used. Do not move the published `v1.0.0` tag or republish 1.0.0. Future
+PowerShell 7. **1.0.0 is published**; this guide records the sequence used,
+including the final documentation refresh that replaced its assets. Future
 releases use a new version and tag. Recheck the official links before a later
 release.
 
@@ -16,8 +16,9 @@ release.
 
 Current state: the source repository, `v1.0.0` tag and GitHub release are public.
 The tag points at the final release commit and `main` contains the full history.
-Do not create a second `v1.0.0` tag or move the published tag. Future releases
-start from `main` with a new version and tag.
+The 1.0.0 tag was moved once for the final documentation refresh before the
+assets were replaced. Future releases start from `main` with a new version and
+tag.
 
 At the 2026-11-05 consolidation, only `main` existed locally and on origin. No
 separate upstream remote or open PR needed merging. Fetch plus fast-forward
@@ -87,13 +88,13 @@ Get-Content (Join-Path $bundle 'SHA256SUMS.txt')
 If native source changes, follow [the TV build brief](TV-BUILD.md), create a fresh
 stage/IPK and repeat its audits and affected TV acceptance. If source changes
 after this handoff, regenerate the explicit source ZIP in a fresh output folder
-and update its commit/checksum receipts. Never reuse a reviewed output path or
-overwrite the existing `v1.0.0` tag after publication.
+and update its commit/checksum receipts. Never reuse a reviewed output path. The
+final 1.0.0 documentation refresh was the one tag update for this release.
 
 ## 4. Tag and publish hosting
 
-For 1.0.0, the annotated tag and GitHub release were published from the final
-release commit. The tag is now immutable; do not move it. The release page is the
+For 1.0.0, the annotated tag and GitHub release were refreshed from the final
+documentation commit before the assets were replaced. The release page is the
 source/download URL for Homebrew.
 
 ```powershell

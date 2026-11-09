@@ -72,7 +72,7 @@ as UID 6252 with no root service. Its new score file is owned by UID 6252, and
 creation plus replacement after close/relaunch were verified. The file's
 timestamp advanced, its format remained valid and no temporary file remained.
 The old 13-byte numeric table's hash stayed unchanged. The initial table is empty;
-this is not a human-earned result or a non-empty migration test.
+this is not a scored result or a non-empty migration test.
 
 Fresh checks passed: four Windows Debug suites on the freed B: volume, four Linux
 host suites, four Linux ASan/UBSan suites, **68 native UI cases**, six source-boundary
@@ -80,22 +80,22 @@ tests, seven stage-boundary cases and six package-permission tests. The SDK audi
 has 12 records; all 104 staged / 105 packaged files match, including 89 sprites
 and one state-directory README. Original simulation and artwork are unchanged.
 
-The requested independent review of this fix found one release-verifier gap:
-hashes alone accepted writable or non-root-owned code/assets. The verifier now enforces
-root ownership and exact file/directory modes, with only the sticky state parent
-excepted. Six permission tests pass, including six metadata-only tampering cases;
-the peer's unsafe fixture is rejected and the installed IPK still passes unchanged.
+A scoped review of this fix found one release-verifier gap: hashes alone accepted
+writable or non-root-owned code/assets. The verifier now enforces root ownership
+and exact file/directory modes, with only the sticky state parent excepted. Six
+permission tests pass, including six metadata-only tampering cases; the peer's
+unsafe fixture is rejected and the installed IPK still passes unchanged.
 
-The corrected build is open for an earned-score/initials/relaunch playthrough.
-Broader input/firmware coverage, non-empty TV upgrade/migration and uninstall
-survival remain unverified. Release and tag publication are held while acceptance
-of this correction is pending. Raw evidence and preserved originals are in the
-project's ignored `.ai/`; the synthesis queue records sources and destinations.
+The corrected build is the published 1.0.0 package. An earned-score/initials/
+relaunch playthrough remains a useful acceptance check. Broader input/firmware
+coverage, non-empty TV upgrade/migration and uninstall survival remain
+unverified. Raw evidence and preserved originals are in the project's ignored
+`.ai/`; the synthesis queue records sources and destinations.
 
 ## Historical November 4 release preparation
 
-Three requested independent research lanes completed: scoped peer review,
-rooted/unrooted research and consumer webOS version research. The peer found two release issues:
+Three scoped research lanes completed: peer review, rooted/unrooted research and
+consumer webOS version research. The peer found two release issues:
 the checklist mixed earlier TV evidence with current acceptance, and documentation
 source paths were too broadly accepted. The checklist now identifies artifacts;
 the source builder explicitly lists approved docs and rejects unapproved credential

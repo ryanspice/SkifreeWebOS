@@ -124,11 +124,11 @@ measure, not a comprehensive security audit.
 The source repository and 1.0.0 GitHub release are public. No Homebrew submission
 or social post is part of this handoff.
 
-## Independent review follow-up
+## Review follow-up
 
-The requested independent source review found two release issues: earlier TV
-observations appeared as completed current-package gates, and broad documentation
-text rules could admit unapproved credential/receipt files to a source archive.
+A scoped source review found two release issues: earlier TV observations appeared
+as completed current-package gates, and broad documentation text rules could admit
+unapproved credential/receipt files to a source archive.
 The checklist now labels earlier evidence and leaves current TV gates open.
 Documentation paths are explicitly allowlisted, with negative cases for unapproved
 JSON, text, Markdown and YAML files. The expanded six-test source suite passes; no
