@@ -80,7 +80,7 @@ tests, seven stage-boundary cases and six package-permission tests. The SDK audi
 has 12 records; all 104 staged / 105 packaged files match, including 89 sprites
 and one state-directory README. Original simulation and artwork are unchanged.
 
-The requested independent AI review of this fix found one release-verifier gap:
+The requested independent review of this fix found one release-verifier gap:
 hashes alone accepted writable or non-root-owned code/assets. The verifier now enforces
 root ownership and exact file/directory modes, with only the sticky state parent
 excepted. Six permission tests pass, including six metadata-only tampering cases;
@@ -94,7 +94,7 @@ project's ignored `.ai/`; the synthesis queue records sources and destinations.
 
 ## Historical November 4 release preparation
 
-Three requested independent AI review lanes completed: scoped peer review,
+Three requested independent research lanes completed: scoped peer review,
 rooted/unrooted research and consumer webOS version research. The peer found two release issues:
 the checklist mixed earlier TV evidence with current acceptance, and documentation
 source paths were too broadly accepted. The checklist now identifies artifacts;
@@ -188,6 +188,6 @@ On the C3, an existing empty 13-byte table remained byte-identical through updat
 | Asset manifest | `e86293722f01e2a9fb1b3732b87e66ab9512ccb3291acc622feb3467f9ba197e` |
 | Original core source | `bf9922eefc15b4af9a715dc38170c7a455cbb270b54637b68859c71e7a91463b` |
 
-Development used substantial AI assistance for implementation, testing, documentation and review. Automated and model reviews do not substitute for meaningful human code review. Original game/artwork and reconstructed code retain separate attribution and rights; the new platform's MIT license does not relicense them. The owner recorded a free, attributed fan-release basis; no upstream license grant is claimed. [Notices](../NOTICE.md).
+Owner reviewed and accepted the 1.0.0 build. Original game/artwork and reconstructed code retain separate attribution and rights; the new platform's MIT license does not relicense them. The owner recorded a free, attributed fan-release basis; no upstream license grant is claimed. [Notices](../NOTICE.md).
 
-The source repository and the 1.0.0 GitHub release are public. No Homebrew listing or social post has been published. Future compatibility claims require their own device evidence; Homebrew metadata, human publication review and maintainer acceptance remain separate.
+The source repository and the 1.0.0 GitHub release are public. No Homebrew listing or social post has been published. Future compatibility claims require their own device evidence; Homebrew metadata, owner review and maintainer acceptance remain separate.

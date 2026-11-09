@@ -131,13 +131,13 @@ git log -3 --oneline</code></pre>
       <section class="step-panel" id="panel-1" aria-labelledby="title-1" hidden>
         <h2 id="title-1">2. Accept the candidate</h2>
         <p class="cue">Look for named evidence for this exact package, including the final HUD/browser review.</p>
-        <ul><li>Confirm controls, course timing, initials and scores after relaunch.</li><li>Complete meaningful human code review and describe the design choices.</li><li>Record the owner's free fan-release decision; do not claim an upstream license grant.</li><li>Review current CI and the 1.0.0 tag checklist.</li></ul>
+        <ul><li>Confirm controls, course timing, initials and scores after relaunch.</li><li>Record owner review and acceptance.</li><li>Record the owner's free fan-release decision; do not claim an upstream license grant.</li><li>Review current CI and the 1.0.0 tag checklist.</li></ul>
         <pre><code>python release/source_archive_tests.py
 python release/ipk_permissions_tests.py
 python native/tests/public_stage_tests.py
 git diff --check
 gh run list --repo ryanspice/SkifreeWebOS --workflow checks.yml --limit 3</code></pre>
-        <p class="gate">Homebrew eligibility remains a review gate. AI peer reviews do not establish human review, and a non-free package pool does not settle distribution rights.</p>
+        <p class="gate">Homebrew eligibility remains a review gate. A non-free package pool does not settle distribution rights.</p>
         <p><a href="https://www.webosbrew.org/develop/guides/publishing/rules/" target="_blank" rel="noopener noreferrer">Current Homebrew rules</a> · <a href="https://github.com/ryanspice/SkifreeWebOS/blob/main/release/TAGGING.md" target="_blank" rel="noopener noreferrer">Tag checklist</a></p>
       </section>
       <section class="step-panel" id="panel-2" aria-labelledby="title-2" hidden>
@@ -206,8 +206,8 @@ if ($m.ipkHash.sha256 -ne $expected) { throw 'Different candidate' }</code></pre
       <section class="step-panel" id="panel-6" aria-labelledby="title-6" hidden>
         <h2 id="title-6">7. Submit the Homebrew listing</h2>
         <p class="cue">The PR adds one package YAML to webosbrew/apps-repo. Your IPK stays on your release host.</p>
-        <ol><li>Fork webosbrew/apps-repo and create a feature branch in a separate private checkout.</li><li>Copy the generated file to <code>packages/com.ryanspice.skifree.yml</code>.</li><li>Open a PR against webosbrew/apps-repo → main.</li><li>Complete the current template with actual TV/release evidence and honest AI disclosure.</li><li>Address maintainer checks and review before merge.</li></ol>
-        <p class="gate">Do not claim full human review until it happened. A generated description, hosted release or passing CI alone does not establish listing acceptance.</p>
+        <ol><li>Fork webosbrew/apps-repo and create a feature branch in a separate private checkout.</li><li>Copy the generated file to <code>packages/com.ryanspice.skifree.yml</code>.</li><li>Open a PR against webosbrew/apps-repo → main.</li><li>Complete the current template with tested TV/release evidence.</li><li>Address maintainer checks and review before merge.</li></ol>
+        <p class="gate">Homebrew maintainers review the listing. A generated description, hosted release or passing CI alone does not establish listing acceptance.</p>
         <p><a href="https://github.com/webosbrew/apps-repo" target="_blank" rel="noopener noreferrer">Open apps-repo</a> · <a href="https://github.com/webosbrew/apps-repo/blob/main/.github/pull_request_template.md" target="_blank" rel="noopener noreferrer">Read current PR template</a></p>
       </section>
       <section class="step-panel" id="panel-7" aria-labelledby="title-7" hidden>

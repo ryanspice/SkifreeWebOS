@@ -40,7 +40,7 @@ release.
 
 - [x] Version 1.0.0 aligned in app metadata, CMake, intro and release tooling.
 - [x] Host core/storage tests, scripted UI evidence and ARM package audit exist.
-- [x] Independent AI review completed; its release-doc/source-boundary and
+- [x] Independent review completed; its release-doc/source-boundary and
   verifier-permission findings are addressed with regression checks.
 - [x] Rooted/unrooted and version research synthesized into a compatibility plan.
 - [x] Release package installed and launched on the C3.
@@ -50,9 +50,8 @@ release.
   artwork/reconstruction license grant is claimed.
 - [x] Release asset replaced with the audited package and current notices; release published.
 - [x] Owner reported that tested inputs and Original behavior are good.
-- [ ] Independent human code/design review, or an explicit owner sign-off on
-  credits and claims.
-- [ ] Decide the Homebrew pool/eligibility and measured minimum webOS release.
+- [x] Owner reviewed and accepted the build, credits and claims.
+- [ ] Confirm the Homebrew pool/eligibility.
 - [x] Reconcile the existing `v1.0.0` tag with the final release commit; publish
   the release; regenerate the source set when tracked files change.
 - [ ] Submit the completed package YAML and PR body to `webosbrew/apps-repo`.

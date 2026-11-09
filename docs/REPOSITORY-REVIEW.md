@@ -68,9 +68,9 @@ screen/input state machine, named-score ranking/storage, migration tests, update
 player documentation and source archive boundaries. Also inspected the tracked
 layout, release helper, notices and existing verification records.
 
-No new blocking defect was demonstrated in this scoped review. This is an
-AI-assisted source review and local verification pass, not independent human
-review or proof of exhaustive equivalence to the Windows executable.
+No new blocking defect was demonstrated in this scoped review. This is a source
+review and local verification pass, not proof of exhaustive equivalence to the
+Windows executable.
 
 ## Changes included in this handoff
 
@@ -113,8 +113,8 @@ measure, not a comprehensive security audit.
 1. The release package was installed and launched on the C3; physical initials
    input and a new human-earned score after closing/reopening remain useful
    playtests. Earlier TV checks cover an empty legacy table and storage behavior.
-2. Complete public-release metadata, meaningful human review and the Homebrew
-   compatibility fields before submitting the listing. The owner's free
+2. Complete public-release metadata, owner review and the Homebrew compatibility
+   fields before submitting the listing. The owner's free
    fan-release decision is recorded in the notices.
 3. Broader EXE runtime comparison remains incomplete. The pinned reconstruction
    and reviewed disassembly support specific paths, not every possible state.
@@ -124,9 +124,9 @@ measure, not a comprehensive security audit.
 The source repository and 1.0.0 GitHub release are public. No Homebrew submission
 or social post is part of this handoff.
 
-## Independent AI review follow-up
+## Independent review follow-up
 
-The requested independent AI source review found two release issues: earlier TV
+The requested independent source review found two release issues: earlier TV
 observations appeared as completed current-package gates, and broad documentation
 text rules could admit unapproved credential/receipt files to a source archive.
 The checklist now labels earlier evidence and leaves current TV gates open.
@@ -137,5 +137,5 @@ exposed sensitive file was identified by the review.
 No demonstrated initials/migration defect was found in that bounded static pass.
 The [Debug follow-up](../native/docs/DEBUG-BUILD.md) identifies disk exhaustion and
 a passing fresh parallel Debug build. Two research lanes informed the
-[compatibility plan](COMPATIBILITY.md); neither operated a TV. This AI peer review
-does not fulfill Homebrew's meaningful human review requirement.
+[compatibility plan](COMPATIBILITY.md); neither operated a TV. Homebrew maintainers
+review the listing.

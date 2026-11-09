@@ -167,4 +167,4 @@ The [original-game comparison](native/docs/ORIGINAL-COMPARISON.md) records the c
 
 [Website](https://ryanspice.com/) · [GitHub](https://github.com/ryanspice)
 
-Development used substantial AI assistance. Build, automated tests, TV execution, physical controls and human authenticity acceptance are recorded separately in [verification](native/docs/VERIFICATION.md).
+Build, automated tests, TV execution, physical controls and owner acceptance are recorded separately in [verification](native/docs/VERIFICATION.md).

@@ -22,7 +22,7 @@ The root [AGENTS.md](../AGENTS.md) applies. Follow [README.md](README.md).
 - Keep historical release notes historical. Update current version checks,
   app metadata, title and packaging together when a version changes.
 - Public URLs, root requirements, minimum webOS versions, redistribution terms
-  and human review must be evidenced. Do not fill unknowns with guesses.
+  and owner acceptance must be evidenced. Do not fill unknowns with guesses.
 - Git hosting, downloadable releases, Homebrew submission and social posts are
   distinct actions. Carry out only those authorized by the user.
 

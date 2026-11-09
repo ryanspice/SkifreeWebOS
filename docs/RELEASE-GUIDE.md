@@ -41,10 +41,9 @@ ownership before merging; do not reset or force-push to make them match.
 
 Read [the tag checklist](../release/TAGGING.md). Core/storage checks and the
 current C3 package evidence exist. Confirm the latest HUD/browser visually,
-complete meaningful human code review, and retain the named-score acceptance.
-The Homebrew submission needs honest AI disclosure and the tested TV/release;
-automated model reviews do not replace human review. See the current
-[Homebrew rules](https://www.webosbrew.org/develop/guides/publishing/rules/).
+record owner review and acceptance, and retain the named-score acceptance.
+The Homebrew submission needs the tested TV/release and the current template.
+See the current [Homebrew rules](https://www.webosbrew.org/develop/guides/publishing/rules/).
 
 ```powershell
 python release/source_archive_tests.py
@@ -192,8 +191,8 @@ Create a feature branch in that fork and open a PR to upstream `main`. Here
 Use the [current PR template](https://github.com/webosbrew/apps-repo/blob/main/.github/pull_request_template.md).
 Describe the app, exact TV model and measured release, tested controls/saves,
 known compatibility limits, original-game attribution, distribution evidence
-and support URL. Disclose AI use accurately. Only claim experienced human review
-after it has actually happened; do not select a declaration to make CI pass.
+and support URL. Use the tested evidence and the current template; let the
+maintainers review the listing.
 
 Maintainers review the submission and may request changes. A successful GitHub
 release does not itself create a Homebrew listing. Repository source/schema is

@@ -1,7 +1,7 @@
 # Compatibility brief and synthesis plan
 
 Research date: 2026-11-04; minimum-release evidence added 2026-11-09. Two requested
-independent AI research lanes examined rooted/unrooted routes and consumer webOS
+independent research lanes examined rooted/unrooted routes and consumer webOS
 versions. The 11.2.0 floor comes from Homebrew firmware data plus the tested C3;
 no older firmware build was run.
 

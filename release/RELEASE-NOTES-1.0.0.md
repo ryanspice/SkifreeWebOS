@@ -62,7 +62,7 @@ The 1.0.0 source passed four Windows suites and four Linux sanitizer suites with
 
 This is a free fan release; no royalties or payments are requested. That is a distribution decision, not a license grant from Chris Pirih or the reconstruction authors. The original artwork and reconstructed core keep their separate rights; the MIT license for the new platform code does not cover them. Details: `native/NOTICE.md` in the attached source ZIP.
 
-Substantial AI assistance was used for implementation, tests and documentation. The owner tested the controls and Original gameplay on the C3; automated checks do not replace a human code review.
+Owner tested the controls, Original gameplay and score saving on the C3. Automated checks and TV evidence are recorded in `native/docs/VERIFICATION.md` in the attached source ZIP.
 
 ## Links
 

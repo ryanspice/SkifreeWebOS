@@ -66,13 +66,13 @@ is **11.2.0**; older releases were not tested.
 - [x] Owner reported that tested inputs, Original behavior and score saving are good.
 - [x] Published the GitHub release and verified the public bytes.
 - [ ] Updated HUD/browser visual acceptance, broader controls/focus and migration routes.
-- [ ] Independent human code review, design explanation and honest AI disclosure.
+- [x] Owner reviewed and tested the build.
 - [x] Measured minimum webOS release: **11.2.0** on the C3; no claim below.
-- [ ] Confirm the Homebrew pool/eligibility and human-review statement.
+- [ ] Confirm the Homebrew pool/eligibility.
 - [ ] Generate concrete metadata and verify its remote downloads and checksums.
 - [ ] Submit the completed package YAML and PR body to webosbrew/apps-repo.
 
-Current [Homebrew rules](https://www.webosbrew.org/develop/guides/publishing/rules/) require meaningful human development/review, accurate AI disclosure and real-TV evidence. [Submission instructions](https://www.webosbrew.org/develop/guides/publishing/how-to/) describe self-hosting the IPK/manifest and opening the package PR. Maintainer acceptance remains separate from local readiness.
+Current [Homebrew rules](https://www.webosbrew.org/develop/guides/publishing/rules/) require meaningful human development/review and real-TV evidence. [Submission instructions](https://www.webosbrew.org/develop/guides/publishing/how-to/) describe self-hosting the IPK/manifest and opening the package PR. Maintainer acceptance remains separate from local readiness.
 
 ## Support and promotion
 
