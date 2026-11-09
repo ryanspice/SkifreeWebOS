@@ -4,20 +4,34 @@ Research date: 2026-11-04. Two requested independent AI research lanes examined
 rooted/unrooted routes and consumer webOS versions. Their findings are source
 and documentation research; no new TV or firmware-symbol test was performed.
 
-## Current package
+## 1.0.0 support scope
 
-The candidate targets ARM32 EABI5 with `/usr/lib/ld-linux.so.3`, GLIBC 2.38 and
-GLIBCXX 3.4.32. The release package was installed and launched on an OLED48C3PUA,
-firmware 43.21.84, reported SDK 11.2.0, on November 9, 2026. Its executable is
-byte-identical to the earlier storage-corrected package, which created/replaced
-its score file as a non-root process and preserved owner-confirmed non-empty
-Slalom/Freestyle records across a fresh session and an update.
-Marketing webOS names, firmware releases and SDK version fields identify different
-things; none alone establishes a native ABI minimum.
+1.0.0 is a single-TV release. The only tested configuration is the owner's
+**LG OLED48C3PUA (C3), firmware 43.21.84**. The release package was installed and
+launched through Developer Mode on 2026-11-09; the owner accepted the gameplay,
+controls and score saving. The executable is byte-identical to the earlier
+storage-corrected package, which created/replaced its score file as a non-root
+process and preserved owner-confirmed non-empty Slalom/Freestyle records across a
+fresh session and an update.
 
-| Target | Evidence | Next acceptance gate |
+| Target | 1.0.0 status |
+| --- | --- |
+| Owner's C3 / firmware 43.21.84 | **Tested and accepted.** Release IPK installed/launched; executable verified; scores saved; owner playtest accepted. |
+| Every other TV, firmware and webOS release | **Theoretical only.** No backward-compatibility claim, minimum webOS release or support commitment is made in 1.0.0. |
+
+The executable targets ARM32 EABI5 with `/usr/lib/ld-linux.so.3`, GLIBC 2.38 and
+GLIBCXX 3.4.32. Marketing webOS names, firmware releases and SDK version fields
+identify different things; none alone establishes a native ABI minimum. Other
+targets will be tested in a later release; until then, do not claim them as
+supported or backward-compatible.
+
+## Theoretical later targets
+
+The rows below are research targets for a later release, not a 1.0.0 support
+matrix. Each needs its own build/package and device evidence.
+
+| Target | Current evidence | Later acceptance gate |
 | --- | --- | --- |
-| Observed C3 configuration | Release package installed/launched; executable byte-identical to the corrected package, whose non-root score-file creation/replacement was verified | Broader controls/focus, visual acceptance and migration routes |
 | webOS TV 25/26 families | No family-wide native compatibility evidence | Exact firmware dependency inventory and representative TV runs |
 | webOS TV 22–24 / 6.x | Current binary may require newer libraries than individual firmwares export | Required-symbol comparison, then device tests |
 | webOS TV 4.x–5.x | ABI and SDL/Wayland compatibility unknown | Separate older-ABI build and SDL investigation |

@@ -52,9 +52,9 @@ with no separate upstream remote or open PR. Fast-forward merge had no remote
 changes to integrate. The cleanup/roadmap landed as `b284697`; its hosted
 [host/source workflow passed](https://github.com/ryanspice/SkifreeWebOS/actions/runs/42162092585).
 The [release guide](RELEASE-GUIDE.md) and [visual walkthrough](RELEASE-WALKTHROUGH.html)
-cover the remaining GitHub/Homebrew sequence. The source repository is public; the
-release draft, Homebrew submission and social posting remain unpublished. No
-branch deletion or force-push was needed for this consolidation.
+cover the GitHub/Homebrew sequence. The source repository and 1.0.0 GitHub release
+are public; Homebrew submission and social posting remain unpublished. No branch
+deletion or force-push was needed for this consolidation.
 
 ## Historical review — 2026-11-04
 
@@ -121,8 +121,8 @@ measure, not a comprehensive security audit.
 4. Score storage assumes a single writer. It does not guarantee POSIX power-loss
    durability or protect against another process changing a loaded file.
 
-The source repository is public. No downloadable release, Homebrew submission or
-social post is part of this handoff.
+The source repository and 1.0.0 GitHub release are public. No Homebrew submission
+or social post is part of this handoff.
 
 ## Independent AI review follow-up
 

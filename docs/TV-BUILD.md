@@ -9,9 +9,12 @@ Release package: `com.ryanspice.skifree_1.0.0_arm.ipk`,
 `b0801db115564c79c84c784e234d274ca2e8b8e074b40ce6fab5c51b3eae548f`.
 It reuses the C3-verified executable (`ed646651…`) from the November 5 build
 with the current 1254×1254 icon and notices. The exact package was installed and
-launched on the C3 on November 9, 2026. The maintainer's private release handoff
-contains the IPK, source set and receipts; they are not in the public source archive.
-The earlier package's non-root score-file evidence remains the storage evidence.
+launched on the C3 on November 9, 2026. The earlier package's non-root score-file
+evidence remains the storage evidence.
+
+1.0.0 is a single-TV release: the owner's C3 is the only tested configuration.
+Other models and older webOS versions are theoretical targets; no backward
+compatibility is claimed until a later release has its own device evidence.
 
 ## Build inputs
 

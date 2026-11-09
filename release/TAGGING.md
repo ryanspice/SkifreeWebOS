@@ -1,10 +1,12 @@
 # Prepare the 1.0.0 tag
 
-Proposed tag: **`v1.0.0`**. The source repository is public. An annotated tag
-`v1.0.0` (object `42cac15`, peeled to commit `c51f237`) and a draft release
-already exist; the draft is not published. The tag predates the final
-documentation/tooling changes, so it must be reconciled with the exact release
-commit before publication. Do not create a second `v1.0.0` tag.
+Published tag: **`v1.0.0`**. The source repository and the GitHub release are
+public, and the annotated tag points at the final 1.0.0 release commit. Do not
+move a published tag; future releases use a new version and tag.
+
+For 1.0.0, the tag was updated before publication because it predated the final
+documentation/tooling commit. That force-update is historical and must not be
+repeated now that the release is public.
 
 The [release walkthrough](../docs/RELEASE-GUIDE.md) explains these steps in order,
 including public hosting, generated Homebrew metadata and the listing PR.
@@ -45,30 +47,20 @@ release.
   score bytes verified; owner-confirmed non-empty records survived an update.
 - [x] Owner recorded the free fan-release basis and the icon authorship. No
   upstream artwork/reconstruction license grant is claimed.
-- [x] Draft release asset replaced with the audited package and current notices.
+- [x] Release asset replaced with the audited package and current notices; release published.
 - [x] Owner reported that tested inputs and Original behavior are good.
 - [ ] Independent human code/design review, or an explicit owner sign-off on
   credits and claims.
 - [ ] Decide the Homebrew pool/eligibility and measured minimum webOS release.
-- [ ] Reconcile the existing `v1.0.0` tag with the final release commit; publish
-  the draft; regenerate the source set if any tracked file changes.
+- [x] Reconcile the existing `v1.0.0` tag with the final release commit; publish
+  the release; regenerate the source set when tracked files change.
 - [ ] Submit the completed package YAML and PR body to `webosbrew/apps-repo`.
 - [ ] Send social posts only after the release and listing exist.
 
-## Commands before publication
+## Published state
 
-The tag already exists. Only run a tag update after the exact release commit is
-frozen and after confirming that force-updating an unpublished tag is intended:
-
-```sh
-git status --short
-git show --stat HEAD
-git rev-parse HEAD
-git tag -f -a v1.0.0 <release-commit> -m "SkiFree for webOS 1.0.0"
-git push --force origin refs/tags/v1.0.0
-```
-
-Attach the audited ARM IPK, source ZIP/manifest, checksums and release notes to
-the draft. Verify hosted bytes after upload. A tag alone does not establish TV
-acceptance, all-version compatibility or a Homebrew listing. Keep social drafts
-unsent until the release destination and community-specific copy are finalized.
+The ARM IPK, source ZIP/manifest, checksums, release notes and package audit are
+attached to the published GitHub release. Do not move `v1.0.0` now that it is
+public. A tag or successful download does not establish all-version compatibility,
+a Homebrew listing or maintainer acceptance. Keep social drafts unsent until the
+listing and community-specific copy are finalized.

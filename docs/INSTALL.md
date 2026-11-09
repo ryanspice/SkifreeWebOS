@@ -1,14 +1,17 @@
 # Install and play
 
-SkiFree for webOS 1.0.0 is a release candidate verified on the owner's C3. There is no public download or Homebrew Channel listing yet. These instructions apply to the exact IPK in the draft release, the maintainer's test handoff, or a package you build from this source. Do not install a copy from an untrusted mirror.
+SkiFree for webOS 1.0.0 is published on GitHub and verified on the owner's C3. There is no Homebrew Channel listing yet. These instructions apply to the exact IPK in the release, or a package you build from this source. Do not install a copy from an untrusted mirror.
 
 ## Compatibility
 
 The 1.0.0 release package was installed and launched on one TV only: the owner's
 **LG OLED48C3PUA (C3), firmware 43.21.84**, on November 9, 2026. Its executable is
 byte-identical to the earlier C3-verified 1.0.0 package, whose non-root process
-created the new score file successfully. The TV reports SDK 11.2.0. Other TVs,
-webOS releases and firmware versions are TBD, and so is the minimum webOS release.
+created the new score file successfully. The TV reports SDK 11.2.0.
+
+1.0.0 is a single-TV release. Other TVs, webOS releases and firmware versions are
+theoretical targets only; no backward-compatibility claim is made until a later
+release tests them. The minimum webOS release is not established.
 
 The ARM32 build requires GLIBC 2.38 and GLIBCXX 3.4.32. Older TV software may not
 provide those libraries. The observed install used Developer Mode and a non-root
@@ -58,6 +61,11 @@ Original opens automatically. Move the Magic Remote pointer or mouse to aim, or 
 The on-screen buttons and **Back → Choose a Run** offer the same choices. Keyboard F5–F8 also work. **Back / Escape** pauses or opens the menu; **F2** starts a new game. Switching runs preserves their progress until the app closes. [Full Original controls](../README.md#original-controls).
 
 The on-screen colour strip and footer hints stay hidden during skiing. The physical colour buttons and F5–F8 remain active. Open the pause menu to show the clickable choices again. After returning from another app, use **Resume** or **Back** to continue; focus returning does not resume the run automatically.
+
+**Known 1.0.0 issue:** in some nested menus/dialogs, the first **Back** press opens
+the exit confirmation instead of canceling the current dialog. Cancel and press
+**Back** again. It does not affect gameplay or score saving; a later release will
+fix it.
 
 ## Scores and troubleshooting
 

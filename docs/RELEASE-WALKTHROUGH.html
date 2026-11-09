@@ -71,10 +71,10 @@
 <main id="skifree-release">
   <header class="intro">
     <h1>SkiFree: from main to Homebrew</h1>
-    <p>Follow the eight steps. Commands are examples for PowerShell 7; nothing here executes them. Snapshot: 5 November 2026.</p>
-    <p class="muted">1.0.0 is the offline release candidate. Optional online scores belong to the 1.1.0 roadmap.</p>
+    <p>Follow the eight steps. Commands are examples for PowerShell 7; nothing here executes them. Snapshot: 9 November 2026.</p>
+    <p class="muted">1.0.0 is the published offline release. Optional online scores belong to the 1.1.0 roadmap.</p>
   </header>
-  <div class="facts"><span><strong>Source:</strong> main consolidated</span><span><strong>GitHub:</strong> private draft</span><span><strong>Homebrew:</strong> not submitted</span></div>
+  <div class="facts"><span><strong>Source:</strong> main consolidated</span><span><strong>GitHub:</strong> published release</span><span><strong>Homebrew:</strong> not submitted</span></div>
   <div class="flow" aria-label="Release flow: exact files go to a public GitHub release; Homebrew points to its manifest; users install on a supported TV">
     <figure>
       <svg viewBox="0 0 180 94" role="img" aria-label="A release contains an IPK, manifest and source archive">
@@ -157,18 +157,14 @@ Get-Content (Join-Path $bundle 'RELEASE-MANIFEST.json')</code></pre>
         <p>Documentation-only commits can keep this binary and its evidence. Native changes need a fresh build, package audit and affected TV checks. Always regenerate the source archive after source changes.</p>
       </section>
       <section class="step-panel" id="panel-3" aria-labelledby="title-3" hidden>
-        <h2 id="title-3">4. Reconcile the tag and publish hosting</h2>
-        <p class="cue">The source repository is public; the v1.0.0 tag and a draft release already exist.</p>
-        <p class="gate">Do not create a second tag. Reconcile the existing tag with the exact release commit before publishing; do not move a published tag.</p>
-        <pre><code>$releaseCommit = (git rev-parse HEAD).Trim()
-git show --stat $releaseCommit
-git tag --list v1.0.0
+        <h2 id="title-3">4. Tag and publish hosting</h2>
+        <p class="cue">The source repository and v1.0.0 release are public; the tag points at the final commit.</p>
+        <p class="gate">Do not move a published tag. Future releases use a new version and tag.</p>
+        <pre><code>git show --stat v1.0.0
 git ls-remote --tags origin refs/tags/v1.0.0
-# The tag exists. Only before publication, with owner approval:
-# git tag -f -a v1.0.0 $releaseCommit -m 'SkiFree for webOS 1.0.0'
-# git push --force origin refs/tags/v1.0.0</code></pre>
-        <ol><li>Review tracked files/history before publishing the release.</li><li>Confirm the repository is the intended public source; visibility and release publication are separate actions.</li><li>Releases → existing 1.0.0 draft → Edit. Check tag, target, notes and attachments.</li><li>Keep it a draft until the manifest and final source set are attached.</li></ol>
-        <p>A private draft will not serve public downloads. Source hosting and Homebrew listing are separate actions.</p>
+gh release view v1.0.0 --json isDraft,isPrerelease,tagName,url,assets</code></pre>
+        <ol><li>Review the published tag, target, notes and assets.</li><li>Use the public release as the source/download URL.</li><li>Do not edit or republish 1.0.0; use a new version for changes.</li></ol>
+        <p>A private draft would not serve public downloads; 1.0.0 is public. Source hosting and Homebrew listing remain separate actions.</p>
       </section>
       <section class="step-panel" id="panel-4" aria-labelledby="title-4" hidden>
         <h2 id="title-4">5. Generate Homebrew metadata</h2>
@@ -192,9 +188,9 @@ $manifestUrl = 'https://github.com/ryanspice/SkifreeWebOS/releases/latest/downlo
         <p><a href="https://github.com/webosbrew/dev-toolbox-cli" target="_blank" rel="noopener noreferrer">Official toolbox</a> · <a href="https://www.webosbrew.org/develop/guides/publishing/how-to/" target="_blank" rel="noopener noreferrer">Submission reference</a></p>
       </section>
       <section class="step-panel" id="panel-5" aria-labelledby="title-5" hidden>
-        <h2 id="title-5">6. Publish, then verify downloads</h2>
-        <p class="cue">A signed-out visitor must be able to download the manifest and its exact IPK.</p>
-        <ol><li>Attach the generated <code>com.ryanspice.skifree.manifest.json</code> to the draft.</li><li>For stable 1.0.0, clear Pre-release, choose Latest, then Publish release.</li><li>Download without account credentials and compare hash and size.</li><li>Check icon, source and support links too.</li></ol>
+        <h2 id="title-5">6. Verify published downloads</h2>
+        <p class="cue">1.0.0 is published; a signed-out visitor must be able to download the manifest and its exact IPK.</p>
+        <ol><li>The package manifest is attached to the published 1.0.0 release.</li><li>Do not republish or replace 1.0.0 assets.</li><li>Download without account credentials and compare hash and size.</li><li>Check icon, source and support links too.</li></ol>
         <pre><code>$verify = '.ai/evidence/public-download-' + (Get-Date -Format 'yyyyMMdd-HHmmss')
 New-Item -ItemType Directory -Path $verify | Out-Null
 $manifestFile = Join-Path $verify 'manifest.json'

@@ -44,8 +44,9 @@ The same package was installed and launched on the owner's LG OLED48C3PUA (C3), 
 ## Compatibility and limits
 
 - Tested on one TV: **LG OLED48C3PUA (C3), firmware 43.21.84**, Developer Mode, non-root app process.
+- **Single-TV release.** Other models, firmware and webOS releases are theoretical targets only. No backward-compatibility claim or minimum webOS release is made in 1.0.0.
 - ARM32; the binary requires GLIBC 2.38 and GLIBCXX 3.4.32. Other webOS generations, rooted routes and older firmware are not established.
-- The minimum webOS release is not measured.
+- **Known issue:** in some nested menus/dialogs, the first **Back** press opens the exit confirmation instead of canceling the current dialog. Cancel and press **Back** again. It does not affect gameplay or score saving; a later release will fix it.
 - The reconstruction has documented byte-accuracy TODOs; this is not a claim of perfect executable or pixel equivalence. Original audio playback remains inactive.
 - Score storage is local. Non-empty records survived a fresh session and an update on the C3; uninstall, app-UID changes and other migration routes remain unverified.
 

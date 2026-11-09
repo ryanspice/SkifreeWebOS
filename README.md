@@ -15,7 +15,7 @@ A free, independent adaptation of SkiFree for LG webOS TVs. Play with a Magic Re
 
 **[Install and play](docs/INSTALL.md)** · [Controls](#original-controls) · [Compatibility and checks](native/docs/VERIFICATION.md) · [Champions of Snowboarding 2026](docs/support.md)
 
-**Release status:** 1.0.0 is a release candidate verified on the owner's C3. The GitHub release and its download are still drafts; no public IPK or Homebrew Channel listing has been published. Do not install a copy from an untrusted mirror.
+**Release status:** 1.0.0 is verified on the owner's C3. Download it from the [GitHub release](https://github.com/ryanspice/SkifreeWebOS/releases/tag/v1.0.0); no Homebrew Channel listing has been published yet. Do not install a copy from an untrusted mirror.
 
 **Next: [1.1.0 — optional online high scores](docs/ROADMAP-1.1.0.md).** Planned:
 an opt-in leaderboard, an Off setting and reliable offline play. Online scores
@@ -25,7 +25,7 @@ are not part of this 1.0.0 build.
 
 Original preserves the reconstructed 1.04 mountain, courses, characters and rules.
 The separate Recreation and Yeti Chase runs add simplified steering and boosts.
-This candidate adds a lighter Recreation HUD, hides the footer while skiing and
+This release adds a lighter Recreation HUD, hides the footer while skiing and
 lets qualifying Original scores carry three initials, starting at **AAA**.
 
 The release executable is byte-identical to the package verified on the LG C3;
@@ -38,9 +38,9 @@ after you start skiing downhill.
 
 ## Install on your TV
 
-1. Get the **ARM IPK and its SHA-256** from the eventual release, the maintainer's test
-   handoff, or build it by following the [TV build brief](docs/TV-BUILD.md). No public
-   download is available yet.
+1. Get the **ARM IPK and its SHA-256** from the
+   [1.0.0 release](https://github.com/ryanspice/SkifreeWebOS/releases/tag/v1.0.0),
+   or build it by following the [TV build brief](docs/TV-BUILD.md).
 2. Set up your TV with [LG Developer Mode](https://webostv.developer.lge.com/develop/getting-started/developer-mode-app)
    and the webOS CLI. This is the route used for the C3 tests. The package verified there
    was installed and launched as a non-root app. [Rooted and unrooted notes](docs/COMPATIBILITY.md).
@@ -57,14 +57,22 @@ OK to jump. **Back** opens the menu. Developer Mode expires; see the
 [full installation guide](docs/INSTALL.md) for setup, checksums, session upkeep
 and score troubleshooting.
 
+**Known 1.0.0 issue:** in some nested menus/dialogs, the first **Back** press opens
+the exit confirmation instead of canceling the current dialog. Cancel and press
+**Back** again. It does not affect gameplay or score saving; a later release will
+fix it.
+
 | At a glance | Current status |
 | --- | --- |
 | TV target | LG C3 / OLED48C3PUA, observed firmware 43.21.84 |
 | Native runtime | ARM32; GLIBC 2.38 and GLIBCXX 3.4.32 required |
 | Controls | Magic Remote pointer and directions, mouse, keyboard |
 | Saved scores | Original top ten per course, three-letter initials, legacy import |
-| Other TVs and webOS releases | TBD; only the owner's C3 is tested |
-| Tag and downloads | [Release preparation and remaining gates](release/TAGGING.md) |
+| Other TVs and webOS releases | Theoretical only in 1.0.0. The owner's C3 is the only tested TV; no backward-compatibility claim is made. |
+| Tag and downloads | [GitHub release](https://github.com/ryanspice/SkifreeWebOS/releases/tag/v1.0.0) · [tag checklist](release/TAGGING.md) |
+
+1.0.0 is a single-TV release. Other models and older webOS versions are
+theoretical targets for later testing; do not treat them as supported.
 
 ## Choose your run
 

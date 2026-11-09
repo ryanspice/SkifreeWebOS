@@ -5,19 +5,19 @@ view. GitHub shows HTML source rather than running this page; download/open it
 from your checkout. The page never runs commands or publishes anything. Its
 checkboxes are your personal checklist, not acceptance evidence.
 
-This guide covers the **offline 1.0.0 candidate**. Online scores are planned for
+This guide covers the **offline 1.0.0 release**. Online scores are planned for
 [1.1.0](ROADMAP-1.1.0.md). Commands below run from the repository root in
-PowerShell 7. Public-release commands are future steps, not a record that they
-have been executed. Recheck the official links before a later release.
+PowerShell 7. **1.0.0 is published**; the tag/publication steps record the
+sequence used. Do not move the published `v1.0.0` tag or republish 1.0.0. Future
+releases use a new version and tag. Recheck the official links before a later
+release.
 
 ## 1. Consolidate and verify main
 
-Current state (2026-11-09): the source repository is public. `main` holds the
-last public code/docs commit; the local `release/1.0.0-compat-scope` branch holds
-the final documentation and package changes. The `v1.0.0` tag and a draft release
-already exist. Do not create a second tag. Before publishing, merge or otherwise
-make the exact release commit reachable from the public default branch so the
-source URL and tag show the same tree.
+Current state: the source repository, `v1.0.0` tag and GitHub release are public.
+The tag points at the final release commit and `main` contains the full history.
+Do not create a second `v1.0.0` tag or move the published tag. Future releases
+start from `main` with a new version and tag.
 
 At the 2026-11-05 consolidation, only `main` existed locally and on origin. No
 separate upstream remote or open PR needed merging. Fetch plus fast-forward
@@ -91,33 +91,22 @@ after this handoff, regenerate the explicit source ZIP in a fresh output folder
 and update its commit/checksum receipts. Never reuse a reviewed output path or
 overwrite the existing `v1.0.0` tag after publication.
 
-## 4. Reconcile the tag and publish hosting
+## 4. Tag and publish hosting
 
-Only after acceptance and the owner's publishing decision. A `v1.0.0` tag and a
-draft release already exist; the tag predates the final documentation-only commit.
-Before publishing, reconcile it with the exact release commit. Moving an
-unpublished tag is a force update; do not move a published tag.
+For 1.0.0, the annotated tag and GitHub release were published from the final
+release commit. The tag is now immutable; do not move it. The release page is the
+source/download URL for Homebrew.
 
 ```powershell
-$releaseCommit = (git rev-parse HEAD).Trim()
-git show --stat $releaseCommit
-git tag --list v1.0.0
+git show --stat v1.0.0
 git ls-remote --tags origin refs/tags/v1.0.0
-# The tag exists. Do not create a second one. If the exact release commit differs,
-# update it only before publication and only with the owner's approval:
-# git tag -f -a v1.0.0 $releaseCommit -m 'SkiFree for webOS 1.0.0'
-# git push --force origin refs/tags/v1.0.0
+gh release view v1.0.0 --json isDraft,isPrerelease,tagName,url,assets
 ```
 
-The source repository is already public. Review the tracked tree and history
-before publishing a release; visibility changes and release publication are
-separate actions. A draft does not serve Homebrew users. If you use separate
-public hosting instead, verify every supplied URL without sign-in and meet the
-applicable source obligations.
-
-Open **Releases → the existing 1.0.0 draft → Edit**. Review target/tag, title,
-notes and attachments against the frozen bundle. Leave the release as a draft
-while preparing its Homebrew manifest. No public URL should be claimed live yet.
+The source repository is public. Review the published tag, target, notes and
+assets against the frozen bundle. Future releases use a new version and tag; a
+separate hosting route must verify every supplied URL without sign-in and meet
+the applicable source obligations.
 
 ## 5. Generate Homebrew metadata
 
@@ -162,16 +151,15 @@ checks package identity/hash/size, but does not establish compatibility, rights
 or live URLs. Inspect the generated JSON and YAML. It leaves private preparation
 receipts locally; do not upload those as public artifacts.
 
-## 6. Publish and verify public bytes
+## 6. Verify public bytes
 
-Attach `com.ryanspice.skifree.manifest.json` from the metadata folder to the
-existing GitHub draft alongside the frozen release files. For a stable 1.0.0,
-clear **Set as a pre-release**, choose **Set as the latest release**, then
-**Publish release**. The `releases/latest/download/` manifest route needs a
-public stable latest release; a draft/prerelease is not sufficient.
+1.0.0 is already published as a stable, latest release; the package manifest is
+attached. Do not republish or replace its assets. From a fresh unauthenticated
+download, check the manifest, IPK hash and byte count, original icon, source and
+support links. Keep downloads under `.ai/`.
 
-From a fresh unauthenticated download, check the manifest, IPK hash and byte
-count, original icon, source and support links. Keep downloads under `.ai/`.
+The `releases/latest/download/` manifest route needs a public stable latest
+release; 1.0.0 satisfies that. A draft or prerelease would not.
 
 ```powershell
 $verify = '.ai/evidence/public-download-' + (Get-Date -Format 'yyyyMMdd-HHmmss')

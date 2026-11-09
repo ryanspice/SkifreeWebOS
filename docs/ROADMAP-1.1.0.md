@@ -3,6 +3,13 @@
 Status: **planned, not implemented**. Updated 2026-11-05. The application and
 release tooling remain at 1.0.0. This plan does not add networking to that build.
 
+## 1.0.x known issue (deferred)
+
+In some nested menus/dialogs, the first **Back** press opens the exit confirmation
+instead of canceling the current dialog. Cancel the prompt and press **Back** again
+to return. It does not affect gameplay, Original rules or score saving. The fix is
+deferred to a later 1.0.x/1.1.0 release and is not a 1.0.0 blocker.
+
 ## Goal and scope
 
 Share completed Original results with a small public leaderboard while keeping

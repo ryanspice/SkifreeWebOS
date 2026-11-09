@@ -46,10 +46,9 @@ matches all **104 staged / 105 packaged files**; the 89 original sprites and cor
 are unchanged.
 
 The public README image is a C3 opening capture showing the hidden status panel.
-The tag and public release remain separate from this draft preparation. The
-2026-11-09 install/launch used the release IPK; a new screen capture was blocked by
-the TV's `/tmp` permissions, so this pass records launch evidence without a new
-screenshot.
+The 1.0.0 tag and GitHub release are public. The 2026-11-09 install/launch used the
+release IPK; a new screen capture was blocked by the TV's `/tmp` permissions, so
+this pass records launch evidence without a new screenshot.
 
 ## Historical November 5 non-root score storage fix
 
@@ -162,13 +161,15 @@ A subsequent strict Linux/WSL Release build passed all four CTest suites and rer
 
 Tested configuration: **LG OLED48C3PUA (C3), firmware 43.21.84, SDK 11.2.0**. The version information was queried again during publication preparation. The audited IPK installed and launched through the application manager, and its actual framebuffer was inspected at **1920×1080 on Mali-G52 / GLES 3.2**. Installed executable and asset-manifest hashes matched the audited stage.
 
-Close/relaunch was exercised. One immediate sequence briefly left no running app entry; a subsequent launch after closure succeeded. No crash cause was established from that observation. No compatibility claim is made for other TV generations, and a minimum numeric webOS release or rooted/unrooted requirement has not been verified. See [runtime requirements](WEBOS-RUNTIME.md).
+Close/relaunch was exercised. One immediate sequence briefly left no running app entry; a subsequent launch after closure succeeded. No crash cause was established from that observation. **1.0.0 is a single-TV release:** the C3 is the only tested configuration, and other TV generations are theoretical targets, not backward-compatibility claims. A minimum numeric webOS release or rooted/unrooted requirement has not been verified. See [runtime requirements](WEBOS-RUNTIME.md).
 
 ![Native opening screen on the C3](../../docs/media/skifree-original-c3.png)
 
 ## Human feedback
 
 The owner confirmed all four physical colour buttons in 0.5.0, accepted the gentler Recreation pursuit in 0.6.0, and subsequently reported that the inputs he tested seemed good. This is positive aggregate feedback; it does not enumerate a complete device-by-device input matrix for 1.0.0.
+
+The owner also reported a non-blocking 1.0.0 interaction issue: in some nested menus/dialogs, the first **Back** press opens the exit confirmation instead of canceling the current dialog. Canceling and pressing Back again works. Gameplay and score saving are unaffected; the fix is deferred to a later release.
 
 The local 1.0 candidate follows the owner's release bar: preserve the reconstructed C behavior and intended Original gameplay, with **WebOS 1.0.0** on the intro. Full Windows runtime equivalence remains unclaimed.
 
@@ -189,4 +190,4 @@ On the C3, an existing empty 13-byte table remained byte-identical through updat
 
 Development used substantial AI assistance for implementation, testing, documentation and review. Automated and model reviews do not substitute for meaningful human code review. Original game/artwork and reconstructed code retain separate attribution and rights; the new platform's MIT license does not relicense them. The owner recorded a free, attributed fan-release basis and the project icon authorship; no upstream license grant is claimed. [Notices](../NOTICE.md).
 
-The source repository is public. A GitHub Release, Homebrew listing and social posts have not been published. Final Homebrew metadata, human publication review and maintainer acceptance remain separate from this draft preparation.
+The source repository and the 1.0.0 GitHub release are public. No Homebrew listing or social post has been published. Future compatibility claims require their own device evidence; Homebrew metadata, human publication review and maintainer acceptance remain separate.
