@@ -6,7 +6,7 @@ Bundle SDL-webOS 2.32.10 and the pinned libpng 1.6.43 startup codec. The game al
 
 Run the dependency audit and public-stage hash audit before packaging. The final IPK verifier checks every app file against that stage and requires executable permissions. The Windows packager's missing ELF execute bit was observed and corrected by `release/finalize_ipk.py`.
 
-The C3 target reports OLED48C3PUA, firmware 43.21.84, SDK 11.2.0, glibc 2.39 and GLIBCXX_3.4.32. Its Developer Mode jail does not expose `/etc/starfish-release`; minimum-release metadata must not be inferred from a marketing name. Runtime/install/input acceptance for the current artifact is recorded separately in VERIFICATION.md.
+The C3 target reports OLED48C3PUA, firmware 43.21.84, SDK 11.2.0, glibc 2.39 and GLIBCXX_3.4.32. Its Developer Mode jail does not expose `/etc/starfish-release`. Homebrew firmware data maps the C3 `43.21.70.01-HE_DTV_W23O_AFABJAAA` build to webOS release `11.2.0`; the owner's newer `43.21.84` firmware reports SDK `11.2.0`. The measured minimum is **11.2.0**; no release below that was tested. Runtime/install/input acceptance for the current artifact is recorded separately in VERIFICATION.md.
 
 Launch via the webOS application manager. Direct execution over the Developer Mode SSH service was rejected as the wrong application identity and is not a valid graphics test.
 

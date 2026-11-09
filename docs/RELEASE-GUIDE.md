@@ -115,7 +115,7 @@ describes hosting the IPK and manifest together. The current official toolbox
 source provides `webosbrew-gen-manifest`; older installations may expose
 `webosbrew-toolbox-gen-manifest`. Our helper recognizes either. The generator's
 [current CLI source](https://github.com/webosbrew/dev-toolbox-cli/blob/main/packages/gen-manifest/src/main.rs)
-matches the helper's package/icon/link/root/output arguments.
+matches the helper's package/link/root/output arguments.
 
 Install the generator from the [official toolbox repository](https://github.com/webosbrew/dev-toolbox-cli)
 if absent. With an existing Rust/Cargo toolchain, the source-install command is
@@ -123,14 +123,15 @@ if absent. With an existing Rust/Cargo toolchain, the source-install command is
 Review its selected revision/dependencies before installing; this guide does not
 install tools. Check `webosbrew-gen-manifest --help` after installation.
 
-The minimum release must come from actual compatibility evidence and the TV's
-`/etc/starfish-release`. Do not substitute firmware `43.21.84`, SDK `11.2.0` or
-a marketing name. Check the oldest release you claim. `rootRequired=false`
-describes this app's runtime, independently of how Homebrew Channel is installed;
-Developer Mode CLI installation is the verified non-root route for this build.
+The 1.0.0 measured minimum is **11.2.0**. The C3 jail lacks
+`/etc/starfish-release`; Homebrew firmware data maps the C3 `43.21.x` W23O build
+to release `11.2.0`, and the tested TV reports SDK `11.2.0`. Use `>=11.2.0`.
+Do not claim an older release. `rootRequired=false` describes this app's runtime,
+independently of how Homebrew Channel is installed; Developer Mode CLI installation
+is the verified non-root route for this build.
 
 ```powershell
-$minimumRelease = Read-Host 'Measured minimum compatible starfish release (numeric)'
+$minimumRelease = '>=11.2.0'
 $metadata = '.ai/outbox/homebrew-' + (Get-Date -Format 'yyyyMMdd-HHmmss')
 $releaseBase = 'https://github.com/ryanspice/SkifreeWebOS/releases/download/v1.0.0'
 $manifestUrl = 'https://github.com/ryanspice/SkifreeWebOS/releases/latest/download/com.ryanspice.skifree.manifest.json'

@@ -32,8 +32,8 @@ foreach ($entry in @{
     SourceUrl=$SourceUrl; IconUrl=$IconUrl; IpkUrl=$IpkUrl;
     ManifestUrl=$ManifestUrl; SupportPageUrl=$SupportPageUrl
 }.GetEnumerator()) { Assert-PublicHttpsUrl $entry.Value $entry.Key }
-if ($MinimumWebOSRelease -notmatch '^\d+(\.\d+){1,3}$') {
-    throw 'MinimumWebOSRelease must be a measured numeric release from the device, not its marketing name.'
+if ($MinimumWebOSRelease -notmatch '^(>=)?\d+(\.\d+){1,3}$') {
+    throw 'MinimumWebOSRelease must be a measured numeric release, optionally >=, not a marketing name.'
 }
 $packagePath = (Resolve-Path -LiteralPath $IpkPath).Path
 if (-not (Test-Path -LiteralPath $packagePath -PathType Leaf) -or

@@ -1,23 +1,29 @@
 # Compatibility brief and synthesis plan
 
-Research date: 2026-11-04. Two requested independent AI research lanes examined
-rooted/unrooted routes and consumer webOS versions. Their findings are source
-and documentation research; no new TV or firmware-symbol test was performed.
+Research date: 2026-11-04; minimum-release evidence added 2026-11-09. Two requested
+independent AI research lanes examined rooted/unrooted routes and consumer webOS
+versions. The 11.2.0 floor comes from Homebrew firmware data plus the tested C3;
+no older firmware build was run.
 
 ## 1.0.0 support scope
 
 1.0.0 is a single-TV release. The only tested configuration is the owner's
-**LG OLED48C3PUA (C3), firmware 43.21.84**. The release package was installed and
-launched through Developer Mode on 2026-11-09; the owner accepted the gameplay,
-controls and score saving. The executable is byte-identical to the earlier
-storage-corrected package, which created/replaced its score file as a non-root
-process and preserved owner-confirmed non-empty Slalom/Freestyle records across a
-fresh session and an update.
+**LG OLED48C3PUA (C3), firmware 43.21.84, webOS release 11.2.0**. The release
+package was installed and launched through Developer Mode on 2026-11-09; the owner
+accepted the gameplay, controls and score saving. The executable is byte-identical
+to the earlier storage-corrected package, which created/replaced its score file as
+a non-root process and preserved owner-confirmed non-empty Slalom/Freestyle records
+across a fresh session and an update.
+
+The measured minimum is **11.2.0**. Homebrew firmware data maps the C3
+`43.21.70.01-HE_DTV_W23O_AFABJAAA` build to release `11.2.0`; the owner's newer
+`43.21.84` firmware reports SDK `11.2.0` and is the tested device. No release below
+11.2.0 has been tested.
 
 | Target | 1.0.0 status |
 | --- | --- |
-| Owner's C3 / firmware 43.21.84 | **Tested and accepted.** Release IPK installed/launched; executable verified; scores saved; owner playtest accepted. |
-| Every other TV, firmware and webOS release | **Theoretical only.** No backward-compatibility claim, minimum webOS release or support commitment is made in 1.0.0. |
+| Owner's C3 / firmware 43.21.84 / release 11.2.0 | **Tested and accepted.** Release IPK installed/launched; executable verified; scores saved; owner playtest accepted. |
+| Every other TV, firmware and webOS release | **Theoretical only.** The measured floor is 11.2.0; no support or backward-compatibility claim is made below it. |
 
 The executable targets ARM32 EABI5 with `/usr/lib/ld-linux.so.3`, GLIBC 2.38 and
 GLIBCXX 3.4.32. Marketing webOS names, firmware releases and SDK version fields

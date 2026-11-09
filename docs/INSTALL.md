@@ -5,13 +5,14 @@ SkiFree for webOS 1.0.0 is published on GitHub and verified on the owner's C3. T
 ## Compatibility
 
 The 1.0.0 release package was installed and launched on one TV only: the owner's
-**LG OLED48C3PUA (C3), firmware 43.21.84**, on November 9, 2026. Its executable is
-byte-identical to the earlier C3-verified 1.0.0 package, whose non-root process
-created the new score file successfully. The TV reports SDK 11.2.0.
+**LG OLED48C3PUA (C3), firmware 43.21.84, webOS 11.2.0**, on November 9, 2026.
+Its executable is byte-identical to the earlier C3-verified 1.0.0 package, whose
+non-root process created the new score file successfully. The TV reports SDK
+11.2.0.
 
-1.0.0 is a single-TV release. Other TVs, webOS releases and firmware versions are
-theoretical targets only; no backward-compatibility claim is made until a later
-release tests them. The minimum webOS release is not established.
+1.0.0 is a single-TV release. The measured minimum is **11.2.0**. No release below
+11.2.0 has been tested. Other TVs, webOS releases and firmware versions are
+theoretical targets only; no support claim is made for them.
 
 The ARM32 build requires GLIBC 2.38 and GLIBCXX 3.4.32. Older TV software may not
 provide those libraries. The observed install used Developer Mode and a non-root

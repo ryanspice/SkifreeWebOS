@@ -48,8 +48,9 @@ The script defaults to `-Pool non-free` because the original artwork is separate
 The website is https://ryanspice.com/ and the source repository is
 https://github.com/ryanspice/SkifreeWebOS. The repository and the 1.0.0 GitHub
 Release are public. No Homebrew listing has been published. The TV jail lacks
-`/etc/starfish-release`; the observed SDK version alone is not used to fill
-minimum-release metadata.
+`/etc/starfish-release`; Homebrew firmware data maps the C3 `43.21.x` W23O build
+to release `11.2.0`, and the tested TV reports SDK `11.2.0`. The measured minimum
+is **11.2.0**; older releases were not tested.
 
 ## Submission checklist
 
@@ -66,7 +67,8 @@ minimum-release metadata.
 - [x] Published the GitHub release and verified the public bytes.
 - [ ] Updated HUD/browser visual acceptance, broader controls/focus and migration routes.
 - [ ] Independent human code review, design explanation and honest AI disclosure.
-- [ ] Confirm the Homebrew pool/eligibility and measured minimum webOS release.
+- [x] Measured minimum webOS release: **11.2.0** on the C3; no claim below.
+- [ ] Confirm the Homebrew pool/eligibility and human-review statement.
 - [ ] Generate concrete metadata and verify its remote downloads and checksums.
 - [ ] Submit the completed package YAML and PR body to webosbrew/apps-repo.
 

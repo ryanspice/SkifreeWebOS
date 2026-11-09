@@ -12,9 +12,9 @@ with the current notices. The exact package was installed and
 launched on the C3 on November 9, 2026. The earlier package's non-root score-file
 evidence remains the storage evidence.
 
-1.0.0 is a single-TV release: the owner's C3 is the only tested configuration.
-Other models and older webOS versions are theoretical targets; no backward
-compatibility is claimed until a later release has its own device evidence.
+1.0.0 is a single-TV release: the owner's C3 at webOS **11.2.0** is the only
+tested configuration. 11.2.0 is the measured minimum. Other models and older
+webOS versions are theoretical targets; no support claim is made below 11.2.0.
 
 ## Build inputs
 

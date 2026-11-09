@@ -170,7 +170,7 @@ gh release view v1.0.0 --json isDraft,isPrerelease,tagName,url,assets</code></pr
         <h2 id="title-4">5. Generate Homebrew metadata</h2>
         <p class="cue">The manifest describes one IPK; the package YAML points at the stable manifest URL.</p>
         <p>Install the official toolbox generator if absent. Our helper accepts the current <code>webosbrew-gen-manifest</code> name and the older toolbox name. Keep the variables from step 3.</p>
-        <pre><code>$minimumRelease = Read-Host 'Measured minimum starfish release'
+        <pre><code>$minimumRelease = '>=11.2.0'
 $metadata = '.ai/outbox/homebrew-' + (Get-Date -Format 'yyyyMMdd-HHmmss')
 $releaseBase = 'https://github.com/ryanspice/SkifreeWebOS/releases/download/v1.0.0'
 $manifestUrl = 'https://github.com/ryanspice/SkifreeWebOS/releases/latest/download/com.ryanspice.skifree.manifest.json'
@@ -183,7 +183,7 @@ $manifestUrl = 'https://github.com/ryanspice/SkifreeWebOS/releases/latest/downlo
   -SupportPageUrl 'https://github.com/ryanspice/SkifreeWebOS/blob/v1.0.0/docs/support.md' `
   -RootRequired false -MinimumWebOSRelease $minimumRelease `
   -Pool non-free -OutputDirectory $metadata</code></pre>
-        <p class="gate">Use compatibility evidence and <code>/etc/starfish-release</code> for the minimum. Firmware, SDK and marketing version numbers are different. The exact minimum is not established here.</p>
+        <p class="gate">The 1.0.0 measured minimum is <strong>11.2.0</strong>. The C3 jail lacks <code>/etc/starfish-release</code>; Homebrew firmware data maps the C3 43.21.x W23O build to 11.2.0. Do not claim an older release.</p>
         <p>Inspect JSON/YAML, including title, hash, size, pool and requirements. RootRequired describes the app, not how the Homebrew installer is obtained.</p>
         <p><a href="https://github.com/webosbrew/dev-toolbox-cli" target="_blank" rel="noopener noreferrer">Official toolbox</a> · <a href="https://www.webosbrew.org/develop/guides/publishing/how-to/" target="_blank" rel="noopener noreferrer">Submission reference</a></p>
       </section>

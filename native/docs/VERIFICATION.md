@@ -9,7 +9,7 @@ Updated November 9, 2026. This record separates automated checks, physical-devic
 - **Storage-fix package:** SHA-256 `e7b3d649…` (1,989,972 bytes; ARM executable `60397dfc…`). It was launched as non-root UID 6252, and score-file creation and replacement were checked. See *Historical November 5 non-root score storage fix*.
 - **Source:** the final release commit is recorded in `RELEASE-MANIFEST.json`. No gameplay source changed after the `494726b3` package; the release IPK is a repack with the current notices, not a new compile.
 
-The repackaged IPK's install and launch are recorded below. Its score file was not independently re-inspected after this install; the non-empty, non-root and update evidence applies to the byte-identical executable from the earlier package.
+The repackaged IPK's install and launch are recorded below. Its score file was read after install and contains records; the owner confirmed score saving. The non-empty, non-root and update evidence also applies to the byte-identical executable from the earlier package.
 
 ## Current package: saved-score browser and course-aware HUD
 
@@ -159,9 +159,9 @@ A subsequent strict Linux/WSL Release build passed all four CTest suites and rer
 
 ## Physical TV
 
-Tested configuration: **LG OLED48C3PUA (C3), firmware 43.21.84, SDK 11.2.0**. The version information was queried again during publication preparation. The audited IPK installed and launched through the application manager, and its actual framebuffer was inspected at **1920×1080 on Mali-G52 / GLES 3.2**. Installed executable and asset-manifest hashes matched the audited stage.
+Tested configuration: **LG OLED48C3PUA (C3), firmware 43.21.84, SDK 11.2.0, webOS release 11.2.0**. The version information was queried again during publication preparation. The audited IPK installed and launched through the application manager, and its actual framebuffer was inspected at **1920×1080 on Mali-G52 / GLES 3.2**. Installed executable and asset-manifest hashes matched the audited stage.
 
-Close/relaunch was exercised. One immediate sequence briefly left no running app entry; a subsequent launch after closure succeeded. No crash cause was established from that observation. **1.0.0 is a single-TV release:** the C3 is the only tested configuration, and other TV generations are theoretical targets, not backward-compatibility claims. A minimum numeric webOS release or rooted/unrooted requirement has not been verified. See [runtime requirements](WEBOS-RUNTIME.md).
+Close/relaunch was exercised. One immediate sequence briefly left no running app entry; a subsequent launch after closure succeeded. No crash cause was established from that observation. **1.0.0 is a single-TV release:** the C3 is the only tested configuration, and other TV generations are theoretical targets, not backward-compatibility claims. The measured minimum is **webOS 11.2.0**; Homebrew firmware data maps the C3 `43.21.70.01-HE_DTV_W23O_AFABJAAA` build to 11.2.0, and the owner's 43.21.84 TV reports SDK 11.2.0. No release below 11.2.0 was tested. A rooted/unrooted requirement has not been established. See [runtime requirements](WEBOS-RUNTIME.md).
 
 ![Native opening screen on the C3](../../docs/media/skifree-original-c3.png)
 
@@ -177,7 +177,7 @@ The local 1.0 candidate follows the owner's release bar: preserve the reconstruc
 
 Host tests cover non-empty save/reload, malformed tables, ranking validation, interrupted temporary files and replacement failures. The UI warns when saving is disabled. Existing malformed files and recovery material are preserved. The store does not guarantee concurrent-writer safety or POSIX power-loss durability.
 
-On the C3, an existing empty 13-byte table remained byte-identical through update and close/relaunch. The earlier package's non-root process then created/replaced its own score file, and owner-confirmed non-empty Slalom and Freestyle records survived a fresh launch and the later UI update unchanged. The 2026-11-09 repackaged IPK was installed and launched; its score file was not independently re-inspected. Uninstall, app-UID changes and broader migration routes remain unverified.
+On the C3, an existing empty 13-byte table remained byte-identical through update and close/relaunch. The earlier package's non-root process then created/replaced its own score file, and owner-confirmed non-empty Slalom and Freestyle records survived a fresh launch and the later UI update unchanged. The final 2026-11-09 IPK was installed and launched; its score file was read and contains Slalom and Freestyle records. The owner confirmed saving. Uninstall, app-UID changes and broader migration routes remain unverified.
 
 ## Earlier installed artifact identity and disclosure
 

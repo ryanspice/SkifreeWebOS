@@ -64,15 +64,17 @@ fix it.
 
 | At a glance | Current status |
 | --- | --- |
-| TV target | LG C3 / OLED48C3PUA, observed firmware 43.21.84 |
+| TV target | LG C3 / OLED48C3PUA, firmware 43.21.84, webOS 11.2.0 |
+| Minimum webOS release | **11.2.0** tested; no claim below it |
 | Native runtime | ARM32; GLIBC 2.38 and GLIBCXX 3.4.32 required |
 | Controls | Magic Remote pointer and directions, mouse, keyboard |
 | Saved scores | Original top ten per course, three-letter initials, legacy import |
-| Other TVs and webOS releases | Theoretical only in 1.0.0. The owner's C3 is the only tested TV; no backward-compatibility claim is made. |
+| Other TVs and webOS releases | Theoretical only. The C3 at 11.2.0 is the only tested configuration; no support claim below 11.2.0. |
 | Tag and downloads | [GitHub release](https://github.com/ryanspice/SkifreeWebOS/releases/tag/v1.0.0) · [tag checklist](release/TAGGING.md) |
 
-1.0.0 is a single-TV release. Other models and older webOS versions are
-theoretical targets for later testing; do not treat them as supported.
+1.0.0 is a single-TV release. The measured minimum is 11.2.0. Other models and
+older webOS versions are theoretical targets for later testing; do not treat them
+as supported.
 
 ## Choose your run
 

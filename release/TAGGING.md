@@ -29,6 +29,7 @@ Use [1.0.0 release notes](RELEASE-NOTES-1.0.0.md) for the eventual release body,
 - Bytes: **3,033,558**
 - SHA-256: `b0e38b31545c153494795c0fcd7f98b42c37c2425d7dfe872c69984791df3588`
 - Executable: `ed646651…` (byte-identical to the earlier C3-verified package)
+- Minimum webOS: **11.2.0** (measured on the C3; no claim below)
 - C3: installed and launched through Developer Mode on 2026-11-09.
 
 The maintainer's private release handoff holds the IPK, source set, manifests and
