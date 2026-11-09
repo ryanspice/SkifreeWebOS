@@ -5,8 +5,8 @@ version **1.0.0**. This package includes Original, Recreation, Yeti Chase and
 three-letter score entry. Build/package evidence does not replace its C3 run.
 
 Release package: `com.ryanspice.skifree_1.0.0_arm.ipk`,
-**3,034,062 bytes**, SHA-256
-`b0801db115564c79c84c784e234d274ca2e8b8e074b40ce6fab5c51b3eae548f`.
+**3,033,540 bytes**, SHA-256
+`b2aae0695f7818dfc939ee04a96373045e9e0a22a6e88f12f18bfed5b36a7450`.
 It reuses the C3-verified executable (`ed646651…`) from the November 5 build
 with the current notices. The exact package was installed and
 launched on the C3 on November 9, 2026. The earlier package's non-root score-file

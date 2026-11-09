@@ -28,10 +28,10 @@ The full mapping is in `README.md` in the attached source ZIP.
 2. Compare the package SHA-256 with the listed value:
 
    ```text
-   b0801db115564c79c84c784e234d274ca2e8b8e074b40ce6fab5c51b3eae548f
+   b2aae0695f7818dfc939ee04a96373045e9e0a22a6e88f12f18bfed5b36a7450
    ```
 
-   The release IPK is **3,034,062 bytes**.
+   The release IPK is **3,033,540 bytes**.
 3. Install and launch through the webOS CLI:
 
    ```powershell

@@ -77,7 +77,7 @@ $tag = 'v1.0.0'
 $bundle = $env:SKIFREE_RELEASE_BUNDLE
 if (-not $bundle) { throw 'Set SKIFREE_RELEASE_BUNDLE to the private handoff folder.' }
 $ipk = Join-Path $bundle 'com.ryanspice.skifree_1.0.0_arm.ipk'
-$expected = 'b0801db115564c79c84c784e234d274ca2e8b8e074b40ce6fab5c51b3eae548f'
+$expected = 'b2aae0695f7818dfc939ee04a96373045e9e0a22a6e88f12f18bfed5b36a7450'
 if ((Get-FileHash $ipk -Algorithm SHA256).Hash.ToLowerInvariant() -ne $expected) {
     throw 'IPK differs from the audited C3 candidate. Rebuild/review its evidence.'
 }

@@ -24,7 +24,7 @@ The finalizer normalizes Unix modes, including execute permissions on the ELF. T
 
 The builder refuses existing output files. Preserve previous archives and use a fresh revision name after changes. The ZIP, adjacent SHA-256 file and per-file manifest form one source-release set. A source-only documentation refresh does not change the audited IPK or its checksum.
 
-The release package (SHA-256 `b0801db1…`, 3,034,062 bytes) is attached to the
+The release package (SHA-256 `b2aae069…`, 3,033,540 bytes) is attached to the
 public 1.0.0 GitHub release. It reuses the
 C3-verified executable from the earlier `494726b3…` package and was installed and
 launched on the C3 on 2026-11-09. The earlier package's actual non-root file
