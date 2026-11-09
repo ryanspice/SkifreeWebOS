@@ -30,10 +30,10 @@ for the distinction between installation method and app privileges.
 2. Obtain the IPK and its `SHA256SUMS.txt` from the same release, then compare the
    package's SHA-256 with the listed checksum. In PowerShell, use
    `Get-FileHash -Algorithm SHA256 <path-to-ipk>`. The release package installed
-   and launched on the C3 is 3,033,540 bytes with SHA-256:
+   and launched on the C3 is 3,033,558 bytes with SHA-256:
 
    ```text
-   b2aae0695f7818dfc939ee04a96373045e9e0a22a6e88f12f18bfed5b36a7450
+   b0e38b31545c153494795c0fcd7f98b42c37c2425d7dfe872c69984791df3588
    ```
 
    Its executable is byte-identical to the earlier C3-verified package

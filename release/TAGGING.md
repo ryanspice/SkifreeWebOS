@@ -26,8 +26,8 @@ Use [1.0.0 release notes](RELEASE-NOTES-1.0.0.md) for the eventual release body,
 ## Current package
 
 - IPK: `com.ryanspice.skifree_1.0.0_arm.ipk`
-- Bytes: **3,033,540**
-- SHA-256: `b2aae0695f7818dfc939ee04a96373045e9e0a22a6e88f12f18bfed5b36a7450`
+- Bytes: **3,033,558**
+- SHA-256: `b0e38b31545c153494795c0fcd7f98b42c37c2425d7dfe872c69984791df3588`
 - Executable: `ed646651…` (byte-identical to the earlier C3-verified package)
 - C3: installed and launched through Developer Mode on 2026-11-09.
 
