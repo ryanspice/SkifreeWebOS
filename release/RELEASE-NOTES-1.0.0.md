@@ -23,7 +23,7 @@ BEST initials/result row. Original ranking and gameplay rules are unchanged.
 
 Score storage rejects incomplete, malformed or incorrectly ranked tables before adopting them. Saves retain the temporary-file/replace approach; failure and interrupted-save states preserve recovery material, disable further writes for that session and show a clear menu warning. Older binaries do not read the new initials file.
 
-Owner playtesting provided positive aggregate input feedback. The source, build, package and TV evidence is recorded in [verification](../native/docs/VERIFICATION.md). Full Windows runtime equivalence and compatibility with every LG TV have not been established. This remains a local candidate; no public release or social post has been sent.
+Owner playtesting provided positive aggregate input feedback. The source, build, package and TV evidence is recorded in [verification](../native/docs/VERIFICATION.md). Full Windows runtime equivalence has not been established. Only one TV is tested: the owner's LG OLED48C3PUA (C3), firmware 43.21.84. Other TVs, webOS releases and the minimum webOS release are TBD. This remains a local candidate; no public release or social post has been sent.
 
 
 The corrected package passed four Windows suites, four Linux sanitizer suites,

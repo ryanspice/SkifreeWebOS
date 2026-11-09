@@ -62,7 +62,7 @@ and score troubleshooting.
 | Native runtime | ARM32; GLIBC 2.38 and GLIBCXX 3.4.32 required |
 | Controls | Magic Remote pointer and directions, mouse, keyboard |
 | Saved scores | Original top ten per course, three-letter initials, legacy import |
-| Other webOS generations | Compatibility research and separate validation planned |
+| Other TVs and webOS releases | TBD; only the owner's C3 is tested |
 | Tag and downloads | [Release preparation and remaining gates](release/TAGGING.md) |
 
 ## Choose your run
