@@ -51,7 +51,7 @@ The same package was installed and launched on the owner's LG OLED48C3PUA (C3), 
 
 ## Verification
 
-The release executable passed four Windows suites, four Linux sanitizer suites and **118 assertions**, plus **83 native UI cases**, source/stage boundary checks and package-permission checks. The staged package contains 104 allowlisted files; the IPK verifier matched all 105 packaged files, including the 89 hash-checked sprites. The release package was installed and launched on the C3. See `native/docs/VERIFICATION.md` in the attached source ZIP for exact artifact identities and scope.
+The 1.0.0 source passed four Windows suites and four Linux sanitizer suites with **118 assertions**; the native UI suite passed **83 cases**. The release ARM stage contains 104 allowlisted files; the IPK verifier matched all 105 packaged files, including the 89 hash-checked sprites. The release package was installed and launched on the C3. See `native/docs/VERIFICATION.md` in the attached source ZIP for exact artifact identities and scope.
 
 ## Credits and rights
 
