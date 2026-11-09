@@ -10,4 +10,4 @@
 
 Original timed/slalom courses, exact original physics, all NPC behavior and audio are not implemented. Consult the current verification record for actual TV and physical-input results; software input tests are not physical-controller acceptance.
 
-Optional support links lead to Ryan's website/GitHub and a page featuring Champions of Snowboarding 2026. No payment or signup is required to play. No Homebrew listing or public release is claimed until publication occurs.
+Optional support links lead to Ryan's website/GitHub. No payment or signup is required to play. No Homebrew listing or public release is claimed until publication occurs.

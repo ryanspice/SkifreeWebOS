@@ -1,6 +1,6 @@
 # Native SkiFree for webOS — 1.0.0
 
-C++20; original 1.04 reconstructed game core; SDL2 window/context/input; Spice Home raw GLES2 shaders. No browser or Rust runtime.
+C++20; original 1.04 reconstructed game core; SDL2 window/context/input; raw GLES2 shaders. No browser or Rust runtime.
 
 Desktop dependencies: CMake, a C++20 compiler, SDL2 headers/runtime, libpng and a working GLES2 driver. The SDL functions are loaded dynamically. The following Linux commands run from this `native` directory:
 

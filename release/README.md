@@ -8,7 +8,7 @@ main consolidation through GitHub hosting and a Homebrew submission.
 
 ## Build, package and verify
 
-Build using `native/README.md`. Stage the executable, the explicit 89-sprite inventory, icon, licenses and required SDL/libpng runtimes. Run `native/scripts/audit_public_stage.py --stage <stage> --report <outside-stage-report.json>`.
+Build using `native/README.md`. Stage the executable, the explicit 89-sprite inventory, required app files, licenses and SDL/libpng runtimes. Run `native/scripts/audit_public_stage.py --stage <stage> --report <outside-stage-report.json>`.
 
 Package that directory with `ares-package`. On Windows, write this first package to an ignored intermediate directory. Then run:
 
@@ -20,7 +20,7 @@ python release/ipk_permissions_tests.py
 python release/prepare_source_archive.py --out .ai/outbox/release-1.0.0/SkifreeWebOS-1.0.0-source.zip
 ```
 
-The finalizer normalizes Unix modes, including execute permissions on the ELF. The verifier compares every packaged app file against the audited stage. The source builder permits source files, explicitly listed documentation and policies, the checked-in project icon, the 89 hash-verified sprites and three hash-verified documentation images. It excludes original EXE/ZIP files, raw resource dumps, known private/planning paths, unsent launch drafts, unapproved documentation text and generated release metadata. This path/asset gate is not a content-level secret scanner; review source contents before publication. Documentation images are not added to the IPK. Source ZIPs include the Git-visible tree, including allowed uncommitted files, and omit ignored build dependencies; pinned dependency preparation remains documented.
+The finalizer normalizes Unix modes, including execute permissions on the ELF. The verifier compares every packaged app file against the audited stage. The source builder permits source files, explicitly listed documentation and policies, required app files, the 89 hash-verified sprites and two hash-verified documentation images. It excludes original EXE/ZIP files, raw resource dumps, known private/planning paths, unsent launch drafts, unapproved documentation text and generated release metadata. This path/asset gate is not a content-level secret scanner; review source contents before publication. Documentation images are not added to the IPK. Source ZIPs include the Git-visible tree, including allowed uncommitted files, and omit ignored build dependencies; pinned dependency preparation remains documented.
 
 The builder refuses existing output files. Preserve previous archives and use a fresh revision name after changes. The ZIP, adjacent SHA-256 file and per-file manifest form one source-release set. A source-only documentation refresh does not change the audited IPK or its checksum.
 
@@ -41,7 +41,7 @@ retained; immutable receipts may still contain their historical paths.
 
 ## Homebrew metadata
 
-`Prepare-Homebrew.ps1` wraps the official Homebrew manifest generator and checks app identity, version, byte size and SHA-256. Supply the final IPK, real public source/icon/IPK/manifest/support URLs, observed root requirement and minimum tested numeric webOS release. It produces the manifest, package YAML, checksum and receipt in a fresh output directory.
+`Prepare-Homebrew.ps1` wraps the official Homebrew manifest generator and checks app identity, version, byte size and SHA-256. Supply the final IPK, public source/IPK/manifest/support URLs, observed root requirement and measured minimum webOS release. It writes the manifest, package YAML, checksum and receipt to a fresh output directory.
 
 The script defaults to `-Pool non-free` because the original artwork is separate from the code's MIT license. Confirm the appropriate pool and redistribution terms against the current repository rules before submission; free pricing does not describe a source/artwork license. No license grant is fabricated by this tooling. Public URL and compatibility fields remain explicit inputs rather than plausible placeholders.
 
@@ -60,7 +60,7 @@ minimum-release metadata.
 - [x] Corrected storage IPK: actual score-file creation/replacement as non-root UID 6252; legacy bytes preserved.
 - [x] Owner-confirmed non-empty Slalom/Freestyle records reloaded and survived the UI package update unchanged.
 - [x] Release package installed and launched on the C3; exact bytes and checksum recorded.
-- [x] Owner recorded the free fan-release basis and the icon authorship; no upstream license grant is claimed.
+- [x] Owner recorded the free fan-release basis; no upstream license grant is claimed.
 - [x] Release asset replaced with the audited package, current notices and refreshed source set.
 - [x] Owner reported that tested inputs, Original behavior and score saving are good.
 - [x] Published the GitHub release and verified the public bytes.
@@ -74,6 +74,6 @@ Current [Homebrew rules](https://www.webosbrew.org/develop/guides/publishing/rul
 
 ## Support and promotion
 
-The description links to the website and a public copy of `docs/support.md`, which introduces Champions of Snowboarding 2026. `.github/FUNDING.yml` uses the verified website as a custom support link. No donation account or paid campaign was created.
+The description links to the website. `.github/FUNDING.yml` uses the verified website as a custom support link. No donation account or paid campaign was created.
 
 Unsent Reddit, LinkedIn and X drafts remain in the maintainer's local working copy and are excluded from the public source archive. Check each community's current rules before posting; obtain moderator approval where required. No post, moderator request, schedule or ad has been sent.

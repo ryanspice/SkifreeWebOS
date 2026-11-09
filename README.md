@@ -13,7 +13,7 @@ A free, independent adaptation of SkiFree for LG webOS TVs. Play with a Magic Re
 
 *Native 1.0.0 framebuffer captured on an LG C3. Original is the default run.*
 
-**[Install and play](docs/INSTALL.md)** · [Controls](#original-controls) · [Compatibility and checks](native/docs/VERIFICATION.md) · [Champions of Snowboarding 2026](docs/support.md)
+**[Install and play](docs/INSTALL.md)** · [Controls](#original-controls) · [Compatibility and checks](native/docs/VERIFICATION.md)
 
 **Release status:** 1.0.0 is verified on the owner's C3. Download it from the [GitHub release](https://github.com/ryanspice/SkifreeWebOS/releases/tag/v1.0.0); no Homebrew Channel listing has been published yet. Do not install a copy from an untrusted mirror.
 
@@ -163,6 +163,6 @@ The [original-game comparison](native/docs/ORIGINAL-COMPARISON.md) records the c
 
 ## More from Ryan
 
-[Website](https://ryanspice.com/) · [GitHub](https://github.com/ryanspice) · [Support my work and discover Champions of Snowboarding 2026](docs/support.md)
+[Website](https://ryanspice.com/) · [GitHub](https://github.com/ryanspice)
 
 Development used substantial AI assistance. Build, automated tests, TV execution, physical controls and human authenticity acceptance are recorded separately in [verification](native/docs/VERIFICATION.md).

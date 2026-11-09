@@ -131,7 +131,7 @@ git log -3 --oneline</code></pre>
       <section class="step-panel" id="panel-1" aria-labelledby="title-1" hidden>
         <h2 id="title-1">2. Accept the candidate</h2>
         <p class="cue">Look for named evidence for this exact package, including the final HUD/browser review.</p>
-        <ul><li>Confirm controls, course timing, initials and scores after relaunch.</li><li>Complete meaningful human code review and describe the design choices.</li><li>Record the owner's free fan-release decision and the icon authorship; do not claim an upstream license grant.</li><li>Review current CI and the 1.0.0 tag checklist.</li></ul>
+        <ul><li>Confirm controls, course timing, initials and scores after relaunch.</li><li>Complete meaningful human code review and describe the design choices.</li><li>Record the owner's free fan-release decision; do not claim an upstream license grant.</li><li>Review current CI and the 1.0.0 tag checklist.</li></ul>
         <pre><code>python release/source_archive_tests.py
 python release/ipk_permissions_tests.py
 python native/tests/public_stage_tests.py
@@ -190,7 +190,7 @@ $manifestUrl = 'https://github.com/ryanspice/SkifreeWebOS/releases/latest/downlo
       <section class="step-panel" id="panel-5" aria-labelledby="title-5" hidden>
         <h2 id="title-5">6. Verify published downloads</h2>
         <p class="cue">1.0.0 is published; a signed-out visitor must be able to download the manifest and its exact IPK.</p>
-        <ol><li>The package manifest is attached to the published 1.0.0 release.</li><li>Do not republish or replace 1.0.0 assets.</li><li>Download without account credentials and compare hash and size.</li><li>Check icon, source and support links too.</li></ol>
+        <ol><li>The package manifest is attached to the published 1.0.0 release.</li><li>Do not republish or replace 1.0.0 assets.</li><li>Download without account credentials and compare hash and size.</li><li>Check source and support links too.</li></ol>
         <pre><code>$verify = '.ai/evidence/public-download-' + (Get-Date -Format 'yyyyMMdd-HHmmss')
 New-Item -ItemType Directory -Path $verify | Out-Null
 $manifestFile = Join-Path $verify 'manifest.json'
@@ -213,7 +213,7 @@ if ($m.ipkHash.sha256 -ne $expected) { throw 'Different candidate' }</code></pre
       <section class="step-panel" id="panel-7" aria-labelledby="title-7" hidden>
         <h2 id="title-7">8. Confirm the listing and share it</h2>
         <p class="cue">The listing appears, its download works, and its version/hash matches your release.</p>
-        <ul><li>Check installation, launch and update on a supported TV. Preserve existing scores; do not uninstall the owner's game as a test.</li><li>Finish the Reddit, LinkedIn and X drafts with actual download/listing links and checked community rules.</li><li>Keep optional support and Champions links in the description/support page.</li><li>For 1.1.0, keep the app ID, create a new version/tag, and regenerate the manifest at the stable URL. Review package requirements when compatibility changes.</li></ul>
+        <ul><li>Check installation, launch and update on a supported TV. Preserve existing scores; do not uninstall the owner's game as a test.</li><li>Finish the Reddit, LinkedIn and X drafts with actual download/listing links and checked community rules.</li><li>Keep optional support links in the description.</li><li>For 1.1.0, keep the app ID, create a new version/tag, and regenerate the manifest at the stable URL. Review package requirements when compatibility changes.</li></ul>
         <p>Homebrew maintainers control listing acceptance. Announcing the app and enabling future online scores are separate steps.</p>
       </section>
       <div class="footer">

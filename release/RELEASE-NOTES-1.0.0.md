@@ -58,13 +58,12 @@ The 1.0.0 source passed four Windows suites and four Linux sanitizer suites with
 
 - Original SkiFree game and artwork: **Chris Pirih**, https://ski.ihoc.net/.
 - Original game core adapted from the pinned reconstructions by **Eric Fry** (`yuv422/skifree_decomp`) and **Jeff** (`jeff-1amstudios/skifree_sdl`).
-- TV platform, renderer and input adaptation: new code under MIT, adapted from Ryan's Spice Home C++ project.
-- Project icon: **Ryan Spice**, created for this project using the original SkiFree icon as a visual reference.
+- TV platform, renderer and input adaptation: new code under MIT.
 
 This is a free fan release; no royalties or payments are requested. That is a distribution decision, not a license grant from Chris Pirih or the reconstruction authors. The original artwork and reconstructed core keep their separate rights; the MIT license for the new platform code does not cover them. Details: `native/NOTICE.md` in the attached source ZIP.
 
 Substantial AI assistance was used for implementation, tests and documentation. The owner tested the controls and Original gameplay on the C3; automated checks do not replace a human code review.
 
-## More from Ryan
+## Links
 
-[Website](https://ryanspice.com/) · [GitHub](https://github.com/ryanspice) · [Support and Champions of Snowboarding 2026](https://github.com/ryanspice/SkifreeWebOS/blob/v1.0.0/docs/support.md)
+[Website](https://ryanspice.com/) · [GitHub](https://github.com/ryanspice)

@@ -56,7 +56,7 @@ class PublicSourceBoundaries(unittest.TestCase):
 
     def test_documentation_media_inventory(self):
         manifest = json.loads((archive.ROOT / "docs/media/manifest.json").read_text(encoding="utf-8"))
-        self.assertEqual(len(manifest["files"]), 3)
+        self.assertEqual(len(manifest["files"]), 2)
         self.assertEqual({item["path"] for item in manifest["files"]}, archive.PUBLIC_MEDIA)
         for item in manifest["files"]:
             with self.subTest(name=item["path"]):

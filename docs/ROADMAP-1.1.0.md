@@ -187,5 +187,5 @@ Required evidence:
 
 Account login, cross-device identity recovery, cloud-save synchronization,
 historical-score backfill, seeded competitions and verified replays are outside
-1.1.0. A public web leaderboard and Champions of Snowboarding link can follow
-once the API works; promotional links need not appear in the game’s score flow.
+1.1.0. A public web leaderboard can follow once the API works; promotional links
+need not appear in the game’s score flow.

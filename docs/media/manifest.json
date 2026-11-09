@@ -16,14 +16,6 @@
       "context": "Native desktop capture of the lighter Recreation HUD and hidden in-run footer",
       "width": 1280,
       "path": "docs/media/skifree-recreation-desktop.png"
-    },
-    {
-      "sha256": "d6f91e6302eb6c129a8694802b5e905593823939527b3f268dd97a8da0d72e3d",
-      "captured": "2026-10-15",
-      "height": 800,
-      "context": "Champions development home interface; concept course panel, not gameplay",
-      "width": 1280,
-      "path": "docs/media/champions-development-preview.png"
     }
   ]
 }

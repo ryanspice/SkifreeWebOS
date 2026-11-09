@@ -3,8 +3,8 @@
 ## Current maintenance pass — 2026-11-05
 
 Baseline: `65a813b`, with a clean worktree, 185 tracked files and approximately
-1.95 MB of tracked file contents. The largest tracked item is the attributed
-Champions development preview (approximately 1.40 MB). Generated builds, private
+1.95 MB of tracked file contents. The largest tracked item is a documentation
+image (approximately 1.40 MB). Generated builds, private
 TV receipts, local dependencies and unsent launch material are already ignored.
 No deletion or history rewrite is needed to make the source tree navigable.
 
@@ -115,7 +115,7 @@ measure, not a comprehensive security audit.
    playtests. Earlier TV checks cover an empty legacy table and storage behavior.
 2. Complete public-release metadata, meaningful human review and the Homebrew
    compatibility fields before submitting the listing. The owner's free
-   fan-release decision and the icon authorship are recorded in the notices.
+   fan-release decision is recorded in the notices.
 3. Broader EXE runtime comparison remains incomplete. The pinned reconstruction
    and reviewed disassembly support specific paths, not every possible state.
 4. Score storage assumes a single writer. It does not guarantee POSIX power-loss

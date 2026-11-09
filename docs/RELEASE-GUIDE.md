@@ -56,8 +56,8 @@ gh run list --repo ryanspice/SkifreeWebOS --workflow checks.yml --limit 3
 
 Keep [Original provenance](../native/src/classic/PROVENANCE.md), artwork terms and
 [notices](../native/NOTICE.md) separate from the platform code's MIT license. The
-owner has recorded a free, attributed fan-release basis and the project icon
-authorship; no upstream license grant is claimed. That is a distribution decision,
+owner has recorded a free, attributed fan-release basis; no upstream license
+grant is claimed. That is a distribution decision,
 not a legal conclusion. A `non-free` listing does not create rights. Ask maintainers
 about eligibility if the documented terms remain unclear; do not change the
 bundled/import product behavior merely to complete a form.
@@ -155,8 +155,8 @@ receipts locally; do not upload those as public artifacts.
 
 1.0.0 is already published as a stable, latest release; the package manifest is
 attached. Do not republish or replace its assets. From a fresh unauthenticated
-download, check the manifest, IPK hash and byte count, original icon, source and
-support links. Keep downloads under `.ai/`.
+download, check the manifest, IPK hash and byte count, source and support links.
+Keep downloads under `.ai/`.
 
 The `releases/latest/download/` manifest route needs a public stable latest
 release; 1.0.0 satisfies that. A draft or prerelease would not.
@@ -207,7 +207,7 @@ update checks; do not uninstall the owner's real game as a test. Confirm the
 listed hash/version before sharing the listing URL.
 
 Finish the existing Reddit, LinkedIn and X drafts with real download/listing
-links, screenshots and a modest optional support/Champions link. Check each
+links, screenshots and a modest optional support link. Check each
 community's current posting rules. Sending posts remains a separate action.
 
 For 1.1.0: keep the application ID, increment versions together, rebuild/test,

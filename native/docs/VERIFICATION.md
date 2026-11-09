@@ -4,10 +4,10 @@ Updated November 9, 2026. This record separates automated checks, physical-devic
 
 ## Status on November 9, 2026
 
-- **Release package:** `com.ryanspice.skifree_1.0.0_arm.ipk`, **3,034,062 bytes**, SHA-256 `b0801db115564c79c84c784e234d274ca2e8b8e074b40ce6fab5c51b3eae548f`; ARM executable `ed646651…`. It was installed and launched through Developer Mode on the C3 on 2026-11-09. It reuses the executable from the earlier C3-verified package (`494726b3…`, 1,999,474 bytes) and adds the current 1254×1254 icon and notices. The executable contains the initials and named-score markers.
+- **Release package:** `com.ryanspice.skifree_1.0.0_arm.ipk`, **3,034,062 bytes**, SHA-256 `b0801db115564c79c84c784e234d274ca2e8b8e074b40ce6fab5c51b3eae548f`; ARM executable `ed646651…`. It was installed and launched through Developer Mode on the C3 on 2026-11-09. It reuses the executable from the earlier C3-verified package (`494726b3…`, 1,999,474 bytes) and adds the current notices. The executable contains the initials and named-score markers.
 - **Earlier C3-verified package:** SHA-256 `494726b3…` (1,999,474 bytes; the same `ed646651…` executable). Owner-confirmed Slalom and Freestyle records survived a fresh launch and a package update. Its non-root score-file creation/replacement and empty-table preservation were checked.
 - **Storage-fix package:** SHA-256 `e7b3d649…` (1,989,972 bytes; ARM executable `60397dfc…`). It was launched as non-root UID 6252, and score-file creation and replacement were checked. See *Historical November 5 non-root score storage fix*.
-- **Source:** the final release commit is recorded in `RELEASE-MANIFEST.json`. No gameplay source changed after the `494726b3` package; the release IPK is a repack with the current icon and notices, not a new compile.
+- **Source:** the final release commit is recorded in `RELEASE-MANIFEST.json`. No gameplay source changed after the `494726b3` package; the release IPK is a repack with the current notices, not a new compile.
 
 The repackaged IPK's install and launch are recorded below. Its score file was not independently re-inspected after this install; the non-empty, non-root and update evidence applies to the byte-identical executable from the earlier package.
 
@@ -188,6 +188,6 @@ On the C3, an existing empty 13-byte table remained byte-identical through updat
 | Asset manifest | `e86293722f01e2a9fb1b3732b87e66ab9512ccb3291acc622feb3467f9ba197e` |
 | Original core source | `bf9922eefc15b4af9a715dc38170c7a455cbb270b54637b68859c71e7a91463b` |
 
-Development used substantial AI assistance for implementation, testing, documentation and review. Automated and model reviews do not substitute for meaningful human code review. Original game/artwork and reconstructed code retain separate attribution and rights; the new platform's MIT license does not relicense them. The owner recorded a free, attributed fan-release basis and the project icon authorship; no upstream license grant is claimed. [Notices](../NOTICE.md).
+Development used substantial AI assistance for implementation, testing, documentation and review. Automated and model reviews do not substitute for meaningful human code review. Original game/artwork and reconstructed code retain separate attribution and rights; the new platform's MIT license does not relicense them. The owner recorded a free, attributed fan-release basis; no upstream license grant is claimed. [Notices](../NOTICE.md).
 
 The source repository and the 1.0.0 GitHub release are public. No Homebrew listing or social post has been published. Future compatibility claims require their own device evidence; Homebrew metadata, human publication review and maintainer acceptance remain separate.

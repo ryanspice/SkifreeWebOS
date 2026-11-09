@@ -1,26 +1,12 @@
-# More from Ryan
+# Support
 
-Thanks for playing SkiFree for webOS. It's free, with no paid unlock or account required to play. Chris Pirih created the original SkiFree and its artwork; this is my independent TV adaptation.
+SkiFree for webOS is free. No paid unlock or account is required. Chris Pirih created the original SkiFree and its artwork; this is an independent TV adaptation.
 
-[Visit my website](https://ryanspice.com/) · [Follow my work on GitHub](https://github.com/ryanspice)
-
-## Champions of Snowboarding 2026
-
-**Another mountain. A snowboard this time.**
-
-![Champions of Snowboarding 2026 development home screen](media/champions-development-preview.png)
-
-*Development interface captured October 15, 2026. The course panel contains concept linework; this is a work-in-progress interface preview, not gameplay footage or a release announcement.*
-
-I'm also building **Champions of Snowboarding 2026**. If SkiFree brought you here, take a look at the snowboarding game I'm working on next.
-
-**[Follow my work at ryanspice.com](https://ryanspice.com/)**
-
-Champions is my own separate game. This is a promotion from its developer, with no claim of affiliation with SkiFree or its author.
+[Website](https://ryanspice.com/) · [GitHub](https://github.com/ryanspice)
 
 ## Help with SkiFree for webOS
 
-Useful reports include your TV model, exact firmware/webOS release, app version, input device and the steps that reproduce a problem. Please keep original executable files, private network addresses, credentials and unrelated TV logs out of public issues.
+Useful reports include your TV model, exact firmware/webOS release, app version, input device and the steps that reproduce a problem. Keep original executable files, private network addresses, credentials and unrelated TV logs out of public issues.
 
 [Installation and troubleshooting](INSTALL.md) · [Controls and high scores](../README.md#original-controls)
 

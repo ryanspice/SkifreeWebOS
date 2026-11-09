@@ -6,7 +6,7 @@
 - [TV build brief](TV-BUILD.md)
 - [Rooted/unrooted and webOS version compatibility plan](COMPATIBILITY.md)
 - [Controls and run selection](../README.md#original-controls)
-- [Support Ryan and Champions of Snowboarding 2026](support.md)
+- [Project support](https://ryanspice.com/)
 - [Screenshot context and attribution](media/README.md)
 
 ## Development and evidence

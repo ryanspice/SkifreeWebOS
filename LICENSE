@@ -1,4 +1,4 @@
-Scope: this license covers the new platform, integration and tooling authored for this project. It does not cover original SkiFree resources, the reconstructed code/tables in native/src/classic, or the Champions promotional image in docs/media. See native/NOTICE.md, native/src/classic/PROVENANCE.md and docs/media/README.md.
+Scope: this license covers the new platform, integration and tooling authored for this project. It does not cover original SkiFree resources or the reconstructed code/tables in native/src/classic. See native/NOTICE.md and native/src/classic/PROVENANCE.md.
 
 MIT License
 

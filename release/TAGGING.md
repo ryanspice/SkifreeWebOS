@@ -45,8 +45,8 @@ release.
 - [x] Release package installed and launched on the C3.
 - [x] Storage-fix package: non-root file creation/replacement and preserved old
   score bytes verified; owner-confirmed non-empty records survived an update.
-- [x] Owner recorded the free fan-release basis and the icon authorship. No
-  upstream artwork/reconstruction license grant is claimed.
+- [x] Owner recorded the free fan-release basis. No upstream
+  artwork/reconstruction license grant is claimed.
 - [x] Release asset replaced with the audited package and current notices; release published.
 - [x] Owner reported that tested inputs and Original behavior are good.
 - [ ] Independent human code/design review, or an explicit owner sign-off on

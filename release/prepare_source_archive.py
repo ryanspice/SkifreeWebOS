@@ -14,8 +14,7 @@ ROOT_FILES = {"README.md", "CONTRIBUTING.md", "AGENTS.md", "LICENSE", "NOTICE.md
 LOCAL_FILES = {"native/docs/PUBLISHING-PLAN-2026-11-04.md",
                "release/HOMEBREW-PR-DRAFT.md"}
 LOCAL_PREFIXES = (".ai/", "private/", "native/docs/wayfinder/", "docs/marketing/")
-PUBLIC_MEDIA = {"docs/media/skifree-original-c3.png", "docs/media/skifree-recreation-desktop.png",
-                "docs/media/champions-development-preview.png"}
+PUBLIC_MEDIA = {"docs/media/skifree-original-c3.png", "docs/media/skifree-recreation-desktop.png"}
 # New release outputs belong in ignored project-local .ai/ directories.
 RELEASE_FILES = {"README.md", "AGENTS.md", "TAGGING.md", "Prepare-Homebrew.ps1", "homebrew-package.yml.in",
                  "finalize_ipk.py", "verify_ipk.py", "prepare_source_archive.py",

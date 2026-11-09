@@ -15,7 +15,7 @@ The adaptation retains the original actor tables, nominal 40 ms timer cadence, c
 Platform changes:
 
 - C++ compilation with fixed-width Win32 integer types and explicit wrapping arithmetic; a portable implementation of the original Microsoft CRT random sequence.
-- SDL window/context/input and the Spice Home raw GLES renderer replace GDI and the reference SDL_Renderer. No SDL_ttf, SDL_image or Rust runtime is used.
+- SDL window/context/input and the raw GLES renderer replace GDI and the reference SDL_Renderer. No SDL_ttf, SDL_image or Rust runtime is used.
 - Original bitmap resources 1–89 are separate nearest-filtered textures. Bitmap dimensions and original depth ordering are preserved; dirty-region bookkeeping remains in the core.
 - A 640×360 logical game area is scaled to the TV; the original window was resizable. The status font and pause/help/score dialogs are platform adaptations, not original Windows UI pixels.
 - The platform pauses on focus loss, maps remote OK to the original mouse click action, and exposes fast mode in the pause menu for remotes without F.

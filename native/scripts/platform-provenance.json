@@ -1,7 +1,7 @@
 {
   "recorded_date": "2026-11-04",
-  "source_root": "B:/Dev/webos/spice-home-cpp",
-  "source_license": "MIT, Copyright (c) 2026 Spice Home contributors",
+  "source_root": "private earlier MIT-licensed renderer project",
+  "source_license": "MIT; see LICENSE",
   "source_modified": false,
   "scope": "SDL window/input loader, raw GLES2 quad/texture renderer, viewport geometry, strict build/staging scaffolding",
   "adaptations": [

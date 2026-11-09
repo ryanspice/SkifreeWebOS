@@ -8,7 +8,7 @@ Release package: `com.ryanspice.skifree_1.0.0_arm.ipk`,
 **3,034,062 bytes**, SHA-256
 `b0801db115564c79c84c784e234d274ca2e8b8e074b40ce6fab5c51b3eae548f`.
 It reuses the C3-verified executable (`ed646651…`) from the November 5 build
-with the current 1254×1254 icon and notices. The exact package was installed and
+with the current notices. The exact package was installed and
 launched on the C3 on November 9, 2026. The earlier package's non-root score-file
 evidence remains the storage evidence.
 
@@ -20,7 +20,7 @@ compatibility is claimed until a later release has its own device evidence.
 
 - C++20, CMake, Ninja and the verified ARM webOS SDK environment/toolchain.
 - SDL-webOS 2.32.10 headers/runtime and libpng 1.6.43 built for the same target.
-- The manifest's 89 sprites, the checked-in icon (`native/icon.png`) and attribution/license files.
+- The manifest's 89 sprites, required app files and attribution/license files.
 - The webOS CLI packager plus Python 3 for finalization and exact package audit.
 
 See [native setup](../native/README.md) and
