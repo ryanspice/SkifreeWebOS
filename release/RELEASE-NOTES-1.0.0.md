@@ -1,33 +1,69 @@
-# SkiFree for webOS 1.0.0 — local candidate
+# SkiFree for webOS 1.0.0
 
-The opening now reads **WebOS 1.0.0** beneath the crossed-out original 1.04. The original mountain, artwork and attribution remain, with no added lift cables and centered controls.
+A free, native C++/GLES2 adaptation of SkiFree for LG webOS TVs. Play from the sofa with a Magic Remote, mouse or keyboard.
 
-Original is the default and follows the reconstructed SkiFree 1.04 behavior. Recreation and its gentler Yeti Chase remain separate choices on Green and Yellow; Blue opens help.
+Original game and artwork by **Chris Pirih**. This is an independent fan release with no affiliation or endorsement by Chris Pirih, Microsoft or LG. The original Windows executable and ZIP are not included or run.
 
-The latest local revision replaces Recreation's dark HUD bar with compact white status areas and hides footer controls while skiing. Menus and the stationary Original opening retain their choices; physical colour shortcuts remain active.
+## What's included
 
-Qualifying Original scores now prompt for three arcade-style initials, starting at AAA. Keyboard, remote arrows/OK and pointer plus/minus controls are supported. Existing scores import with --- initials into `scores-initials-v1.txt`; the original `scores-v104.txt` and prototype `record.txt` remain untouched. Original's ranking and course rules are unchanged.
+- **Original** is the default. It follows the reconstructed SkiFree 1.04 behavior: Slalom, Tree Slalom and Freestyle, the original mountain, characters, scoring, fast mode and yeti encounters.
+- **Recreation** adds simplified steering, timed boosts and aerial tricks. **Yeti Chase** is its gentler pursuit mode.
+- Original scores use a classic three-letter initials screen. **Back → High Scores** browses the three saved course tables without finishing another run.
+- The last 1.0.0 pass adds a compact white Recreation HUD, hides the in-run footer and shows the active Original course with live statistics and a separate saved BEST row.
+- All 89 original bitmap resources are bundled. No import, account or payment is required.
 
-The November 5 correction fixes a real TV save failure: SDL's preference path
-pointed at the protected installation root. Scores now live in a writable
-per-runtime-user state directory, and startup verifies an actual save before
-reporting it as available. The corrected package runs and creates/replaces its
-score file on the C3 without root. Existing installation-root named and numeric
-tables are preserved during import. Owner-confirmed non-empty records survived
-a fresh session and the later UI update.
+## Controls
 
-**Back → High Scores** now browses the three saved Original course tables without
-finishing another run. Original’s status box is hidden on the opening screen;
-after downhill movement it shows the active course, LIVE statistics and a separate
-BEST initials/result row. Original ranking and gameplay rules are unchanged.
+- **Pointer / mouse:** aim the skis; **OK / click** jumps or performs an airborne trick.
+- **Directions:** turn, brake uphill or point downhill.
+- **Red / Green / Yellow:** Original, Recreation, Yeti Chase. **Blue:** help.
+- **Back:** pause menu. **F2:** new game. **F5–F8:** the four run shortcuts.
+- Keyboard: **Insert / numpad 0 / Space** for the smaller original jump; **f** toggles original fast mode.
 
-Score storage rejects incomplete, malformed or incorrectly ranked tables before adopting them. Saves retain the temporary-file/replace approach; failure and interrupted-save states preserve recovery material, disable further writes for that session and show a clear menu warning. Older binaries do not read the new initials file.
+The full mapping is in `README.md` in the attached source ZIP.
 
-Owner playtesting provided positive aggregate input feedback. The source, build, package and TV evidence is recorded in [verification](../native/docs/VERIFICATION.md). Full Windows runtime equivalence has not been established. Only one TV is tested: the owner's LG OLED48C3PUA (C3), firmware 43.21.84. Other TVs, webOS releases and the minimum webOS release are TBD. This remains a local candidate; no public release or social post has been sent.
+## Install
 
+1. Download the IPK and `SHA256SUMS.txt` from this release.
+2. Compare the package SHA-256 with the listed value:
 
-The corrected package passed four Windows suites, four Linux sanitizer suites,
-83 native UI cases, six source-boundary tests, seven stage-boundary cases and
-six package-permission tests. All 104 staged / 105 packaged files matched.
-The old numeric file and the real non-empty named table remain unchanged. Broader
-migration routes remain unverified. See the verification record for exact artifact identities and scope.
+   ```text
+   b0801db115564c79c84c784e234d274ca2e8b8e074b40ce6fab5c51b3eae548f
+   ```
+
+   The release IPK is **3,034,062 bytes**.
+3. Install and launch through the webOS CLI:
+
+   ```powershell
+   ares-install --device my-tv .\com.ryanspice.skifree_1.0.0_arm.ipk
+   ares-launch --device my-tv com.ryanspice.skifree
+   ```
+
+The same package was installed and launched on the owner's LG OLED48C3PUA (C3), firmware 43.21.84, on November 9, 2026. Its executable is byte-identical to the earlier C3-verified 1.0.0 package.
+
+## Compatibility and limits
+
+- Tested on one TV: **LG OLED48C3PUA (C3), firmware 43.21.84**, Developer Mode, non-root app process.
+- ARM32; the binary requires GLIBC 2.38 and GLIBCXX 3.4.32. Other webOS generations, rooted routes and older firmware are not established.
+- The minimum webOS release is not measured.
+- The reconstruction has documented byte-accuracy TODOs; this is not a claim of perfect executable or pixel equivalence. Original audio playback remains inactive.
+- Score storage is local. Non-empty records survived a fresh session and an update on the C3; uninstall, app-UID changes and other migration routes remain unverified.
+
+## Verification
+
+The release executable passed four Windows suites, four Linux sanitizer suites and **118 assertions**, plus **83 native UI cases**, source/stage boundary checks and package-permission checks. The staged package contains 104 allowlisted files; the IPK verifier matched all 105 packaged files, including the 89 hash-checked sprites. The release package was installed and launched on the C3. See `native/docs/VERIFICATION.md` in the attached source ZIP for exact artifact identities and scope.
+
+## Credits and rights
+
+- Original SkiFree game and artwork: **Chris Pirih**, https://ski.ihoc.net/.
+- Original game core adapted from the pinned reconstructions by **Eric Fry** (`yuv422/skifree_decomp`) and **Jeff** (`jeff-1amstudios/skifree_sdl`).
+- TV platform, renderer and input adaptation: new code under MIT, adapted from Ryan's Spice Home C++ project.
+- Project icon: **Ryan Spice**, created for this project using the original SkiFree icon as a visual reference.
+
+This is a free fan release; no royalties or payments are requested. That is a distribution decision, not a license grant from Chris Pirih or the reconstruction authors. The original artwork and reconstructed core keep their separate rights; the MIT license for the new platform code does not cover them. Details: `native/NOTICE.md` in the attached source ZIP.
+
+Substantial AI assistance was used for implementation, tests and documentation. The owner tested the controls and Original gameplay on the C3; automated checks do not replace a human code review.
+
+## More from Ryan
+
+[Website](https://ryanspice.com/) · [GitHub](https://github.com/ryanspice) · [Support and Champions of Snowboarding 2026](https://github.com/ryanspice/SkifreeWebOS/blob/v1.0.0/docs/support.md)

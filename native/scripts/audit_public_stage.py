@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail-closed audit of the free package and its exact attributed sprite inventory."""
+"""Fail-closed audit of the free package, its exact sprite inventory and project icon."""
 import argparse
 import hashlib
 import importlib.util
@@ -43,7 +43,7 @@ def audit(stage: Path) -> dict:
     generator = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(generator)
     if files["icon.png"].read_bytes() != generator.icon_bytes():
-        raise ValueError("Icon is not the original procedural project icon.")
+        raise ValueError("Icon does not match the project's checked-in icon.")
     app = json.loads(files["appinfo.json"].read_text(encoding="utf-8-sig"))
     if app["id"] != "com.ryanspice.skifree" or app["main"] != "skifree-native":
         raise ValueError("Unexpected app identity or executable.")

@@ -34,6 +34,7 @@ instructions in `native/AGENTS.md` or `release/AGENTS.md` before editing.
 
 - This is a standalone source candidate. Do not modify sibling reference projects as part of routine work here.
 - The current user direction is a free bundled release. Ship only the 89 original-game bitmap resources listed and hashed in `native/assets/manifest.json`, alongside the original project icon. Never add the original executable, ZIP, full resource archive, unrelated reference material or private TV receipts.
+- Owner direction (2026-11-09): distribute the 89 sprites and reconstructed core as a free, attributed fan release with no royalties requested; the project icon is Ryan's work based on the original icon. This is a distribution decision, not an upstream license grant. Keep the notices accurate; do not remove attribution or claim endorsement.
 - A public IPK must pass the explicit bundled-file and hash audit. Original artwork keeps its own rights and attribution; the new code's MIT license does not cover it.
 - Keep original-game credits separate from the license for the new implementation. Do not imply ownership of the original game or that importing a copy grants redistribution rights.
 - Distinguish source checks, desktop tests, ARM packaging, real-TV execution, physical input testing, and human play acceptance.

@@ -13,7 +13,8 @@ SPEC.loader.exec_module(archive)
 
 class PublicSourceBoundaries(unittest.TestCase):
     def test_expected_source_and_docs(self):
-        for name in ("README.md", "CONTRIBUTING.md", "AGENTS.md", "native/AGENTS.md", "release/AGENTS.md",
+        for name in ("README.md", "CONTRIBUTING.md", "AGENTS.md", "SECURITY.md", "CODE_OF_CONDUCT.md",
+                     "native/AGENTS.md", "release/AGENTS.md",
                      "docs/README.md", "docs/REPOSITORY-REVIEW.md", "docs/ROADMAP-1.1.0.md",
                      "docs/RELEASE-GUIDE.md", "docs/RELEASE-WALKTHROUGH.html",
                      ".github/workflows/checks.yml", "native/src/main.cpp", "native/include/skifree/scores.hpp",

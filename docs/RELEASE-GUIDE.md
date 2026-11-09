@@ -12,6 +12,13 @@ have been executed. Recheck the official links before a later release.
 
 ## 1. Consolidate and verify main
 
+Current state (2026-11-09): the source repository is public. `main` holds the
+last public code/docs commit; the local `release/1.0.0-compat-scope` branch holds
+the final documentation and package changes. The `v1.0.0` tag and a draft release
+already exist. Do not create a second tag. Before publishing, merge or otherwise
+make the exact release commit reachable from the public default branch so the
+source URL and tag show the same tree.
+
 At the 2026-11-05 consolidation, only `main` existed locally and on origin. No
 separate upstream remote or open PR needed merging. Fetch plus fast-forward
 merge found no remote changes; the planning/cleanup work was committed to main.
@@ -48,26 +55,29 @@ gh run list --repo ryanspice/SkifreeWebOS --workflow checks.yml --limit 3
 ```
 
 Keep [Original provenance](../native/src/classic/PROVENANCE.md), artwork terms and
-[notices](../native/NOTICE.md) separate from the platform code's MIT license.
-Record the permission/terms supporting this exact bundled distribution before
-public release. A `non-free` listing does not resolve missing rights. Ask
-maintainers about eligibility if the documented terms remain unclear; do not
-change the bundled/import product behavior merely to complete a form.
+[notices](../native/NOTICE.md) separate from the platform code's MIT license. The
+owner has recorded a free, attributed fan-release basis and the project icon
+authorship; no upstream license grant is claimed. That is a distribution decision,
+not a legal conclusion. A `non-free` listing does not create rights. Ask maintainers
+about eligibility if the documented terms remain unclear; do not change the
+bundled/import product behavior merely to complete a form.
 
 ## 3. Freeze one exact bundle
 
-The prepared private handoff is `.ai/outbox/release-tutorial-1.0.0/`. It contains
-the IPK, explicit source ZIP and per-file manifest, release notes, release
-identity manifest and checksums. Check that `RELEASE-MANIFEST.json.sourceCommit`
-is the intended release commit. The IPK retains its audited gameplay build when
-only documentation changed. A source ZIP refresh does not imply a new TV test.
+The maintainer's private handoff is outside the public source archive (for
+example, a project-local `.ai/outbox/` folder). It contains the IPK, explicit
+source ZIP and per-file manifest, release notes, release identity manifest and
+checksums. Check that `RELEASE-MANIFEST.json.sourceCommit` is the intended release
+commit. The release IPK reuses the TV-verified executable; a documentation-only
+refresh does not change it. A source ZIP refresh does not imply a new TV test.
 
 ```powershell
 $repo = 'ryanspice/SkifreeWebOS'
 $tag = 'v1.0.0'
-$bundle = '.ai/outbox/release-tutorial-1.0.0'
+$bundle = $env:SKIFREE_RELEASE_BUNDLE
+if (-not $bundle) { throw 'Set SKIFREE_RELEASE_BUNDLE to the private handoff folder.' }
 $ipk = Join-Path $bundle 'com.ryanspice.skifree_1.0.0_arm.ipk'
-$expected = '494726b3024c7982d47596fc520515c8f529ae8322b53ae53e6d86676f3271fd'
+$expected = 'b0801db115564c79c84c784e234d274ca2e8b8e074b40ce6fab5c51b3eae548f'
 if ((Get-FileHash $ipk -Algorithm SHA256).Hash.ToLowerInvariant() -ne $expected) {
     throw 'IPK differs from the audited C3 candidate. Rebuild/review its evidence.'
 }
@@ -81,25 +91,29 @@ after this handoff, regenerate the explicit source ZIP in a fresh output folder
 and update its commit/checksum receipts. Never reuse a reviewed output path or
 overwrite the existing `v1.0.0` tag after publication.
 
-## 4. Create the tag and prepare public hosting
+## 4. Reconcile the tag and publish hosting
 
-Only after acceptance and redistribution checks: select the exact reviewed
-commit, confirm the tag is unused, then create and push the annotated tag.
+Only after acceptance and the owner's publishing decision. A `v1.0.0` tag and a
+draft release already exist; the tag predates the final documentation-only commit.
+Before publishing, reconcile it with the exact release commit. Moving an
+unpublished tag is a force update; do not move a published tag.
 
 ```powershell
 $releaseCommit = (git rev-parse HEAD).Trim()
+git show --stat $releaseCommit
 git tag --list v1.0.0
 git ls-remote --tags origin refs/tags/v1.0.0
-# Continue only if both tag checks are empty and this is the approved commit.
-git tag -a v1.0.0 $releaseCommit -m 'SkiFree for webOS 1.0.0'
-git push origin v1.0.0
+# The tag exists. Do not create a second one. If the exact release commit differs,
+# update it only before publication and only with the owner's approval:
+# git tag -f -a v1.0.0 $releaseCommit -m 'SkiFree for webOS 1.0.0'
+# git push --force origin refs/tags/v1.0.0
 ```
 
-In GitHub **Settings → General → Danger Zone → Change repository visibility**,
-make the intended source repository public only when ready. Review the tracked
-tree and history first. A private release or draft cannot serve Homebrew users.
-If you choose separate public hosting instead, verify every supplied URL without
-sign-in and meet the applicable source obligations.
+The source repository is already public. Review the tracked tree and history
+before publishing a release; visibility changes and release publication are
+separate actions. A draft does not serve Homebrew users. If you use separate
+public hosting instead, verify every supplied URL without sign-in and meet the
+applicable source obligations.
 
 Open **Releases → the existing 1.0.0 draft → Edit**. Review target/tag, title,
 notes and attachments against the frozen bundle. Leave the release as a draft
@@ -181,7 +195,7 @@ for the maintainer is not ready for a listing.
 ## 7. Submit to Homebrew
 
 Fork [webosbrew/apps-repo](https://github.com/webosbrew/apps-repo). In a separate
-checkout inside `.ai/inbox/`, add the generated YAML as
+private checkout outside this public tree, add the generated YAML as
 `packages/com.ryanspice.skifree.yml`; do not add its IPK or local receipts.
 Create a feature branch in that fork and open a PR to upstream `main`. Here
 “upstream” means webosbrew/apps-repo, not this game's origin/main.

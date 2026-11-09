@@ -7,7 +7,7 @@
 [![TV evidence: LG C3](https://img.shields.io/badge/TV_evidence-LG_C3-6b8e23)](native/docs/VERIFICATION.md)
 [![License: separate code and artwork terms](https://img.shields.io/badge/license-see_notices-yellow)](native/NOTICE.md)
 
-A free, independent adaptation of SkiFree for LG webOS TVs. Play with a Magic Remote, mouse or keyboard. Original game and artwork by **Chris Pirih**.
+A free, independent adaptation of SkiFree for LG webOS TVs. Play with a Magic Remote, mouse or keyboard. Original game and artwork by **Chris Pirih**. This is a free fan release; no royalties or payments are requested, and original rights remain with their owners. See [notices](native/NOTICE.md).
 
 ![SkiFree for webOS 1.0.0 opening screen on an LG C3](docs/media/skifree-original-c3.png)
 
@@ -15,7 +15,7 @@ A free, independent adaptation of SkiFree for LG webOS TVs. Play with a Magic Re
 
 **[Install and play](docs/INSTALL.md)** · [Controls](#original-controls) · [Compatibility and checks](native/docs/VERIFICATION.md) · [Champions of Snowboarding 2026](docs/support.md)
 
-**Release status:** 1.0.0 is a locally tested candidate. A public download and Homebrew Channel listing have not been published.
+**Release status:** 1.0.0 is a release candidate verified on the owner's C3. The GitHub release and its download are still drafts; no public IPK or Homebrew Channel listing has been published. Do not install a copy from an untrusted mirror.
 
 **Next: [1.1.0 — optional online high scores](docs/ROADMAP-1.1.0.md).** Planned:
 an opt-in leaderboard, an Off setting and reliable offline play. Online scores
@@ -28,8 +28,9 @@ The separate Recreation and Yeti Chase runs add simplified steering and boosts.
 This candidate adds a lighter Recreation HUD, hides the footer while skiing and
 lets qualifying Original scores carry three initials, starting at **AAA**.
 
-The package verified on the LG C3 kept saved Slalom and Freestyle records across
-a fresh session and a package update. **Back → High Scores**
+The release executable is byte-identical to the package verified on the LG C3;
+that build kept saved Slalom and Freestyle records across a fresh session and a
+package update. **Back → High Scores**
 opens the three saved course tables. Original’s status box stays hidden on the
 opening screen, then shows live course statistics and the saved **BEST** record
 after you start skiing downhill.
@@ -37,8 +38,9 @@ after you start skiing downhill.
 
 ## Install on your TV
 
-1. Get the **ARM IPK and its SHA-256** from the maintainer, or build it by following the
-   [TV build brief](docs/TV-BUILD.md). No public download is available yet.
+1. Get the **ARM IPK and its SHA-256** from the eventual release, the maintainer's test
+   handoff, or build it by following the [TV build brief](docs/TV-BUILD.md). No public
+   download is available yet.
 2. Set up your TV with [LG Developer Mode](https://webostv.developer.lge.com/develop/getting-started/developer-mode-app)
    and the webOS CLI. This is the route used for the C3 tests. The package verified there
    was installed and launched as a non-root app. [Rooted and unrooted notes](docs/COMPATIBILITY.md).
@@ -139,7 +141,7 @@ see [score troubleshooting](docs/INSTALL.md#scores-and-troubleshooting).
 
 ## Build and release
 
-[Contributing](CONTRIBUTING.md) · [Documentation map](docs/README.md) · [Repository review](docs/REPOSITORY-REVIEW.md)
+[Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [Code of conduct](CODE_OF_CONDUCT.md) · [Documentation map](docs/README.md) · [Repository review](docs/REPOSITORY-REVIEW.md)
 
 [TV build brief](docs/TV-BUILD.md) · [Compatibility research and synthesis plan](docs/COMPATIBILITY.md) · [Tag preparation](release/TAGGING.md)
 
@@ -147,7 +149,7 @@ see [score troubleshooting](docs/INSTALL.md#scores-and-troubleshooting).
 
 [Native build instructions](native/README.md) · [Release preparation](release/README.md) · [1.0.0 notes](release/RELEASE-NOTES-1.0.0.md) · [Local visual review](native/docs/VISUAL-REVIEW-1.0.0.md)
 
-C++20 and GLES2 draw the game; SDL2 supplies the window and input. App ID: `com.ryanspice.skifree`. Homebrew publication and social posts remain drafts. The new platform code's MIT license does not cover the original resources or reconstructed core; see [notices](native/NOTICE.md).
+C++20 and GLES2 draw the game; SDL2 supplies the window and input. App ID: `com.ryanspice.skifree`. Homebrew publication and social posts remain drafts. The new platform code's MIT license does not cover the original resources or reconstructed core. This free fan release asks for no royalties or payments; no upstream license grant is recorded. See [notices](native/NOTICE.md).
 
 The [original-game comparison](native/docs/ORIGINAL-COMPARISON.md) records the checked executable resources and reconstruction functions. The Windows executable is the behavioral reference for Original; the [parity contract](native/docs/ORIGINAL-PARITY.md) identifies the TV presentation and input adaptations.
 

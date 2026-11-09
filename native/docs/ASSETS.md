@@ -4,6 +4,6 @@ The reference executable is SkiFree 1.04. Executable SHA-256: `3572d3757638bc1ae
 
 `assets/manifest.json` permits exactly resources 1–89 as `ski32_001.png` through `ski32_089.png`. Exact white becomes transparent; non-white RGB values remain unchanged. The sprite sizes, animation tables and original ordering are used by the reconstructed core. The snowboarder is an original game character: resources 37–44 and actor type 3 are present in the reference game.
 
-The source and IPK audits reject extra files and modified sprite hashes, and exclude the Windows executable, input ZIP, private references and TV receipts. The app icon is checked in as `native/icon.png` and verified by the stage audit.
+The source and IPK audits reject extra files and modified sprite hashes, and exclude the Windows executable, input ZIP, private references and TV receipts. The app icon is checked in as `native/icon.png`; it was created by Ryan Spice in 2026 using the original SkiFree icon as a visual reference, and the stage audit verifies the checked-in bytes.
 
-Original game and artwork: Chris Pirih. New platform code and original/reconstructed material have separate rights. See the notices and core provenance.
+Original game and artwork: Chris Pirih. This is a free fan release with no royalties requested; no upstream license grant is recorded. New platform code and original/reconstructed material have separate rights. See the notices and core provenance.

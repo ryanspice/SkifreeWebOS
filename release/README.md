@@ -20,17 +20,19 @@ python release/ipk_permissions_tests.py
 python release/prepare_source_archive.py --out .ai/outbox/release-1.0.0/SkifreeWebOS-1.0.0-source.zip
 ```
 
-The finalizer normalizes Unix modes, including execute permissions on the ELF. The verifier compares every packaged app file against the audited stage. The source builder permits source files, explicitly listed documentation, the original procedural icon, the 89 hash-verified sprites and three hash-verified documentation images. It excludes original EXE/ZIP files, raw resource dumps, known private/planning paths, unsent launch drafts, unapproved documentation text and generated release metadata. This path/asset gate is not a content-level secret scanner; review source contents before publication. Documentation images are not added to the IPK. Source ZIPs include the Git-visible tree, including allowed uncommitted files, and omit ignored build dependencies; pinned dependency preparation remains documented.
+The finalizer normalizes Unix modes, including execute permissions on the ELF. The verifier compares every packaged app file against the audited stage. The source builder permits source files, explicitly listed documentation and policies, the checked-in project icon, the 89 hash-verified sprites and three hash-verified documentation images. It excludes original EXE/ZIP files, raw resource dumps, known private/planning paths, unsent launch drafts, unapproved documentation text and generated release metadata. This path/asset gate is not a content-level secret scanner; review source contents before publication. Documentation images are not added to the IPK. Source ZIPs include the Git-visible tree, including allowed uncommitted files, and omit ignored build dependencies; pinned dependency preparation remains documented.
 
 The builder refuses existing output files. Preserve previous archives and use a fresh revision name after changes. The ZIP, adjacent SHA-256 file and per-file manifest form one source-release set. A source-only documentation refresh does not change the audited IPK or its checksum.
 
-The package verified on the C3 (SHA-256 `494726b3…`) is kept in `.ai/outbox/session-scores-1.0.0/`. Use the checksum in the installation guide. Its Developer Mode launch and actual non-root file creation/replacement
-are verified. Owner-confirmed non-empty records survived a fresh session and the
-latest package update. Broader TV migration checks and final HUD/browser visual
-acceptance remain pending. The finalizer must preserve the sticky 01777 `state/`
-parent; direct packaging without this step does not satisfy the storage contract.
-See the [TV build brief](../docs/TV-BUILD.md), [compatibility synthesis](../docs/COMPATIBILITY.md)
-and [tag preparation](TAGGING.md).
+The release package (SHA-256 `b0801db1…`, 3,034,062 bytes) is kept in the
+maintainer's private handoff, not in this public source tree. It reuses the
+C3-verified executable from the earlier `494726b3…` package and was installed and
+launched on the C3 on 2026-11-09. The earlier package's actual non-root file
+creation/replacement and owner-confirmed non-empty records are the storage
+evidence. Broader TV migration checks remain pending. The finalizer must preserve
+the sticky 01777 `state/` parent; direct packaging without this step does not
+satisfy the storage contract. See the [TV build brief](../docs/TV-BUILD.md),
+[compatibility synthesis](../docs/COMPATIBILITY.md) and [tag preparation](TAGGING.md).
 
 New work products use `.ai/inbox/`, `.ai/outbox/`, `.ai/evidence/` and `.ai/archive/`.
 Reviews/plans are reconciled through `.ai/SYNTHESIS-QUEUE.json`. Earlier external
@@ -43,11 +45,12 @@ retained; immutable receipts may still contain their historical paths.
 
 The script defaults to `-Pool non-free` because the original artwork is separate from the code's MIT license. Confirm the appropriate pool and redistribution terms against the current repository rules before submission; free pricing does not describe a source/artwork license. No license grant is fabricated by this tooling. Public URL and compatibility fields remain explicit inputs rather than plausible placeholders.
 
-The website is https://ryanspice.com/ and the source handoff repository is
-https://github.com/ryanspice/SkifreeWebOS. The repository is private; it is not a
-public Homebrew source or download URL. No GitHub Release or public IPK has been
-published. The TV jail lacks `/etc/starfish-release`; the observed SDK version
-alone is not used to fill minimum-release metadata.
+The website is https://ryanspice.com/ and the source repository is
+https://github.com/ryanspice/SkifreeWebOS. The repository is public, but no GitHub
+Release or public IPK has been published; the 1.0.0 release remains a draft and is
+not yet a Homebrew source or download URL. The TV jail lacks
+`/etc/starfish-release`; the observed SDK version alone is not used to fill
+minimum-release metadata.
 
 ## Submission checklist
 
@@ -57,11 +60,14 @@ alone is not used to fill minimum-release metadata.
 - [x] Corrected storage IPK: Developer Mode install and native render on the C3, exact checksum recorded.
 - [x] Corrected storage IPK: actual score-file creation/replacement as non-root UID 6252; legacy bytes preserved.
 - [x] Owner-confirmed non-empty Slalom/Freestyle records reloaded and survived the UI package update unchanged.
+- [x] Release package installed and launched on the C3; exact bytes and checksum recorded.
+- [x] Owner recorded the free fan-release basis and the icon authorship; no upstream license grant is claimed.
+- [x] Draft release asset replaced with the audited package, current notices and refreshed source set.
+- [x] Owner reported that tested inputs and Original behavior are good.
 - [ ] Updated HUD/browser visual acceptance, broader controls/focus and migration routes.
-- [ ] Complete publication support claims only for specifically evidenced device/input/lifecycle/save cases.
-- [ ] Meaningful human code review, design explanation and honest AI disclosure.
-- [ ] Record original artwork and reconstruction redistribution terms; confirm repository pool.
-- [ ] Choose and publish the authorized public repository/release URLs.
+- [ ] Independent human code review, design explanation and honest AI disclosure.
+- [ ] Confirm the Homebrew pool/eligibility and measured minimum webOS release.
+- [ ] Publish the authorized public release URLs and verify their bytes.
 - [ ] Generate concrete metadata and verify its remote downloads and checksums.
 - [ ] Submit the completed package YAML and PR body to webosbrew/apps-repo.
 

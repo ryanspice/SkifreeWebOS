@@ -131,7 +131,7 @@ git log -3 --oneline</code></pre>
       <section class="step-panel" id="panel-1" aria-labelledby="title-1" hidden>
         <h2 id="title-1">2. Accept the candidate</h2>
         <p class="cue">Look for named evidence for this exact package, including the final HUD/browser review.</p>
-        <ul><li>Confirm controls, course timing, initials and scores after relaunch.</li><li>Complete meaningful human code review and describe the design choices.</li><li>Record the terms/permission for the bundled artwork and reconstructed core.</li><li>Review current CI and the 1.0.0 tag checklist.</li></ul>
+        <ul><li>Confirm controls, course timing, initials and scores after relaunch.</li><li>Complete meaningful human code review and describe the design choices.</li><li>Record the owner's free fan-release decision and the icon authorship; do not claim an upstream license grant.</li><li>Review current CI and the 1.0.0 tag checklist.</li></ul>
         <pre><code>python release/source_archive_tests.py
 python release/ipk_permissions_tests.py
 python native/tests/public_stage_tests.py
@@ -143,12 +143,13 @@ gh run list --repo ryanspice/SkifreeWebOS --workflow checks.yml --limit 3</code>
       <section class="step-panel" id="panel-2" aria-labelledby="title-2" hidden>
         <h2 id="title-2">3. Freeze one exact bundle</h2>
         <p class="cue">Match the IPK hash, source commit and release receipts before uploading files.</p>
-        <p>Use <code>.ai/outbox/release-tutorial-1.0.0/</code>: IPK, source ZIP, source file manifest, notes, release manifest and checksums. The current C3-tested IPK is 1,999,474 bytes.</p>
+        <p>Use the maintainer's private handoff (outside the public source archive): IPK, source ZIP, source file manifest, notes, release manifest and checksums. The current release IPK is 3,034,062 bytes and reuses the C3-verified executable.</p>
         <pre><code>$repo = 'ryanspice/SkifreeWebOS'
 $tag = 'v1.0.0'
-$bundle = '.ai/outbox/release-tutorial-1.0.0'
+$bundle = $env:SKIFREE_RELEASE_BUNDLE
+if (-not $bundle) { throw 'Set SKIFREE_RELEASE_BUNDLE to the private handoff folder.' }
 $ipk = Join-Path $bundle 'com.ryanspice.skifree_1.0.0_arm.ipk'
-$expected = '494726b3024c7982d47596fc520515c8f529ae8322b53ae53e6d86676f3271fd'
+$expected = 'b0801db115564c79c84c784e234d274ca2e8b8e074b40ce6fab5c51b3eae548f'
 if ((Get-FileHash $ipk -Algorithm SHA256).Hash.ToLowerInvariant() -ne $expected) {
   throw 'IPK differs from the audited candidate'
 }
@@ -156,17 +157,18 @@ Get-Content (Join-Path $bundle 'RELEASE-MANIFEST.json')</code></pre>
         <p>Documentation-only commits can keep this binary and its evidence. Native changes need a fresh build, package audit and affected TV checks. Always regenerate the source archive after source changes.</p>
       </section>
       <section class="step-panel" id="panel-3" aria-labelledby="title-3" hidden>
-        <h2 id="title-3">4. Tag and prepare public hosting</h2>
-        <p class="cue">GitHub should show the reviewed tag and a release draft with matching attachments.</p>
-        <p class="gate">Future publishing steps. Complete step 2 first. Do not move an existing published tag.</p>
+        <h2 id="title-3">4. Reconcile the tag and publish hosting</h2>
+        <p class="cue">The source repository is public; the v1.0.0 tag and a draft release already exist.</p>
+        <p class="gate">Do not create a second tag. Reconcile the existing tag with the exact release commit before publishing; do not move a published tag.</p>
         <pre><code>$releaseCommit = (git rev-parse HEAD).Trim()
+git show --stat $releaseCommit
 git tag --list v1.0.0
 git ls-remote --tags origin refs/tags/v1.0.0
-# Continue only if both checks are empty.
-git tag -a v1.0.0 $releaseCommit -m 'SkiFree for webOS 1.0.0'
-git push origin v1.0.0</code></pre>
-        <ol><li>Review tracked files/history for public release.</li><li>GitHub → Settings → General → Danger Zone → Change repository visibility, when ready.</li><li>Releases → existing 1.0.0 draft → Edit. Check tag, target, notes and attachments.</li><li>Keep it a draft until the manifest is attached.</li></ol>
-        <p>A private repo/draft will not serve public downloads. Source hosting and Homebrew listing are separate actions.</p>
+# The tag exists. Only before publication, with owner approval:
+# git tag -f -a v1.0.0 $releaseCommit -m 'SkiFree for webOS 1.0.0'
+# git push --force origin refs/tags/v1.0.0</code></pre>
+        <ol><li>Review tracked files/history before publishing the release.</li><li>Confirm the repository is the intended public source; visibility and release publication are separate actions.</li><li>Releases → existing 1.0.0 draft → Edit. Check tag, target, notes and attachments.</li><li>Keep it a draft until the manifest and final source set are attached.</li></ol>
+        <p>A private draft will not serve public downloads. Source hosting and Homebrew listing are separate actions.</p>
       </section>
       <section class="step-panel" id="panel-4" aria-labelledby="title-4" hidden>
         <h2 id="title-4">5. Generate Homebrew metadata</h2>
@@ -208,7 +210,7 @@ if ($m.ipkHash.sha256 -ne $expected) { throw 'Different candidate' }</code></pre
       <section class="step-panel" id="panel-6" aria-labelledby="title-6" hidden>
         <h2 id="title-6">7. Submit the Homebrew listing</h2>
         <p class="cue">The PR adds one package YAML to webosbrew/apps-repo. Your IPK stays on your release host.</p>
-        <ol><li>Fork webosbrew/apps-repo and create a feature branch in a separate checkout under <code>.ai/inbox/</code>.</li><li>Copy the generated file to <code>packages/com.ryanspice.skifree.yml</code>.</li><li>Open a PR against webosbrew/apps-repo → main.</li><li>Complete the current template with actual TV/release evidence and honest AI disclosure.</li><li>Address maintainer checks and review before merge.</li></ol>
+        <ol><li>Fork webosbrew/apps-repo and create a feature branch in a separate private checkout.</li><li>Copy the generated file to <code>packages/com.ryanspice.skifree.yml</code>.</li><li>Open a PR against webosbrew/apps-repo → main.</li><li>Complete the current template with actual TV/release evidence and honest AI disclosure.</li><li>Address maintainer checks and review before merge.</li></ol>
         <p class="gate">Do not claim full human review until it happened. A generated description, hosted release or passing CI alone does not establish listing acceptance.</p>
         <p><a href="https://github.com/webosbrew/apps-repo" target="_blank" rel="noopener noreferrer">Open apps-repo</a> · <a href="https://github.com/webosbrew/apps-repo/blob/main/.github/pull_request_template.md" target="_blank" rel="noopener noreferrer">Read current PR template</a></p>
       </section>

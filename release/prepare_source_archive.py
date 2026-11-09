@@ -9,7 +9,8 @@ import subprocess
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-ROOT_FILES = {"README.md", "CONTRIBUTING.md", "AGENTS.md", "LICENSE", "NOTICE.md", ".gitignore", ".gitattributes"}
+ROOT_FILES = {"README.md", "CONTRIBUTING.md", "AGENTS.md", "LICENSE", "NOTICE.md",
+              "SECURITY.md", "CODE_OF_CONDUCT.md", ".gitignore", ".gitattributes"}
 LOCAL_FILES = {"native/docs/PUBLISHING-PLAN-2026-11-04.md",
                "release/HOMEBREW-PR-DRAFT.md"}
 LOCAL_PREFIXES = (".ai/", "private/", "native/docs/wayfinder/", "docs/marketing/")

@@ -52,7 +52,8 @@ project's `.ai/`; external tool output requires ingestion and hash evidence.
 
 Use the bug-report template for reproducible issues. Include app version, run,
 device/firmware, input, steps and sanitized errors. Do not attach private network
-details or original executable/resource archives.
+details or original executable/resource archives. Report vulnerabilities through
+the private route in [SECURITY.md](SECURITY.md), not a public issue.
 
 ## Release boundaries
 

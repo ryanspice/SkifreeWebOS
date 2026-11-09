@@ -4,10 +4,14 @@ Build target: **LG C3 / ARM32**, application `com.ryanspice.skifree`, candidate
 version **1.0.0**. This package includes Original, Recreation, Yeti Chase and
 three-letter score entry. Build/package evidence does not replace its C3 run.
 
-TV-verified local package (November 5 build): `.ai/outbox/session-scores-1.0.0/com.ryanspice.skifree_1.0.0_arm.ipk`,
-**1,999,474 bytes**, SHA-256
-`494726b3024c7982d47596fc520515c8f529ae8322b53ae53e6d86676f3271fd`.
-The adjacent `SHA256SUMS.txt` contains the same checksum.
+Release package: `com.ryanspice.skifree_1.0.0_arm.ipk`,
+**3,034,062 bytes**, SHA-256
+`b0801db115564c79c84c784e234d274ca2e8b8e074b40ce6fab5c51b3eae548f`.
+It reuses the C3-verified executable (`ed646651…`) from the November 5 build
+with the current 1254×1254 icon and notices. The exact package was installed and
+launched on the C3 on November 9, 2026. The maintainer's private release handoff
+contains the IPK, source set and receipts; they are not in the public source archive.
+The earlier package's non-root score-file evidence remains the storage evidence.
 
 ## Build inputs
 

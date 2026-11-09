@@ -13,6 +13,8 @@
 
 - [1.1.0 plan: optional online scores, settings and acceptance](ROADMAP-1.1.0.md)
 - [Contributor workflow](../CONTRIBUTING.md)
+- [Security policy](../SECURITY.md)
+- [Code of conduct](../CODE_OF_CONDUCT.md)
 - [Native build and tests](../native/README.md)
 - [Verification and remaining acceptance checks](../native/docs/VERIFICATION.md)
 - [Repository review](REPOSITORY-REVIEW.md)

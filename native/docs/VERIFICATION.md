@@ -4,12 +4,12 @@ Updated November 9, 2026. This record separates automated checks, physical-devic
 
 ## Status on November 9, 2026
 
-- **Verified on the C3:** the package with SHA-256 `494726b3…` (1,999,474 bytes; ARM executable `ed646651…`). Its executable contains the initials and named-score strings. It was installed and launched through Developer Mode, and owner-confirmed Slalom and Freestyle records survived a fresh launch and a package update. See *Current package* below.
+- **Release package:** `com.ryanspice.skifree_1.0.0_arm.ipk`, **3,034,062 bytes**, SHA-256 `b0801db115564c79c84c784e234d274ca2e8b8e074b40ce6fab5c51b3eae548f`; ARM executable `ed646651…`. It was installed and launched through Developer Mode on the C3 on 2026-11-09. It reuses the executable from the earlier C3-verified package (`494726b3…`, 1,999,474 bytes) and adds the current 1254×1254 icon and notices. The executable contains the initials and named-score markers.
+- **Earlier C3-verified package:** SHA-256 `494726b3…` (1,999,474 bytes; the same `ed646651…` executable). Owner-confirmed Slalom and Freestyle records survived a fresh launch and a package update. Its non-root score-file creation/replacement and empty-table preservation were checked.
 - **Storage-fix package:** SHA-256 `e7b3d649…` (1,989,972 bytes; ARM executable `60397dfc…`). It was launched as non-root UID 6252, and score-file creation and replacement were checked. See *Historical November 5 non-root score storage fix*.
-- **Current draft release asset (not verified):** SHA-256 `e455a6f2…` (2,987,776 bytes; ARM executable `17cc6e5d…`). Its executable lacks the `scores-initials-v1` and `skifree-initials-v1` strings, so it predates the initials and named-score store. Its executable hash matches the earlier 1,953,364-byte package in the table near the end of this file; the size difference is the new 1254-pixel icon. No TV installation of this package is recorded.
-- **Repository source (`c51f237`):** contains the initials, named-score and browser code. It has not been built into a new package or installed on a TV.
+- **Source:** the final release commit is recorded in `RELEASE-MANIFEST.json`. No gameplay source changed after the `494726b3` package; the release IPK is a repack with the current icon and notices, not a new compile.
 
-TV evidence in this file applies only to the verified package. Until a release package is built from the intended source and checked on a TV, do not describe the draft release asset as the tested build.
+The repackaged IPK's install and launch are recorded below. Its score file was not independently re-inspected after this install; the non-empty, non-root and update evidence applies to the byte-identical executable from the earlier package.
 
 ## Current package: saved-score browser and course-aware HUD
 
@@ -26,25 +26,30 @@ identifies the active course, LIVE statistics and a separate saved BEST result.
 The clock displays a live race time only for the timed courses. Restarting hides
 the panel again. These are presentation adaptations; the simulation is unchanged.
 
-Package SHA-256: `494726b3024c7982d47596fc520515c8f529ae8322b53ae53e6d86676f3271fd`
-(1,999,474 bytes). ARM executable SHA-256:
+Release package SHA-256:
+`b0801db115564c79c84c784e234d274ca2e8b8e074b40ce6fab5c51b3eae548f`
+(3,034,062 bytes). ARM executable SHA-256:
 `ed646651be25509a7e04ac00cd9f66c76bc15dd9444e8172c486fac6e3075613`.
-It is installed on the C3. Both real records survived the package update byte for
-byte, and the new process loaded counts `[1,0,1]`. The old numeric file is also
-unchanged. This establishes non-empty relaunch and one package-update path on
+The executable is byte-identical to the earlier C3-verified package (`494726b3…`).
+It is installed on the C3. The earlier package's real records survived its update
+byte for byte, and the new process loaded counts `[1,0,1]`; the old numeric file is
+also unchanged. This establishes non-empty relaunch and one package-update path on
 that configuration, not uninstall, UID-change or all-upgrade survival.
 
-All **83 native UI cases** passed, including two processes sharing the same score
-path, browser course switching/return/empty states, paused race timing, hidden
-intro/restart HUD and the saved-best row during a real Slalom entrance. Captures
-were inspected. Four Linux suites and four Linux ASan/UBSan suites also passed
-for the unchanged gameplay/storage core. The earlier Windows Debug four-suite
-result remains separate evidence. The new ARM stage/IPK audit matches all
-104 staged / 105 packaged files; the 89 original sprites and core are unchanged.
+All **83 native UI cases** passed for the executable, including two processes
+sharing the same score path, browser course switching/return/empty states, paused
+race timing, hidden intro/restart HUD and the saved-best row during a real Slalom
+entrance. Captures were inspected. Four Linux suites and four Linux ASan/UBSan
+suites also passed for the unchanged gameplay/storage core. The earlier Windows
+Debug four-suite result remains separate evidence. The release ARM stage/IPK audit
+matches all **104 staged / 105 packaged files**; the 89 original sprites and core
+are unchanged.
 
-The owner-requested HUD/browser is open for visual feedback. The public README
-image is a new C3 opening capture showing the hidden status panel. Final tag and
-public release remain separate from this private candidate preparation.
+The public README image is a C3 opening capture showing the hidden status panel.
+The tag and public release remain separate from this draft preparation. The
+2026-11-09 install/launch used the release IPK; a new screen capture was blocked by
+the TV's `/tmp` permissions, so this pass records launch evidence without a new
+screenshot.
 
 ## Historical November 5 non-root score storage fix
 
@@ -76,8 +81,8 @@ tests, seven stage-boundary cases and six package-permission tests. The SDK audi
 has 12 records; all 104 staged / 105 packaged files match, including 89 sprites
 and one state-directory README. Original simulation and artwork are unchanged.
 
-The requested Terra review of this fix found one release-verifier gap: hashes
-alone accepted writable or non-root-owned code/assets. The verifier now enforces
+The requested independent AI review of this fix found one release-verifier gap:
+hashes alone accepted writable or non-root-owned code/assets. The verifier now enforces
 root ownership and exact file/directory modes, with only the sticky state parent
 excepted. Six permission tests pass, including six metadata-only tampering cases;
 the peer's unsafe fixture is rejected and the installed IPK still passes unchanged.
@@ -90,8 +95,8 @@ project's ignored `.ai/`; the synthesis queue records sources and destinations.
 
 ## Historical November 4 release preparation
 
-Three requested GPT-6.1 Terra lanes completed: scoped peer review, rooted/unrooted
-research and consumer webOS version research. The peer found two release issues:
+Three requested independent AI review lanes completed: scoped peer review,
+rooted/unrooted research and consumer webOS version research. The peer found two release issues:
 the checklist mixed earlier TV evidence with current acceptance, and documentation
 source paths were too broadly accepted. The checklist now identifies artifacts;
 the source builder explicitly lists approved docs and rejects unapproved credential
@@ -139,11 +144,11 @@ Collision, NPC, coordinate-wrap and all other paths were not exhaustively compar
 | --- | --- | --- |
 | Linux AddressSanitizer / UndefinedBehaviorSanitizer | 118 assertions passed | 70 Original, 15 Recreation, 15 ranking, 18 score-store assertions |
 | Original simulation | 72,000 mixed-input ticks covered | Course clocks, crossings, penalties, pause and delayed callbacks included |
-| Native desktop SDL/GLES UI | 55 cases passed | Input switching, menus, rendering, save/reload between processes, truncated-file preservation |
+| Native desktop SDL/GLES UI | 83 cases passed | Input switching, menus, rendering, save/reload between processes, truncated-file preservation |
 | Public-stage boundaries | 7 cases passed | Allowlisted content, altered assets and unexpected files |
 | Windows MSVC | Score-store and ranking suites passed | Host filesystem behavior |
 | ARM32 build and runtime audit | Passed; 12 dependency records | Target build and library requirements |
-| Staged package and IPK | 103 staged / 104 packaged files matched | Extra package metadata accounts for one file; 89 sprite hashes matched; no Windows EXE |
+| Staged package and IPK | 104 staged / 105 packaged files matched | Extra package metadata accounts for one file; 89 sprite hashes matched; no Windows EXE |
 
 These results belong to the candidate build work. Publication-only documentation edits do not constitute a new run of these suites. The final source addition extended the startup receipt with storage state and score counts; its ARM compile and TV output were checked directly.
 
@@ -171,7 +176,7 @@ The local 1.0 candidate follows the owner's release bar: preserve the reconstruc
 
 Host tests cover non-empty save/reload, malformed tables, ranking validation, interrupted temporary files and replacement failures. The UI warns when saving is disabled. Existing malformed files and recovery material are preserved. The store does not guarantee concurrent-writer safety or POSIX power-loss durability.
 
-On the C3, an existing empty 13-byte table remained byte-identical through update and close/relaunch. Startup reported writable storage and zero entries. That demonstrates preservation of the empty table only. **A human-earned score surviving close/reopen is awaiting the owner's result. Non-empty update survival and uninstall survival remain unverified.**
+On the C3, an existing empty 13-byte table remained byte-identical through update and close/relaunch. The earlier package's non-root process then created/replaced its own score file, and owner-confirmed non-empty Slalom and Freestyle records survived a fresh launch and the later UI update unchanged. The 2026-11-09 repackaged IPK was installed and launched; its score file was not independently re-inspected. Uninstall, app-UID changes and broader migration routes remain unverified.
 
 ## Earlier installed artifact identity and disclosure
 
@@ -182,6 +187,6 @@ On the C3, an existing empty 13-byte table remained byte-identical through updat
 | Asset manifest | `e86293722f01e2a9fb1b3732b87e66ab9512ccb3291acc622feb3467f9ba197e` |
 | Original core source | `bf9922eefc15b4af9a715dc38170c7a455cbb270b54637b68859c71e7a91463b` |
 
-Development used substantial AI assistance for implementation, testing, documentation and review. Automated and model reviews do not substitute for meaningful human code review. Original game/artwork and reconstructed code retain separate attribution and rights; the new platform's MIT license does not relicense them. [Notices](../NOTICE.md).
+Development used substantial AI assistance for implementation, testing, documentation and review. Automated and model reviews do not substitute for meaningful human code review. Original game/artwork and reconstructed code retain separate attribution and rights; the new platform's MIT license does not relicense them. The owner recorded a free, attributed fan-release basis and the project icon authorship; no upstream license grant is claimed. [Notices](../NOTICE.md).
 
-Public hosting, redistribution terms, final Homebrew metadata, human publication review and maintainer acceptance remain separate from local readiness. No public release or social post has been sent.
+The source repository is public. A GitHub Release, Homebrew listing and social posts have not been published. Final Homebrew metadata, human publication review and maintainer acceptance remain separate from this draft preparation.

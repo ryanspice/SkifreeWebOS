@@ -1,14 +1,14 @@
 # Install and play
 
-SkiFree for webOS 1.0.0 is currently a local release candidate. There is no public download or Homebrew Channel listing yet. These instructions are for the audited IPK when supplied by the maintainer, or a package you build from this source.
+SkiFree for webOS 1.0.0 is a release candidate verified on the owner's C3. There is no public download or Homebrew Channel listing yet. These instructions apply to the exact IPK in the draft release, the maintainer's test handoff, or a package you build from this source. Do not install a copy from an untrusted mirror.
 
 ## Compatibility
 
-The 1.0.0 test package was installed and rendered on one TV only: the owner's
-**LG OLED48C3PUA (C3), firmware 43.21.84**, on November 5, 2026. The TV
-reports SDK 11.2.0. Its non-root application process created the new score file
-successfully. Other TVs, webOS releases and firmware versions are TBD, and so is
-the minimum webOS release.
+The 1.0.0 release package was installed and launched on one TV only: the owner's
+**LG OLED48C3PUA (C3), firmware 43.21.84**, on November 9, 2026. Its executable is
+byte-identical to the earlier C3-verified 1.0.0 package, whose non-root process
+created the new score file successfully. The TV reports SDK 11.2.0. Other TVs,
+webOS releases and firmware versions are TBD, and so is the minimum webOS release.
 
 The ARM32 build requires GLIBC 2.38 and GLIBCXX 3.4.32. Older TV software may not
 provide those libraries. The observed install used Developer Mode and a non-root
@@ -26,14 +26,15 @@ for the distinction between installation method and app privileges.
 1. Follow [LG's Developer Mode setup](https://webostv.developer.lge.com/develop/getting-started/developer-mode-app) to connect your TV and computer. The [webOS Homebrew setup guide](https://www.webosbrew.org/devmode/) is another walkthrough. LG requires an account for this installation method; SkiFree itself requires no account.
 2. Obtain the IPK and its `SHA256SUMS.txt` from the same release, then compare the
    package's SHA-256 with the listed checksum. In PowerShell, use
-   `Get-FileHash -Algorithm SHA256 <path-to-ipk>`. The package verified on the C3 is
-   1,999,474 bytes with SHA-256:
+   `Get-FileHash -Algorithm SHA256 <path-to-ipk>`. The release package installed
+   and launched on the C3 is 3,034,062 bytes with SHA-256:
 
    ```text
-   494726b3024c7982d47596fc520515c8f529ae8322b53ae53e6d86676f3271fd
+   b0801db115564c79c84c784e234d274ca2e8b8e074b40ce6fab5c51b3eae548f
    ```
 
-   A different package has not been verified on that TV.
+   Its executable is byte-identical to the earlier C3-verified package
+   (`ed646651…`). A different package has not been verified on that TV.
 3. With the webOS CLI installed and your TV configured, replace `my-tv` with its device name:
 
    ```powershell

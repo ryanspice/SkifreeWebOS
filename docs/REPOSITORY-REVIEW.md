@@ -52,9 +52,9 @@ with no separate upstream remote or open PR. Fast-forward merge had no remote
 changes to integrate. The cleanup/roadmap landed as `b284697`; its hosted
 [host/source workflow passed](https://github.com/ryanspice/SkifreeWebOS/actions/runs/42162092585).
 The [release guide](RELEASE-GUIDE.md) and [visual walkthrough](RELEASE-WALKTHROUGH.html)
-cover the remaining GitHub/Homebrew sequence. Public visibility, tag creation,
-Homebrew submission and social posting are future steps, not effects of this
-consolidation. No branch deletion or force-push was needed.
+cover the remaining GitHub/Homebrew sequence. The source repository is public; the
+release draft, Homebrew submission and social posting remain unpublished. No
+branch deletion or force-push was needed for this consolidation.
 
 ## Historical review — 2026-11-04
 
@@ -110,28 +110,29 @@ measure, not a comprehensive security audit.
 
 ## Remaining acceptance work
 
-1. Test this HUD/initials binary on the C3, including physical initials input and
-   a human-earned score after closing/reopening. Earlier TV checks cover a
-   different binary and an empty legacy table.
-2. Complete public-release metadata, rights evidence, meaningful human review
-   and the Homebrew compatibility fields before submitting the listing.
+1. The release package was installed and launched on the C3; physical initials
+   input and a new human-earned score after closing/reopening remain useful
+   playtests. Earlier TV checks cover an empty legacy table and storage behavior.
+2. Complete public-release metadata, meaningful human review and the Homebrew
+   compatibility fields before submitting the listing. The owner's free
+   fan-release decision and the icon authorship are recorded in the notices.
 3. Broader EXE runtime comparison remains incomplete. The pinned reconstruction
    and reviewed disassembly support specific paths, not every possible state.
 4. Score storage assumes a single writer. It does not guarantee POSIX power-loss
    durability or protect against another process changing a loaded file.
 
-GitHub source hosting is a private handoff. No downloadable release, Homebrew
-submission or social post is part of this repository push.
+The source repository is public. No downloadable release, Homebrew submission or
+social post is part of this handoff.
 
-## Terra follow-up
+## Independent AI review follow-up
 
-The requested independent GPT-6.1 Terra source review found two release issues:
-earlier TV observations appeared as completed current-package gates, and broad
-documentation text rules could admit unapproved credential/receipt files to a
-source archive. The checklist now labels earlier evidence and leaves current TV
-gates open. Documentation paths are explicitly allowlisted, with negative cases
-for unapproved JSON, text, Markdown and YAML files. The expanded six-test source
-suite passes; no exposed sensitive file was identified by the review.
+The requested independent AI source review found two release issues: earlier TV
+observations appeared as completed current-package gates, and broad documentation
+text rules could admit unapproved credential/receipt files to a source archive.
+The checklist now labels earlier evidence and leaves current TV gates open.
+Documentation paths are explicitly allowlisted, with negative cases for unapproved
+JSON, text, Markdown and YAML files. The expanded six-test source suite passes; no
+exposed sensitive file was identified by the review.
 
 No demonstrated initials/migration defect was found in that bounded static pass.
 The [Debug follow-up](../native/docs/DEBUG-BUILD.md) identifies disk exhaustion and

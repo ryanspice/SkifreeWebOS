@@ -1,22 +1,23 @@
 # Compatibility brief and synthesis plan
 
-Research date: 2026-11-04. Two requested GPT-6.1 Terra research lanes examined
+Research date: 2026-11-04. Two requested independent AI research lanes examined
 rooted/unrooted routes and consumer webOS versions. Their findings are source
 and documentation research; no new TV or firmware-symbol test was performed.
 
 ## Current package
 
 The candidate targets ARM32 EABI5 with `/usr/lib/ld-linux.so.3`, GLIBC 2.38 and
-GLIBCXX 3.4.32. The earlier package ran on an OLED48C3PUA, firmware 43.21.84,
-reported SDK 11.2.0. The November 5 storage-corrected package is installed,
-rendering and creating/replacing its score file as a non-root process on that C3.
-Owner-confirmed non-empty Slalom/Freestyle records survived a fresh session and the latest package update unchanged.
+GLIBCXX 3.4.32. The release package was installed and launched on an OLED48C3PUA,
+firmware 43.21.84, reported SDK 11.2.0, on November 9, 2026. Its executable is
+byte-identical to the earlier storage-corrected package, which created/replaced
+its score file as a non-root process and preserved owner-confirmed non-empty
+Slalom/Freestyle records across a fresh session and an update.
 Marketing webOS names, firmware releases and SDK version fields identify different
 things; none alone establishes a native ABI minimum.
 
 | Target | Evidence | Next acceptance gate |
 | --- | --- | --- |
-| Observed C3 configuration | Corrected package installed/rendered; non-root score-file creation/replacement verified | Updated browser/HUD visual acceptance, broader controls/focus and migration routes |
+| Observed C3 configuration | Release package installed/launched; executable byte-identical to the corrected package, whose non-root score-file creation/replacement was verified | Broader controls/focus, visual acceptance and migration routes |
 | webOS TV 25/26 families | No family-wide native compatibility evidence | Exact firmware dependency inventory and representative TV runs |
 | webOS TV 22–24 / 6.x | Current binary may require newer libraries than individual firmwares export | Required-symbol comparison, then device tests |
 | webOS TV 4.x–5.x | ABI and SDL/Wayland compatibility unknown | Separate older-ABI build and SDL investigation |
